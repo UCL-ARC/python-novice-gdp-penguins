@@ -8,7 +8,7 @@ exercises: 20
 
 - Import the Pandas library.
 - Use Pandas to load a CSV data set.
-- Retrieve some basic information about a Pandas DataFrame.
+- Retrieve some basic information about a Pandas dataframe.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -30,7 +30,7 @@ that can be called upon when needed.
 [Pandas](https://pandas.pydata.org) is a widely-used Python library for statistics, particularly when processing tabular data.
 We will use Pandas to read in our data files;
 - First, we must tell Python that we want to use the Pandas library. We can do this using the [`import`](../learners/reference.md#library) command.
-- Then, we can use the `read_csv` function from Pandas to read one of our data files into a DataFrame. This function takes the name of a file as an argument, and returns a DataFrame that we can assign to a variable.
+- Then, we can use the `read_csv` function from Pandas to read one of our data files into a dataframe. This function takes the name of a file as an argument, and returns a dataframe that we can assign to a variable.
 
 ```python
 import pandas as pd # Tells Python we want to use the Pandas library
@@ -59,9 +59,9 @@ print(data_oceania)
 0     34435.36744
 1     25185.00911
 ```
-- The columns in a DataFrame are the observed variables, and the rows are the observations.
+- The columns in a dataframe are the observed variables, and the rows are the observations.
 - Pandas uses backslash `\` to show wrapped lines when output is too wide to fit the screen.
-- Using descriptive DataFrame names helps us distinguish between multiple DataFrames so we won't accidentally overwrite a DataFrame or read from the wrong one.
+- Using descriptive dataframe names helps us distinguish between multiple DataFrames so we won't accidentally overwrite a dataframe or read from the wrong one.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -105,7 +105,7 @@ The dot notation in Python is used most of all as an object attribute/property s
 
 ## Specifying row headings
 
-You might notice that our `data_oceania` DataFrame is displaying the row headings as numbers - in this case `0` and `1`.
+You might notice that our `data_oceania` dataframe is displaying the row headings as numbers - in this case `0` and `1`.
 Additionally, the first column of each row contains the name of the country whose data is stored in that row.
 We would like to be able to index our rows by the country rather than numbers.
 - We can pass the name of the column which contains the row headers to `read_csv` as its `index_col` parameter to fix this.
@@ -134,15 +134,15 @@ Australia       23424.76683     26997.93657     30687.75473     34435.36744
 New Zealand     18363.32494     21050.41377     23189.80135     25185.00911
 ```
 
-Now when we print out our DataFrame we can see that the rows are identified by country, rather than by a number.
+Now when we print out our dataframe we can see that the rows are identified by country, rather than by a number.
 
 ## Working with DataFrames
 
-We know that the `data_oceania` variable contains a DataFrame, but how do we actually know *what's in* this DataFrame?
+We know that the `data_oceania` variable contains a dataframe, but how do we actually know *what's in* this dataframe?
 Or how many rows it has?
 Or the *type of* data stored in the columns?
 
-To obtain an overview of our DataFrame, we can use the `info()` method.
+To obtain an overview of our dataframe, we can use the `info()` method.
 
 ```python
 data_oceania.info()
@@ -170,7 +170,7 @@ dtypes: float64(12)
 memory usage: 208.0+ bytes
 ```
 
-This output is telling us that the `data_oceania` DataFrame:
+This output is telling us that the `data_oceania` dataframe:
 - Has two rows (entries), the first being `'Australia'` and the last being `'New Zealand'`.
 - Has twelve columns per row.
   - Each row has 2 non-null values. Null values are used to represent missing data or observations.
@@ -178,7 +178,7 @@ This output is telling us that the `data_oceania` DataFrame:
 - The only variable (or datatype, `dtype`) used is `float64`, and it is used in 12 columns (that is, all of them).
 - Is using 208 bytes of memory.
 
-Whilst the `info()` method tells us how many columns our DataFrame has, it doesn't tell us what the headers *are*.
+Whilst the `info()` method tells us how many columns our dataframe has, it doesn't tell us what the headers *are*.
 Fortunately, DataFrames also have a `columns` variable, which stores the column headers:
 
 ```python
@@ -196,7 +196,7 @@ Index(['gdpPercap_1952', 'gdpPercap_1957', 'gdpPercap_1962', 'gdpPercap_1967',
 - `columns` is called a *member variable*, or just a *member* of the `data_oceania` variable.
 
 Finally, we might want to treat our columns as rows and vice versa.
-To do so, we can *transpose* our DataFrame:
+To do so, we can *transpose* our dataframe:
   - Transposing doesn't actually copy the data, but just changes how the program *views* it.
 
 ```python
@@ -226,7 +226,7 @@ DataFrames provide each row and column in our table of data with a *label*.
  - We saw that we can use the `index_col` parameter in `read_csv` to specify the row labels.
  - We also saw that, if we didn't provide `index_col` as a parameter, Pandas automatically assigned our rows labels that started at `0` and increased by `1`.
 
-Specifying a row and column uniquely identifies an *entry* in the DataFrame.
+Specifying a row and column uniquely identifies an *entry* in the dataframe.
 To retrieve value of the entry at a location, we can use the `DataFrame.loc` method:
 
 ```python
@@ -243,10 +243,10 @@ print(data.loc['Albania', 'gdpPercap_1952'])
 However, underneath the labels for the rows and columns, each entry also has an *index* `[i, j]`.
 - Indices are listed by `[row_number, column_number]`.
 - Indices start at `0` and increase by `1` as we move along the rows and columns.
-- Indices start at `0` because it represents an offset from the "first" entry in the DataFrame, which is the entry at the intersection of the first row and first column.
+- Indices start at `0` because it represents an offset from the "first" entry in the dataframe, which is the entry at the intersection of the first row and first column.
 - We saw that if we don't provide `index_col` to `read_csv`, Pandas sets the row labels to match the row indices.
 
-Our `data` DataFrame is effectively storing our entries as a grid, and keeps track of which labels correspond to which index.
+Our `data` dataframe is effectively storing our entries as a grid, and keeps track of which labels correspond to which index.
 This lets us interact with our data in a friendly and human-readable way, as it is much easier to work with labels than indices when handling tabular data!
 ![](fig/python-zero-index.svg){alt="."}
 
@@ -270,7 +270,7 @@ print(data.iloc[15,5])
 
 ## Selection using slices
 
-We have seen that `loc` and `iloc` allow us to select individual entries in our DataFrame.
+We have seen that `loc` and `iloc` allow us to select individual entries in our dataframe.
 However, they can also be used to select a range of rows and columns whose entries we want to retrieve.
 - A range of indices (or labels) that we want to select is called a *slice*.
 - Slices are writing using a semicolon `:`.
@@ -452,7 +452,7 @@ to find out what `DataFrame.head` and `DataFrame.tail` do.
 ## Solution
 
 1. We can check out the first five rows of `data_americas` by executing `data_americas.head()`
-  which lets us view the beginning of the DataFrame. We can specify the number of rows we wish
+  which lets us view the beginning of the dataframe. We can specify the number of rows we wish
   to see by specifying the parameter `n` in our call to `data_americas.head()`.
   To view the first three rows, execute:
   
@@ -489,7 +489,7 @@ to find out what `DataFrame.head` and `DataFrame.tail` do.
 2. To check out the last three rows of `data_americas`, we would use the command,
   `americas.tail(n=3)`, analogous to `head()` used above. However, here we want to look at
   the last three columns so we need to change our view and then use `tail()`. To do so, we
-  create a new DataFrame in which rows and columns are switched:
+  create a new dataframe in which rows and columns are switched:
   
   ```python
   americas_flipped = data_americas.T
@@ -540,8 +540,6 @@ to find out what `DataFrame.head` and `DataFrame.tail` do.
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::::::  challenge
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
