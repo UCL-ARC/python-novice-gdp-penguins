@@ -219,14 +219,172 @@ gdpPercap_2002  30687.75473  23189.80135
 gdpPercap_2007  34435.36744  25185.00911
 ```
 
+## Accessing data in a dataframe
+
+The next question on our minds should be; "now that we've loaded our data into Python, how do we select or access its values"?
+DataFrames provide each row and column in our table of data with a *label*.
+ - We saw that we can use the `index_col` parameter in `read_csv` to specify the row labels.
+ - We also saw that, if we didn't provide `index_col` as a parameter, Pandas automatically assigned our rows labels that started at `0` and increased by `1`.
+
+Specifying a row and column uniquely identifies an *entry* in the DataFrame.
+To retrieve value of the entry at a location, we can use the `DataFrame.loc` method:
+
+```python
+# Load the data for Europe so that we have a larger dataset to work with
+data = pd.read_csv('data/gapminder_gdp_europe.csv', index_col='country')
+
+print(data.loc['Albania', 'gdpPercap_1952'])
+```
+
+```output
+1601.056136
+```
+
+However, underneath the labels for the rows and columns, each entry also has an *index* `[i, j]`.
+- Indices are listed by `[row_number, column_number]`.
+- Indices start at `0` and increase by `1` as we move along the rows and columns.
+- Indices start at `0` because it represents an offset from the "first" entry in the DataFrame, which is the entry at the intersection of the first row and first column.
+- We saw that if we don't provide `index_col` to `read_csv`, Pandas sets the row labels to match the row indices.
+
+Our `data` DataFrame is effectively storing our entries as a grid, and keeps track of which labels correspond to which index.
+This lets us interact with our data in a friendly and human-readable way, as it is much easier to work with labels than indices when handling tabular data!
+![](fig/python-zero-index.svg){alt="."}
+
+We can also access entries by providing their index to the `DataFrame.iloc[]` method, rather than their row and column labels.
+- Since `'Albania'` is our first row, and `'gdpPercap_1952'` our first column, we can also get the `['Albania', 'gdpPercap_1952']` entry by using `iloc[0,0]`.
+- Since `'Italy'` is the 16th row, and `'gdpPercap_1977'` is the 6th column, we can get the `['Italy', 'gdpPercap_1977']` entry by using `iloc[15,5]`.
+
+```python
+# Albania is 0 rows away from the first row (Albania)
+# gdpPercap_1952 is 0 columns away from the first column (gdpPercap_1952)
+print(data.iloc[0,0])
+# Italy is 15 rows away from the first row (Albania)
+# gdpPercap_1977 is 5 columns away from the first column (gdpPercap_1952)
+print(data.iloc[15,5])
+```
+
+```output
+1601.056136
+14255.98475
+```
+
+## Selection using slices
+
+We have seen that `loc` and `iloc` allow us to select individual entries in our DataFrame.
+However, they can also be used to select a range of rows and columns whose entries we want to retrieve.
+- A range of indices (or labels) that we want to select is called a *slice*.
+- Slices are writing using a semicolon `:`.
+
+For example, let's say we wanted all the entries from `1957` through to `1987` for all the countries beginning with "B" (`'Belgium'` through to `'Bulgaria'`).
+We could access these entries via a slice:
+
+```python
+# Slice using labels. Notice that, because a slice doesn't include the end value, we have to provide the label of the first column we don't want to include as the end value of our slice.
+print(data.loc['Belgium':'Bulgaria', 'gdpPercap_1957':'gdpPercap_1987'])
+```
+
+```output
+                        gdpPercap_1957  gdpPercap_1962  gdpPercap_1967  \
+country                                                                  
+Belgium                    9714.960623    10991.206760    13149.041190   
+Bosnia and Herzegovina     1353.989176     1709.683679     2172.352423   
+Bulgaria                   3008.670727     4254.337839     5577.002800   
+Croatia                    4338.231617     5477.890018     6960.297861   
+
+                        gdpPercap_1972  gdpPercap_1977  gdpPercap_1982  \
+country                                                                  
+Belgium                   16672.143560    19117.974480    20979.845890   
+Bosnia and Herzegovina     2860.169750     3528.481305     4126.613157   
+Bulgaria                   6597.494398     7612.240438     8224.191647   
+Croatia                    9164.090127    11305.385170    13221.821840   
+
+                        gdpPercap_1987  gdpPercap_1992  
+country                                                 
+Belgium                   22525.563080    25575.570690  
+Bosnia and Herzegovina     4314.114757     2546.781445  
+Bulgaria                   8239.854824     6302.623438  
+Croatia                   13822.583940     8447.794873  
+```
+
+- Leaving out the `start` label will be taken to mean "start from the beginning".
+- Leaving out the `end` label will be taken to mean "go until the end of the dataframe".
+- Putting only a semicolon can be used to mean "all the entries".
+
+```python
+# Fetch the entries in rows up to and including Belgium
+print(data.loc[:'Belgium', :])
+# Fetch the entries in columns from 1987 onwards
+print(data.loc[:, 'gdpPercap_1987':])
+# Fetch all the entries for 'Albania'
+data.loc['Albania', :]
+# Fetch the data from 1987 for all countries
+data.loc[:, 'gdpPercap_1987']
+```
+
+:::::::::::::::::::::::::::::::::::::::::: callout
+
+If you want to fetch all of the columns, you don't have to include the second slice when using `loc`.
+For example, the following two calls will give back the same entries:
+```python
+data.loc['Albania']
+data.loc['Albania', :]
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Extent of Slicing
+
+1. Do the two statements below produce the same output?
+2. Based on this, what rule governs what is included (or not) in numerical slices (using `iloc`) and named slices (using `loc`) in Pandas?
+
+```python
+print(data.iloc[0:2, 0:2])
+print(data.loc['Albania':'Belgium', 'gdpPercap_1952':'gdpPercap_1962'])
+```
+
+:::::::::::::::  solution
+
+## Solution
+
+No, they do not produce the same output! The output of the first statement is:
+
+```output
+        gdpPercap_1952  gdpPercap_1957
+country                                
+Albania     1601.056136     1942.284244
+Austria     6137.076492     8842.598030
+```
+
+The second statement gives:
+
+```output
+        gdpPercap_1952  gdpPercap_1957  gdpPercap_1962
+country                                                
+Albania     1601.056136     1942.284244     2312.888958
+Austria     6137.076492     8842.598030    10750.721110
+Belgium     8343.105127     9714.960623    10991.206760
+```
+
+Clearly, the second statement produces an additional column and an additional row compared to the first statement.  
+What conclusion can we draw? 
+We see that a numerical slice (slicing indices), `0:2`, *omits* the final index (i.e. index 2) in the range provided, while a named slice, `'gdpPercap_1952':'gdpPercap_1962'`, *includes* the final element.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Reading Other Data
 
-Read the data in `gapminder_gdp_americas.csv`
-(which should be in the same directory as `gapminder_gdp_oceania.csv`)
-into a variable called `data_americas`
-and display its summary statistics.
+Read the data in `gapminder_gdp_americas.csv` (which should be in the same directory as `gapminder_gdp_oceania.csv`) into a variable called `data_americas`.
+
+Determine how many rows and columns this data has.
+Hint: try printing out the value of the `.shape` member variable once you load your dataframe!
 
 :::::::::::::::  solution
 
@@ -234,11 +392,45 @@ and display its summary statistics.
 
 To read in a CSV, we use `pd.read_csv` and pass the filename `'data/gapminder_gdp_americas.csv'` to it.
 We also once again pass the column name `'country'` to the parameter `index_col` in order to index by country.
-The summary statistics can be displayed with the `DataFrame.describe()` method.
 
+To determine how many rows and columns this dataframe has, we could use `info` like we did before:
 ```python
 data_americas = pd.read_csv('data/gapminder_gdp_americas.csv', index_col='country')
-data_americas.describe()
+data_americas.info()
+```
+
+```output
+<class 'pandas.core.frame.DataFrame'>
+Index: 25 entries, Argentina to Venezuela
+Data columns (total 13 columns):
+ #   Column          Non-Null Count  Dtype  
+---  ------          --------------  -----  
+ 0   continent       25 non-null     object 
+ 1   gdpPercap_1952  25 non-null     float64
+ 2   gdpPercap_1957  25 non-null     float64
+ 3   gdpPercap_1962  25 non-null     float64
+ 4   gdpPercap_1967  25 non-null     float64
+ 5   gdpPercap_1972  25 non-null     float64
+ 6   gdpPercap_1977  25 non-null     float64
+ 7   gdpPercap_1982  25 non-null     float64
+ 8   gdpPercap_1987  25 non-null     float64
+ 9   gdpPercap_1992  25 non-null     float64
+ 10  gdpPercap_1997  25 non-null     float64
+ 11  gdpPercap_2002  25 non-null     float64
+ 12  gdpPercap_2007  25 non-null     float64
+dtypes: float64(12), object(1)
+memory usage: 2.7+ KB
+```
+
+We can see that we have 25 entries (rows), and 13 columns.
+We could also get the same information about the number of rows and columns using `shape`:
+
+```python
+print(data_americas.shape)
+```
+
+```output
+(25, 13)
 ```
 
 :::::::::::::::::::::::::
@@ -351,41 +543,14 @@ to find out what `DataFrame.head` and `DataFrame.tail` do.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Writing Data
-
-As well as the `read_csv` function for reading data from a file, Pandas provides a `to_csv` function to write dataframes to files.
-- `to_csv` takes the name of the file you want to save your DataFrame to as it's argument.
-- You can use `help` to get more information on how to use `to_csv`:
-```python
-help(data_oceania.to_csv)
-```
-
-Applying what you've learned about reading from files, write the `data_oceania` DataFrame to a file called `processed.csv`.
-
-:::::::::::::::  solution
-
-## Solution
-
-In order to write the DataFrame `data_oceania` to a file called `processed.csv`, execute the following command:
-
-```python
-data_americas.to_csv('processed.csv')
-```
-
-Note that `help(to_csv)` or `help(pd.to_csv)` throws an error! 
-This is due to the fact that `to_csv` is not a global Pandas function, but a *member function* of DataFrames. 
-This means you can only call it using the dot notation on a DataFrame variable.
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::  challenge
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Use the Pandas library to get basic statistics out of tabular data.
+- Use the `pandas` library to work with tabular data in Python.
+- Use the `read_csv` function to load data into a dataframe variable.
 - Use `index_col` to specify that a column's values should be used as row headings.
-- Use `DataFrame.info` to find out more about a dataframe.
-- The `DataFrame.columns` variable stores information about the dataframe's columns.
-- Use `DataFrame.T` to transpose a dataframe.
+- Use `info` to find out basic information about a dataframe.
+- Use slices and `loc` to extract entries from a dataframe.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
