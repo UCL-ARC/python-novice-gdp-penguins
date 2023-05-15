@@ -260,15 +260,18 @@ for example.
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 There are a lot of new functions coming in here, so let's again break down what each one is doing.
+
 ```python
 fig = plt.figure(figsize=(25., 6.))
 ```
+
 - Creates a new figure, like we saw before.
 - The `figsize` parameter lets us specify the size of the figure, rather than letting `matplotlib` decide this automatically for us.
 
 ```python
 axes_1 = fig.add_subplot(1, 3, 1)
 ```
+
 - This calls the `add_subplot` method on the figure that is stored in the `fig` variable.
 - `add_subplot` takes 3 arguments; the first denotes how many total rows fo subplots there are (to be) in our figure, the second how many total columns, and the final parameter denotes which of these subplots that we want to reference (left-to-right, top-to-bottom). In this case, `1` refers to the leftmost subplot.
 - The subplot is saved to the `axes_1` variable so we can refer to it later.
@@ -276,6 +279,7 @@ axes_1 = fig.add_subplot(1, 3, 1)
 ```python
 axes_1.plot(eu_min_data)
 ```
+
 - `plot` tells `matplotlib` to draw data onto a subplot window.
 - In this case, we draw the data stored in `eu_min_data`, the minimum GDP for each year.
 - The `axes_1` dot notation is needed so that Python knows we want to place this data on the `axes_1` subplot.
@@ -345,7 +349,7 @@ plt.show()
 
 ![](fig/03-min_max_avg_with_labels.svg){alt='A figure with 3 subplots, each labelled with the statistic that they display.'}
 
-:: challenge
+::::::::::::::::::::::::::::::::::::::::::::: challenge
 
 ## Setting limits for the axes
 
@@ -357,7 +361,7 @@ Hint:
 - Try using the `set_ylim(min_value, max_value)` method on the subplots.
 - Try using the `max()` and `min()` methods on the `eu_min_data` variables.
 
-::::::::::::: solution
+:::::::::::::::: solution
 
 To fix this for the first subplot, for example, we can use
 
@@ -386,11 +390,11 @@ axes_1.set_ylim(eu_min_data.min(), eu_min_data.max())
 
 instead of the last three lines!
 
-::::::::::::::::::::::
+:::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+::::::::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Drawstyles
 
@@ -414,9 +418,9 @@ axes_1.plot(numpy.mean(data, axis=0), linestyle=':', color='red', marker='x')
 
 :::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+::::::::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Make Your Own Plot
 
@@ -442,9 +446,9 @@ plt.show()
 
 :::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+::::::::::::::::::::::::::::::::::::::::::::: challenge
 
 ## Moving Plots Around
 
@@ -490,13 +494,13 @@ plt.show()
 
 :::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::: keypoints
+::::::::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Use the `pyplot` module from the `matplotlib` library to create visualizations of data.
 - Dataframes have methods like `min`, `max`, and `mean` to compute statistics along either the rows or the columns.
 - We can use `add_subplot` to create multiple plots in a single figure.
 - We can customise the labels, axis ranges, line styles, and more of our plots using `matplotlib`.
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
