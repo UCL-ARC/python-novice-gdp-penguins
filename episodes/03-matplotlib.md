@@ -137,7 +137,7 @@ Turkey                     4469.453380
 United Kingdom            19380.472986
 dtype: float64
 ```
-TODO: make diagram, then explain it!!!!
+![](fif/../fig/03-axis-operations.svg){alt='Diagram illustrating how the axis keyword changes the axis along which the mean() function operates.'}
 
 ## Plotting statistics
 
