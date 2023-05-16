@@ -22,7 +22,49 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-At this point, we've seen that code can have Python make decisions about what it sees in our data. What if we want to convert some of our data, like taking a temperature in Fahrenheit and converting it to Celsius. We could write something like this for converting a single number
+::::::::::::::::::::::::::::::::::::::::::: prereq
+
+In this lesson we are going to be using the data in the `penguin_data.csv` file, which is a subset of the freely available dataset [`palmerpenguins`](https://github.com/allisonhorst/palmerpenguins/tree/main).
+This dataset contains the species, culmen length, culmen depth, flipper length and mass of 343 penguins observed on the Palmer archipelago, Antarctica.
+
+![](https://github.com/allisonhorst/palmerpenguins/blob/main/man/figures/culmen_depth.png)
+
+If you are starting a new notebook, you'll need to `import` Pandas and load this data into a variable, which we will call `penguins`.
+We have assigned each penguin a name, which we will use as the row labels (and pass to the `index_col` parameter).
+
+```python
+import pandas as pd
+
+penguins = pd.read_csv('data/palmer_penguin_data.csv', index_col='name')
+
+# Display the first 5 rows in the dataset
+print(penguins.head(5))
+```
+
+```output
+                id    species  culmen depth (mm)  culmen length (mm)  \
+name                                                                   
+lyndale      N34A2     Gentoo               16.3                51.5   
+drexel       N32A1     Adelie               16.6                35.9   
+delaware     N56A2     Gentoo               16.0                48.6   
+phillips     N20A2     Gentoo               16.8                49.8   
+south shore  N65A2  Chinstrap               18.8                51.0   
+
+             flipper length (mm)  mass (kg)  
+name                                         
+lyndale                    230.0       5.50  
+drexel                     190.0       3.05  
+delaware                   230.0       5.80  
+phillips                   230.0       5.70  
+south shore                203.0       4.10  
+```
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Hypothesis: different species have bigger bills/culmens. Bigger = volume, model as a cylinder.
+
+At this point, we've seen that code can have Python make decisions about that it sees in our data. 
+What if we want to convert some of our data, like taking a temperature in Fahrenheit and converting it to Celsius. We could write something like this for converting a single number
 
 ```python
 fahrenheit_val = 99
