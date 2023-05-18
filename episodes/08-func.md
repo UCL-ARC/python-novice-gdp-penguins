@@ -32,16 +32,27 @@ This dataset contains the species, culmen length, culmen depth, flipper length a
 If you are starting a new notebook, you'll need to `import` Pandas and load this data into a variable, which we will call `penguins`.
 We have assigned each penguin a name, which we will use as the row labels (and pass to the `index_col` parameter).
 
+We will also need the mathematical constant $\pi$ (`pi`), which we can `import` from the `math` library that comes with Python.
+
 ```python
+# Import Pandas like we did before
 import pandas as pd
+# Import pi from the math library
+# Using "from math import pi" means that we don't load in the entire math library - we only need pi!
+from math import pi
 
-penguins = pd.read_csv('data/palmer_penguin_data.csv', index_col='name')
+penguins = pd.read_csv('data/penguin_data.csv', index_col='name')
 
+# Display the value of pi
+print("Pi is:", pi)
 # Display the first 5 rows in the dataset
+print("Our dataset looks like:")
 print(penguins.head(5))
 ```
 
 ```output
+Pi is: 3.141592653589793
+Our dataset looks like:
                 id    species  culmen depth (mm)  culmen length (mm)  \
 name                                                                   
 lyndale      N34A2     Gentoo               16.3                51.5   
@@ -61,33 +72,51 @@ south shore                203.0       4.10
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Hypothesis: different species have bigger bills/culmens. Bigger = volume, model as a cylinder.
+Having recently returned from a research trip to Antarctica, a researcher has hypothesised that penguin species with larger bills are able to consume more food than those with smaller bills.
+The trouble is, the data that's been collected doesn't record the information they want directly - we will need to infer this information from the data that has been recorded.
 
-At this point, we've seen that code can have Python make decisions about that it sees in our data. 
-What if we want to convert some of our data, like taking a temperature in Fahrenheit and converting it to Celsius. We could write something like this for converting a single number
+We're going to have to do a lot of calculations with the data to help justify this researcher's claims.
+It would be helpful if we didn't have to manually type out these calculations *every time* we want to perform them.
+This is where functions come in: given some *inputs*, they define a sequence of steps which produce an *output*.
+
+::::::::::::::::::::::::::::::::::::::::::::::: callout
+
+## Functions are like recipes
+
+Python views functions in the same ways as humans might view recipes when cooking.
+Given some ingredients (the inputs), you follow the recipe (the instructions/steps), to produce a meal (the output).
+- You might decide to switch out the vegetables you're using, or switch chips for something like sweet potato fried, and so you get a different meal even if the *steps you take* to make the meal are the same.
+
+You only have to look in one place for the recipe to know what you're doing. 
+Similarly, functions let us write one set of instructions that can be run multiple times in our code.
+This also helps if we find a bug in our instructions - we only have to change the instructions in one place (the function) rather than all over our notebook!
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+They have given us their dataset, and defined "bigger" to mean "having a greater volume".
+As for "more food", they didn't record how much each penguin they observed ate over the duration of their trip, but they did record the mass of each penguin _and_ their flipper size, which they assure us can be used to infer how much the penguin ate.
+Let's start with a function that will tell us how to work out the size of a penguin's bill from the length and depth of it's culmen.
+
+The researcher informs us that we can treat the bill of a penguin as a cylinder, with the "depth" being the diameter of the cylinder and the "length" the height.
+The volume of a cylinder is given by
+$$ \text{cylinder volume} = \text{cylinder height} \times \pi \left(\text{cylinder radius} \right)^2. $$
+This is not a simple calculation to write out every time we need to do it, and we will most likely want to do this calculation a lot in our analysis!
+So we can define a _function_ that can perform this calculation for us:
 
 ```python
-fahrenheit_val = 99
-celsius_val = ((fahrenheit_val - 32) * (5/9))
+# Functions always start with "def", followed by the name of the function.
+# After the name, we put in brackets the arguments that the function takes.
+def cylinder_volume(height, radius):
+    # The ** operator can be used to raise a number to an integer power
+    volume = height * pi * radius** 2
+    # The "return" keyword tells Python the value that this function should provide as the output
+    return volume
 ```
 
-and for a second number we could just copy the line and rename the variables
+This means that the bill size of a penguin can be worked out as:
+$$ \text{bill size} = \text{culmen height} \times \pi \left(\frac{\text{culmen depth}}{2} \right)^2. $$
+This is not a simple calculation to write out every time we need to do it, so instead we can define a _function_ to do this calculation for us
 
-```python
-fahrenheit_val = 99
-celsius_val = ((fahrenheit_val - 32) * (5/9))
-
-fahrenheit_val2 = 43
-celsius_val2 = ((fahrenheit_val2 - 32) * (5/9))
-```
-
-But we would be in trouble as soon as we had to do this more than a couple times.
-Cutting and pasting it is going to make our code get very long and very repetitive,
-very quickly.
-We'd like a way to package our code so that it is easier to reuse,
-a shorthand way of re-executing longer pieces of code. In Python we can use 'functions'.
-Let's start by defining a function `fahr_to_celsius` that converts temperatures
-from Fahrenheit to Celsius:
 
 ```python
 def explicit_fahr_to_celsius(temp):
@@ -104,7 +133,7 @@ def fahr_to_celsius(temp):
     return ((temp - 32) * (5/9))
 ```
 
-![](fig/python-function.svg){alt='Labeled parts of a Python function definition'}
+![](fig/python-labelled-function.svg){alt='Labeled parts of a Python function definition'}
 
 The function definition opens with the keyword `def` followed by the
 name of the function (`fahr_to_celsius`) and a parenthesized list of parameter names (`temp`). The

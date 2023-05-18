@@ -1,0 +1,59 @@
+% Build me with pdflatex, then use pdf2svg to convert me to an svg file that can go into the repo!
+
+\documentclass[crop, tikz]{standalone}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{xcolor}
+
+\usetikzlibrary{backgrounds}
+
+\newcommand{\tab}{
+    \hspace{8mm}\nobreakspace\ignorespaces
+}
+
+\newcommand{\keyword}[1]{
+    \textcolor{black!55!green}{\textbf{#1}}\ignorespaces
+}
+
+\newcommand{\funcname}[1]{
+    \textcolor{blue}{#1}\ignorespaces
+}
+
+\newcommand{\pythonmathtimes}{
+    \textcolor{blue!55!red}{*}\ignorespaces
+}
+
+\newcommand{\pythoncomment}[1]{
+    \textcolor{gray!85!blue}{#1}
+}
+
+\begin{document}
+
+\begin{tikzpicture}[background rectangle/.style={fill=white}, show background rectangle]
+    % Python function definition
+    \node[anchor=north west, align=left, font=\tt] at (0,0) {
+        \keyword{def}\nobreakspace\funcname{cylinder\_volume}(height, radius):\\
+        \pythoncomment{\tab\# The ** operator can be used to raise}\\
+        \pythoncomment{\tab\# a number to an integer power}\\
+        \tab volume = height\pythonmathtimes\nobreakspace pi \pythonmathtimes\nobreakspace radius\pythonmathtimes\pythonmathtimes\nobreakspace2\\
+        \pythoncomment{\tab\# The "return" keyword tells Python the value}\\
+        \pythoncomment{\tab that this function should provide as the output}\\
+        \tab\keyword{return}\nobreakspace volume
+    };
+
+    % Labels for components of function
+    % function definition
+    \draw[<-] (0.35,0) -- (0,0.5) node[anchor=south] {{\tt def} statement};
+    \draw[<-] (2.75,0) -- (3.1, 0.5) node[anchor=south] {Function name};
+    \draw[<-] (6,0) -- (6.35, 0.45) node[anchor=south] {Function arguments};
+    \draw[<-] (5,0) -- (5.35, 0.45);
+    % body of the function
+    \draw[black] (0,-0.5) -- (-0.5,-0.5) -- (-0.5,-3) -- (0,-3);
+    \node[anchor=east] at (-0.5,-1.75) {Function body};
+    % return statement
+    \draw[<-] (1.50,-3) -- (0.85,-3.5) node[anchor=north]{{\tt return} statement};
+    \draw[<-] (3,-3) -- (3.65,-3.45) node[anchor=north] {Return value};
+\end{tikzpicture}
+
+\end{document}
