@@ -233,6 +233,7 @@ Volume was: 0.0
 ```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::: callout
+
 ## Operating on dataframe columns
 
 Our `penguin_bill_size` function performs well when we give it two individual numbers for the culmen length and depth.
@@ -263,7 +264,7 @@ def visualise_bill_sizes(penguin_data, species_name):
         # We have some data on that species of penguin!
 
         # Use loc to filter for the rows that correspond to that penguin species
-        this_species = pd.DataFrame(penguins.loc[penguins['species'] == species_name])
+        this_species = penguins.loc[penguins['species'] == species_name]
 
         # Now let's work out the bill sizes of these penguins
         bill_sizes = penguin_bill_size(this_species['culmen length (mm)'], this_species['culmen depth (mm)'])
@@ -447,6 +448,48 @@ global `k` value.
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::: challenge
+
+# Producing a scatter plot
+
+Write a function `plot_bill_size_vs_flipper` that:
+- Takes the penguin data and the name of a species as its arguments
+- Produces a scatter plot for that species; with the flipper size on the x-axis and bill size on the y-axis
+- Shows this plot on the screen.
+
+Hint: `plt.scatter(x_data, y_data)` produces a scatter plot.
+
+::::::::::::::::::::::::: solution
+
+```python
+def plot_bill_size_vs_flipper(penguin_data, species_name):
+    # First, we need to check if we have any records of the penguin species in the dataframe we were given
+    if species_name in penguin_data['species'].values:
+        # We have some data on that species of penguin!
+
+        # Use loc to filter for the rows that correspond to that penguin species
+        this_species = penguins.loc[penguins['species'] == species_name]
+
+        # Now let's work out the bill sizes of these penguins
+        bill_sizes = penguin_bill_size(this_species['culmen length (mm)'], this_species['culmen depth (mm)'])
+
+        # Now let's make a plot of these bill sizes
+        fig = plt.figure(figsize=(5., 5.))
+        plt.scatter(this_species['flipper length (mm)'], bill_sizes)
+        plt.title(species_name + " penguins")
+        plt.xlabel("Flipper length (mm)")
+        plt.ylabel("Bill sizes (mm^3)")
+        plt.show()
+    else:
+        # We don't have any data on that species of penguin!
+        print("There is no data on penguin species:", species_name)
+```
+
+
+::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
