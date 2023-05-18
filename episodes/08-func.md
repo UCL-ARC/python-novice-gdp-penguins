@@ -157,15 +157,20 @@ Instead, we can [compose](../learners/reference.md#compose) our `cylinder_volume
 
 ```python
 def penguin_bill_size(culmen_length, culmen_depth):
+    # Divide the culmen depth by two to get the "radius" to use
     culmen_radius = culmen_depth / 2
+    # Now calculate the volume of the bill
     culmen_size = cylinder_volume(culmen_length, culmen_radius)
     return culmen_size
 
-print('Bill size of a penguin with culmen length 1 and culmen depth 2:', penguin_bill_size(1, 2))
+# Compute the bill size of the penguin 'phillips'
+phillips_length = penguins.loc['phillips','culmen length (mm)']
+phillips_depth = penguins.loc['phillips','culmen depth (mm)']
+print('Penguin phillips has bill size', penguin_bill_size(phillips_length, phillips_depth), "mm^3")
 ```
 
 ```output
-Bill size of a penguin with culmen length 1 and culmen depth 2: 3.141592653589793
+Penguin phillips has bill size 11039.204726337332 mm^3
 ```
 
 This is our first taste of how larger programs are built: we define basic operations, then combine them in ever-larger chunks to get the effect we want.
