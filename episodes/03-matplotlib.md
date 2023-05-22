@@ -291,7 +291,7 @@ Just because we have plotted some statistics doesn't mean our plot is complete!
 - There's no title for the plot.
 - There's a lot of whitespace (empty space) surrounding our plot, and between our subplots.
 
-We can fix these using some more ``matplotlib` functions.
+We can fix these using some more `matplotlib` functions.
 - The `set_ylabel` method lets us add a label for the y-axis of any plot or subplot, using dot notation.
 - The `set_title` method lets us add a title to a subplot.
 - The `suptitle` method lets us add a title to the figure window ("super"-title).
