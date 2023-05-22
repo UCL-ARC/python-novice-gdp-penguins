@@ -21,6 +21,8 @@ exercises: 0
 
 In the episode about visualizing data, we wrote Python code that plots values of interest from our first dataset (`gapminder_gdp_europe.csv`).
 
+![](fig/03-min_max_avg_with_labels.svg){alt='The plots of the min, max, and average GDP of countries in Europe, that we created earlier.'}
+
 We still have four more datasets to perform our analysis over, and we'll want to create plots for all of our data sets.
 Preferably, we'd do this with a single statement, and to do that, we'll have to teach the computer how to repeat things.
 
