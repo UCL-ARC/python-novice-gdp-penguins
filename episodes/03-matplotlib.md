@@ -20,7 +20,7 @@ exercises: 20
 
 ## Visualizing data
 
-The mathematician Richard Hamming once said, "The purpose of computing is insight, not numbers," and the best way to develop insight is often to visualize data.  Visualization deserves an entire lecture of its own, but we can explore a few features of Python's `matplotlib` library here. 
+The mathematician Richard Hamming once said, "The purpose of computing is insight, not numbers," and the best way to develop insight is often to visualize data.  Visualization deserves an entire lecture of its own, but we can explore a few features of Python's `matplotlib` library here.
 While there is no official plotting library, `matplotlib` is the *de facto* standard.
 
 ::::::::::::::::::::::::::::::::::::::::::  prereq
@@ -41,7 +41,7 @@ data_eu = pd.read_csv('data/gapminder_gdp_europe.csv', index_col='country')
 Countries are grouped into files by continent.
 Each country has its Gross Domestic Product (GDP) per capita (population) recorded in 5 year intervals from 1952 to 2007.
 
-Dataframes have a `plot()` method which we can use to produce a line-plot of the data contained within the frame.
+Dataframes have a `.plot()` method which we can use to produce a line-plot of the data contained within the frame.
 
 ```python
 data_eu.plot()
@@ -53,13 +53,11 @@ This has placed all of our data into a single plot that Python has then displaye
 You might notice that Pandas has assumed we want to use the row labels as the dependant variable for our plot, and the column headers as the line-labels.
 In our case however, we want to display the GDP per capital over time, using one line for each country.
 We can fix these problems by combining two of the methods we saw in the previous episode;
-- We can transpose our dataframe to reverse the roles of our rows and columns, so `plot` uses the columns as the dependant variable and the rows as the line labels.
 - We can use an (index) slice to take only the first 5 countries, for example.
+- We can transpose our dataframe to reverse the roles of our rows and columns, so `plot` uses the columns as the dependant variable and the rows as the line labels.
 
 ```python
-# Take only the first 5 countries (rows)
 first_five_countries = data_eu.iloc[0:5, :]
-# Transpose the data, then plot if afterwards
 first_five_countries.T.plot()
 ```
 
@@ -92,14 +90,13 @@ dtype: float64
 
 You'll notice that Pandas has assumed (again) that we want to get the mean for each year, or to "take the mean GDP down the columns".
 However it may also be useful to know the average GDP for each country - in which case we want to take the average "along the rows" instead.
-- We could use the transpose method to reverse the roles of our rows and columns like we did before, and *then* take the average:
-- Alternatively, `mean()` (and many other dataframe functions) take an optional parameter called `axis` which lets us specify which axis of the dataframe (rows or columns) to take the average along.
 
-Using the `axis` keyword, we can retrieve the average GDP for each country by taking the average value *across the columns*:
+We could use the transpose method to reverse the roles of our rows and columns like we did before, and *then* take the average.
+Alternatively, `mean()` (and many other dataframe functions) take an optional parameter called `axis` which lets us specify which axis of the dataframe (rows or columns) to take the average along.
+
+Using the `axis` keyword, we can retrieve the average GDP for each country by taking the average value *across the columns* (by setting the argument `axis='columns'` to the `mean` method):
 
 ```python
-# axis=columns means "take the average across the column values"
-# That is, compute the average of each row (country)
 data_eu.mean(axis='columns')
 ```
 
@@ -108,36 +105,14 @@ country
 Albania                    3255.366633
 Austria                   20411.916279
 Belgium                   19900.758072
-Bosnia and Herzegovina     3484.779069
-Bulgaria                   6384.055172
-Croatia                    9331.712346
-Czech Republic            13920.011379
-Denmark                   21671.824888
-Finland                   17473.722667
-France                    18833.570327
-Germany                   20556.684433
-Greece                    13969.036833
-Hungary                   10888.175654
-Iceland                   20531.422273
-Ireland                   15758.606238
-Italy                     16245.209006
-Montenegro                 7208.064560
-Netherlands               21748.852208
-Norway                    26747.306554
-Poland                     8416.553912
-Portugal                  11354.091927
-Romania                    7300.169974
-Serbia                     9305.049444
-Slovak Republic           10415.530689
-Slovenia                  14074.582109
-Spain                     14029.826479
-Sweden                    19943.126104
+...                                ...
 Switzerland               27074.334405
 Turkey                     4469.453380
 United Kingdom            19380.472986
 dtype: float64
 ```
 ![](fif/../fig/03-axis-operations.svg){alt='Diagram illustrating how the axis keyword changes the axis along which the mean() function operates.'}
+
 
 ## Plotting statistics
 
@@ -153,38 +128,37 @@ import matplotlib.pyplot as plt
 We can now create a plot of the average GDP of European countries in the following way:
 
 ```python
-# Create a figure or window for plotting
 fig = plt.figure()
-# Extract the mean GDP each year
 mean_gdp_each_year = data_eu.mean(axis='rows')
-# Plot the data in the figure window
 plt.plot(mean_gdp_each_year)
-# Show the figure to the screen
 plt.show()
 ```
 
 ![](fig/03-eu_mean_gdp_no_labels.svg){alt='A line graph showing the change in the average GDP of European countries.'})
 
 Let's break down what each line is doing.
+
+First, we use the `figure` function from the `matplotlib.pyplot` library to create a new, blank figure canvas.
+The variable `fig` can be used to access this figure canvas.
+
 ```python
 fig = plt.figure()
 ```
-- Uses the `figure` function from the `matplotlib.pyplot` library. 
-- This tells Python to create a new, blank figure window.
-- The variable `fig` cna be used to access this figure window.
+
+Then, we create a new variable `mean_gdp_each_year`, with the average value of our `data_eu` dataframe across the rows (down the columns).
 
 ```python
 mean_gdp_each_year = data_eu.mean(axis='rows')
 ```
-- Takes the average value of our `data_eu` dataframe across the rows (down the columns).
-- Places the result into the variable `mean_gdp_each_year`.
+
+Next, using the `plot` function from the `matplotlib.pyplot` library, we request to visualise the data stored in `mean_gdp_each_year` into the figure canvas.
+If we had multiple figures open, we could specify which one to plot this data on. But since we only have one (`fig`), `plt.plot` knows to plot the data onto this one.
+Finally, `plt.show()` function displays the final result on the screen.
 
 ```python
 plt.plot(mean_gdp_each_year)
+plt.show()
 ```
-- Uses the `plot` function from the `matplotlib.pyplot` library.
-- This places the data stored in `mean_gdp_each_year` and plots it to the figure window.
-- If we had multiple figures open, we could specify which one to plot this data on. But since we only have one (`fig`), `plt.plot` knows to plot the data onto this one.
 
 ## Grouping Plots
 
@@ -193,47 +167,47 @@ It is often the case where we will want to display multiple statistics side-by-s
 This can be achieved by adding *subplots* to a figure, using the `add_subplots` function.
 Let's demonstrate how to do this by plotting the maximum and minimum GDP of countries in Europe for each year alongside the average GDP for that year.
 
+To achieve this we will need:
+1. to compute the min, max, and average GDP each year for European countries;
+1. Create a new figure with the right canvas proportions;
+1. Generate different subplots ("axes") where to plot the data; and
+1. Display the data in the screen.
+
 ```python
-# Compute the min, max, and average GDP each year for European countries
 eu_min_data = data_eu.min(axis='rows')
 eu_max_data = data_eu.max(axis='rows')
 eu_avg_data = data_eu.mean(axis='rows')
 
-# Create a new figure to draw the plots onto
-fig = plt.figure(figsize=(25., 6.))
+fig = plt.figure(figsize=(10., 3.))
 
-# Create a new axis, or plotting window
-# (1, 3, 1) indicates that we want to place this plot in a 1-by-3 grid;
-# and place this subplot in the first position
 axes_1 = fig.add_subplot(1, 3, 1)
-# Plot the minimum GDP on this axis
 axes_1.plot(eu_min_data)
 
-# Create another new axis
-# (1, 3, 2) indicating that we want to use the same 1-by-3 grid;
-# and place this subplot in the second position
 axes_2 = fig.add_subplot(1, 3, 2)
-# Plot the maximum GDP on this axis
 axes_2.plot(eu_max_data)
 
-# Create another new axis
-# This axis will be in the third position of our 1-by-3 grid
 axes_3 = fig.add_subplot(1, 3, 3)
-# Plot the average GDP on this axis
 axes_3.plot(eu_avg_data)
 
-# Display the figure.
 plt.show()
 ```
 
 ![](fig/03-min_max_avg_no_labels.svg){alt='A figure which contains three subplots, side-by-side'}
+
+Note how we've set the right axis arguments when computing the different statistical properties (`axis='rows'`).
+The parameter `figsize` tells Python how big to make this space in relative units. In this case the width is a bit larger than three times the height.
+Each subplot is placed into the figure using its `add_subplot` [method](../learners/reference.md#method).
+The `add_subplot` method takes 3 parameters. The first denotes how many total rows of subplots there are, the second parameter refers to the total number of subplot columns, and the final parameter denotes which subplot your variable is referencing (left-to-right, top-to-bottom).
+Each subplot is stored in a different variable (`axes_1`, `axes_2`, `axes_3`).
+Once a subplot is created, the axes can be used to place the desired plot for each.
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::: callout
 
 ## `min` and `max` methods
 
 The `min` and `max` functions can be used on a dataframe in the same way as the `mean` function, and take the same `axis` parameter.
-For us to retrieve the minimum GDP of countries in Europe for each year, we can use
+For us, this retrieves the minimum GDP of countries in Europe for each year:
 
 ```python
 data_eu.min(axis='rows')
@@ -255,34 +229,7 @@ data_eu.min(axis='rows')
 dtype: float64
 ```
 
-for example.
-
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-There are a lot of new functions coming in here, so let's again break down what each one is doing.
-
-```python
-fig = plt.figure(figsize=(25., 6.))
-```
-
-- Creates a new figure, like we saw before.
-- The `figsize` parameter lets us specify the size of the figure, rather than letting `matplotlib` decide this automatically for us.
-
-```python
-axes_1 = fig.add_subplot(1, 3, 1)
-```
-
-- This calls the `add_subplot` method on the figure that is stored in the `fig` variable.
-- `add_subplot` takes 3 arguments; the first denotes how many total rows fo subplots there are (to be) in our figure, the second how many total columns, and the final parameter denotes which of these subplots that we want to reference (left-to-right, top-to-bottom). In this case, `1` refers to the leftmost subplot.
-- The subplot is saved to the `axes_1` variable so we can refer to it later.
-
-```python
-axes_1.plot(eu_min_data)
-```
-
-- `plot` tells `matplotlib` to draw data onto a subplot window.
-- In this case, we draw the data stored in `eu_min_data`, the minimum GDP for each year.
-- The `axes_1` dot notation is needed so that Python knows we want to place this data on the `axes_1` subplot.
 
 ## Adding labels
 
@@ -297,53 +244,33 @@ We can fix these using some more `matplotlib` functions.
 - The `suptitle` method lets us add a title to the figure window ("super"-title).
 - The `tight_layout` method tells `matplotlib` to remove as much whitespace as possible from our figure.
 
+Putting it all together:
+
 ```python
-# Compute the min, max, and average GDP each year for European countries
 eu_min_data = data_eu.min(axis='rows')
 eu_max_data = data_eu.max(axis='rows')
 eu_avg_data = data_eu.mean(axis='rows')
 
-# Create a new figure to draw the plots onto
-fig = plt.figure(figsize=(25., 6.))
+fig = plt.figure(figsize=(10., 3.))
 
-# Create a new axis, or plotting window
-# (1, 3, 1) indicates that we want to place this plot in a 1-by-3 grid;
-# and place this subplot in the first position
 axes_1 = fig.add_subplot(1, 3, 1)
-# Plot the minimum GDP on this axis
 axes_1.plot(eu_min_data)
-# Add a label to the y-axis of the subplot that axes_1 refers to
 axes_1.set_ylabel('GDP/capita')
-# Add a title to the subplot that axes_1 refers to
 axes_1.set_title('Min')
 
-# Create another new axis
-# (1, 3, 1) indicating that we want to use the same 1-by-3 grid;
-# and place this subplot in the second position
 axes_2 = fig.add_subplot(1, 3, 2)
-# Plot the maximum GDP on this axis
 axes_2.plot(eu_max_data)
-# Add a label to the y-axis of the subplot
 axes_2.set_ylabel('GDP/capita')
-# Add a title to the subplot
 axes_1.set_title('Max')
 
-# Create another new axis
-# This axis will be in the third position of our 1-by-3 grid
 axes_3 = fig.add_subplot(1, 3, 3)
-# Plot the average GDP on this axis
 axes_3.plot(eu_avg_data)
-# Add a label to the y-axis of the subplot
 axes_3.set_ylabel('GDP/capita')
-# Add a title to the subplot
 axes_1.set_title('Average')
 
-# Add a main title to the figure that fig refers to
 fig.suptitle('GDP/capita statistics for European countries')
-# Trim away as much empty space from the figure as possible
 fig.tight_layout()
 
-# Display the figure.
 plt.show()
 ```
 
@@ -363,26 +290,21 @@ Hint:
 
 :::::::::::::::: solution
 
-To fix this for the first subplot, for example, we can use
+To fix this for the first subplot, we can set the y-axis limits to the overall minimum and maximum values of the dataframe.
 
 ```python
-# Create a new axis, or plotting window
-# (1, 3, 1) indicates that we want to place this plot in a 1-by-3 grid;
-# and place this subplot in the first position
 axes_1 = fig.add_subplot(1, 3, 1)
-# Plot the minimum GDP on this axis
 axes_1.plot(eu_min_data)
-# Add a label to the y-axis of the subplot that axes_1 refers to
 axes_1.set_ylabel('GDP/capita')
-# Add a title to the subplot that axes_1 refers to
 axes_1.set_title('Min')
-# Set the y-limits to be the max and min values of the data that we are plotting
+
+# Sets the y-limits to the min/max overall values to ease comparisson across the plots
 y_axes_min_value = eu_min_data.min()
 y_axes_max_value = eu_max_data.max()
 axes_1.set_ylim(y_axes_min_value, y_axes_max_value)
 ```
 
-If you want to be really fancy, you can even use
+Or without creating intermediate variables, you could use
 
 ```python
 axes_1.set_ylim(eu_min_data.min(), eu_min_data.max())
@@ -404,7 +326,7 @@ Modify your calls to `plot` with different parameters to create different line s
 Some useful parameters to add to `plot` are:
 - `linestyle = ':'`. Can also be tried with `'--'`, `'-.'`, and a few other options.
 - `color = 'red'`. Several other colours are also available!
-- `marker = 'x'`. There are [lots of these](https://matplotlib.org/stable/api/markers_api.html) to try out.
+- `marker = 'x'`. There are [lots of different plotting markers](https://matplotlib.org/stable/api/markers_api.html) to try out.
 
 :::::::::::::::  solution
 
@@ -413,7 +335,7 @@ Some useful parameters to add to `plot` are:
 There are a ton of options to pick from here, but an example that draws a dashed, red line with crosses marking the datapoints is below:
 
 ```python
-axes_1.plot(numpy.mean(data, axis=0), linestyle=':', color='red', marker='x')
+axes_1.plot(eu_mean_data, linestyle=':', color='red', marker='x')
 ```
 
 :::::::::::::::::::::::::
@@ -434,10 +356,8 @@ Hint:
 ## Solution
 
 ```python
-# Create a new figure window for the plot
 std_plot = plt.figure()
 
-# Compute the standard deviation down the columns
 std_data = data_eu.std(axis='rows')
 
 plt.plot(std_data)
@@ -463,19 +383,13 @@ eu_min_data = data_eu.min(axis='rows')
 eu_max_data = data_eu.max(axis='rows')
 eu_avg_data = data_eu.mean(axis='rows')
 
-fig = plt.figure(figsize=(25., 6.))
+fig = plt.figure(figsize=(10., 3.))
 
-# Create a new axis, or plotting window
-# (3, 1, 1) indicates that we want to place this plot in a 3-by-1 grid;
-# and place this subplot in the first position
 axes_1 = fig.add_subplot(3, 1, 1)
 axes_1.plot(eu_min_data)
 axes_1.set_ylabel('GDP/capita')
 axes_1.set_title('Min')
 
-# Create another new axis
-# (3, 1, 2) indicating that we want to use the same 3-by-1 grid;
-# and place this subplot in the second position
 axes_2 = fig.add_subplot(3, 1, 2)
 axes_2.plot(eu_max_data)
 axes_2.set_ylabel('GDP/capita')
@@ -492,14 +406,161 @@ fig.tight_layout()
 plt.show()
 ```
 
+
 :::::::::::::::::::::::::
 
+What would you change to make each of these plots of a similar width than when they were side by side?
+
+:::::::::::::::  solution
+
+## Solution
+
+Change the figure size to be taller than wider.
+
+```python
+fig = plt.figure(figsize=(3., 10.))
+```
+:::::::::::::::::::::::::
+
+
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Change In GDP
+
+The GDP data is *longitudinal* in the sense that each row represents a
+series of observations relating to one country.  This means that
+the change in GDP over time is a meaningful concept.
+Let's find out how to calculate changes in the data contained in an array
+with pandas.
+
+The `DataFrame.diff()` function takes an array and returns the differences
+between two successive values, depending of the axis requested.
+
+Let's use it to examine the changes each year across the ages for Portugal.
+
+```python
+portugal = data_eu.loc['Portugal']
+print(portugal)
+```
+
+```output
+1952     3068.319867
+1957     3774.571743
+1962     4727.954889
+ ...             ...
+1997    17641.031560
+2002    19970.907870
+2007    20509.647770
+Name: Portugal, dtype: float64
+```
+
+Calling `portugal.diff()` would do the following calculations
+
+```python
+[ 3068.31 - NaN, 3774.57 - 3068.31,  4727.95 - 3774.57, ...,  19970.90 - 17641.03, 20509.64 - 19970.90 ]
+```
+
+and return the 12 difference values in a new series.
+
+```python
+portugal.diff()
+```
+
+```output
+1952            NaN
+1957     706.251876
+1962     953.383146
+ ...            ...
+1997    1433.764930
+2002    2329.876310
+2007     538.739900
+Name: Portugal, dtype: float64
+```
+
+Note that the first value is NaN because can't substract a value to the first element.
+
+When calling `DataFrame.diff` with a 2-dimensional dataframe, an `axis` argument may be passed to
+the function to specify which axis to process. When applying `DataFrame.diff` to our 2D GDP
+dataframe, which axis would we specify to obtain differences between the same country?
+
+:::::::::::::::  solution
+
+## Solution
+
+Since the row axis (0) is countries, it does not make sense to get the
+difference between two arbitrary countries. The column axis (1) is in
+years, so the difference is the change in GDP -- a meaningful
+concept.
+
+```python
+data_eu.diff(axis=1)
+```
+
+:::::::::::::::::::::::::
+
+How would you find the largest change in GDP for each country? Does
+it matter if the change in inflammation is an increase or a decrease?
+
+:::::::::::::::  solution
+
+## Solution
+
+By using the `DataFrame.max()` function after you apply the `Dataframe.diff()`
+function, you will get the largest difference between days.
+
+```python
+data_eu.diff(axis=1).max(axis=1)
+```
+
+```output
+country
+Albania                   1411.157133
+Austria                   3827.023200
+Belgium                   3523.102370
+...                               ...
+Switzerland               4228.968720
+Turkey                    1950.190666
+United Kingdom            3724.262090
+dtype: float64
+```
+
+If GDP values *decrease* along an axis, then the difference from
+one element to the next will be negative. If
+you are interested in the **magnitude** of the change and not the
+direction, the `DataFrame.abs()` function will provide that.
+
+Notice the difference if you get the largest *absolute* difference
+between readings.
+
+```python
+data_eu.diff(axis=1).abs().max(axis=1)
+```
+
+```output
+country
+Albania                   1411.157133
+Austria                   3827.023200
+Belgium                   3523.102370
+...                               ...
+Switzerland               4228.968720
+Turkey                    1950.190666
+United Kingdom            3724.262090
+dtype: float64
+```
+
+:::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Use the `pyplot` module from the `matplotlib` library to create visualizations of data.
 - Dataframes have methods like `min`, `max`, and `mean` to compute statistics along either the rows or the columns.
+- Use `axis` argument in statistic functions to calculate the values across the specified axis.
 - We can use `add_subplot` to create multiple plots in a single figure.
 - We can customise the labels, axis ranges, line styles, and more of our plots using `matplotlib`.
 
