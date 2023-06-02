@@ -39,7 +39,7 @@ For example, the GDP per capita of the UK is approximately $46510.
 We could track this by assigning the value `46510` to a variable `gdp_per_capita`:
 
 ```python
-gdp_per_capita = 46510
+gdp_per_capita = 46_510
 ```
 
 From now on, whenever we use `gdp_per_capita`, Python will substitute the value we assigned to it.
@@ -69,7 +69,7 @@ In the example above, variable `gdp_per_capita` has an integer value of `46510`.
 If we want to more precisely track the GDP of the UK, we can use a floating point value by executing:
 
 ```python
-gdp_per_capita = 46510.28
+gdp_per_capita = 46_510.28
 ```
 
 To create a string, we add single or double quotes around some text.
@@ -85,7 +85,7 @@ Once we have data stored with variable names, we can make use of it in calculati
 We may want to store our country's raw GDP value as well as the GDP per capita:
 
 ```python
-gdp = 67330000.0 * gdp_per_capita
+gdp = 67_330_000.0 * gdp_per_capita
 ```
 
 We also might decide to add a prefix to our language identifier:
@@ -141,7 +141,7 @@ print(type(uk_language_code))
 Moreover, we can do arithmetic with variables right inside the `print` function:
 
 ```python
-print('GDP in USD $', 67330000.0 * gdp_per_capita)
+print('GDP in USD $', 67_330_000.0 * gdp_per_capita)
 ```
 
 ```output
@@ -162,7 +162,7 @@ To change the value of the `gdp_per_capita` variable, we have to
 **assign** `gdp_per_capita` a new value using the equals `=` sign:
 
 ```python
-gdp_per_capita = 46371.45
+gdp_per_capita = 46_371.45
 print('GDP per capita is now:', gdp_per_capita)
 ```
 
@@ -196,13 +196,13 @@ Comments allow programmers to leave explanatory notes for other programmers or t
 
 ![](fig/01-sticky-note-variables-02.svg){alt='Value of 46371.45 with gdp\_per\_capita label stuck on it, next to a value of 3.13 trillion with gdp label stuck on it.'}
 
-Similar to above, the expression `67330000 * gdp_per_capita` is evaluated to `3122189728500.0`, and then this value is assigned to the variable `gdp` (i.e. the sticky note `gdp` is placed on `3122189728500.0`).
+Similar to above, the expression `67_330_000 * gdp_per_capita` is evaluated to `3122189728500.0`, and then this value is assigned to the variable `gdp` (i.e. the sticky note `gdp` is placed on `3122189728500.0`).
 At this point, each variable is "stuck" to completely distinct and unrelated values.
 
 Let's now change `gdp_per_capita`:
 
 ```python
-gdp_per_capita = 45000.00
+gdp_per_capita = 45_000.00
 print('GDP per capita is now: USD $', gdp_per_capita, 'But raw GDP is still: USD $', gdp)
 ```
 
