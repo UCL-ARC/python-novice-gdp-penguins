@@ -21,12 +21,12 @@ exercises: 15
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In the previous episode, we analysed a single `.csv` data file containing GDP data for countries in Europe. 
+In the previous episode, we analysed a single `.csv` data file containing GDP data for countries in Europe.
 However we also have similar data for the other continents, and we would like to repeat our analysis on each of them.
 This means that we still have 5 more data files to process!
 
-The natural first step is to collect the names of all the files that we have to process. 
-In Python, a list is a way to store multiple values together. 
+The natural first step is to collect the names of all the files that we have to process.
+In Python, a list is a way to store multiple values together.
 In this episode, we will learn how to store multiple values in a list as well as how to work with lists.
 
 ## Python lists
@@ -102,14 +102,14 @@ does not.
 
 Data which can be modified in place is called [mutable](../learners/reference.md#mutable), while data which cannot be modified is called
 [immutable](../learners/reference.md#immutable).
-Strings and numbers are immutable. 
+Strings and numbers are immutable.
 This does not mean that variables with string or number values are constants, but when we want to change the value of a string or number variable, we can only replace the old value with a completely new value.
 
-Lists on the other hand, are mutable: we can modify them after they have been created. 
+Lists on the other hand, are mutable: we can modify them after they have been created.
 We can change individual elements, append new elements, or reorder the whole list.
 For some operations, like sorting, we can choose whether to use a function that modifies the data in-place or a function that returns a modified copy and leaves the original unchanged.
 
-Be careful when modifying data in-place. 
+Be careful when modifying data in-place.
 If two variables refer to the same list, and you modify the list value, it will change for both variables!
 
 ```python
@@ -257,7 +257,7 @@ odds after reversing: [11, 7, 5, 3]
 
 While modifying in place, it is useful to remember that Python treats lists in a slightly counter-intuitive way.
 
-As we saw earlier, when we modified the `mild_salsa` list item in-place, if we make a list, (attempt to) copy it and then modify this list, we can cause all sorts of trouble. 
+As we saw earlier, when we modified the `mild_salsa` list item in-place, if we make a list, (attempt to) copy it and then modify this list, we can cause all sorts of trouble.
 This also applies to modifying the list using the above functions:
 
 ```python
@@ -391,7 +391,7 @@ print('subset', subset)
 subset [5, 13, 23, 37]
 ```
 
-Use the step size argument to create a new string that contains only every other character in the string "In an octopus's garden in the shade". 
+Use the step size argument to create a new string that contains only every other character in the string "In an octopus's garden in the shade".
 Start with creating a variable to hold the string:
 
 ```python
@@ -511,5 +511,3 @@ counts + counts
 - Strings are immutable (i.e., the characters in them cannot be changed).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
