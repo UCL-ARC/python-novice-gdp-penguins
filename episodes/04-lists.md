@@ -21,23 +21,17 @@ exercises: 15
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In the previous episode, we analyzed a single file of clinical trial inflammation data. However,
-after finding some peculiar and potentially suspicious trends in the trial data we ask
-Dr. Maverick if they have performed any other clinical trials. Surprisingly, they say that they
-have and provide us with 11 more CSV files for a further 11 clinical trials they have undertaken
-since the initial trial.
+In the previous episode, we analysed a single `.csv` data file containing GDP data for countries in Europe.
+However we also have similar data for the other continents, and we would like to repeat our analysis on each of them.
+This means that we still have 5 more data files to process!
 
-Our goal now is to process all the inflammation data we have, which means that we still have
-eleven more files to go!
-
-The natural first step is to collect the names of all the files that we have to process. In Python,
-a list is a way to store multiple values together. In this episode, we will learn how to store
-multiple values in a list as well as how to work with lists.
+The natural first step is to collect the names of all the files that we have to process.
+In Python, a list is a way to store multiple values together.
+In this episode, we will learn how to store multiple values in a list as well as how to work with lists.
 
 ## Python lists
 
-Unlike NumPy arrays, lists are built into the language so we do not have to load a library
-to use them.
+Unlike dataframes, lists are built into the language so we do not have to load a library to use them.
 We create a list by putting values inside square brackets and separating the values with commas:
 
 ```python
@@ -64,13 +58,11 @@ last element: 7
 "-1" element: 7
 ```
 
-Yes, we can use negative numbers as indices in Python. When we do so, the index `-1` gives us the
-last element in the list, `-2` the second to last, and so on.
+Yes, we can use negative numbers as indices in Python.
+When we do so, the index `-1` gives us the last element in the list, `-2` the second to last, and so on.
 Because of this, `odds[3]` and `odds[-1]` point to the same element here.
 
-There is one important difference between lists and strings:
-we can change the values in a list,
-but we cannot change individual characters in a string.
+There is one important difference between lists and strings: we can change the values in a list, but we cannot change individual characters in a string.
 For example:
 
 ```python
@@ -108,20 +100,17 @@ does not.
 
 ## Ch-Ch-Ch-Ch-Changes
 
-Data which can be modified in place is called [mutable](../learners/reference.md#mutable),
-while data which cannot be modified is called
+Data which can be modified in place is called [mutable](../learners/reference.md#mutable), while data which cannot be modified is called
 [immutable](../learners/reference.md#immutable).
-Strings and numbers are immutable. This does not mean that variables with string or number values
-are constants, but when we want to change the value of a string or number variable, we can only
-replace the old value with a completely new value.
+Strings and numbers are immutable.
+This does not mean that variables with string or number values are constants, but when we want to change the value of a string or number variable, we can only replace the old value with a completely new value.
 
-Lists and arrays, on the other hand, are mutable: we can modify them after they have been
-created. We can change individual elements, append new elements, or reorder the whole list. For
-some operations, like sorting, we can choose whether to use a function that modifies the data
-in-place or a function that returns a modified copy and leaves the original unchanged.
+Lists on the other hand, are mutable: we can modify them after they have been created.
+We can change individual elements, append new elements, or reorder the whole list.
+For some operations, like sorting, we can choose whether to use a function that modifies the data in-place or a function that returns a modified copy and leaves the original unchanged.
 
-Be careful when modifying data in-place. If two variables refer to the same list, and you modify
-the list value, it will change for both variables!
+Be careful when modifying data in-place.
+If two variables refer to the same list, and you modify the list value, it will change for both variables!
 
 ```python
 mild_salsa = ['peppers', 'onions', 'cilantro', 'tomatoes']
@@ -152,11 +141,9 @@ Ingredients in mild salsa: ['peppers', 'onions', 'cilantro', 'tomatoes']
 Ingredients in hot salsa: ['hot peppers', 'onions', 'cilantro', 'tomatoes']
 ```
 
-Because of pitfalls like this, code which modifies data in place can be more difficult to
-understand. However, it is often far more efficient to modify a large data structure in place
-than to create a modified copy for every small change. You should consider both of these aspects
-when writing your code.
-
+Because of pitfalls like this, code which modifies data in place can be more difficult to understand.
+However, it is often far more efficient to modify a large data structure in place than to create a modified copy for every small change.
+You should consider both of these aspects when writing your code.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -166,10 +153,9 @@ when writing your code.
 
 Since a list can contain any Python variables, it can even contain other lists.
 
-For example, you could represent the products on the shelves of a small grocery shop
-as a nested list called `veg`:
+For example, you could represent the products on the shelves of a small grocery shop as a nested list called `veg`:
 
-![](fig/04_groceries_veg.png){alt='veg is represented as a shelf full of produce. There are three rows of vegetableson the shelf, and each row contains three baskets of vegetables. We can labeleach basket according to the type of vegetable it contains, so the top rowcontains (from left to right) lettuce, lettuce, and peppers.'}
+![](fig/04_groceries_veg.png){alt='veg is represented as a shelf full of produce. There are three rows of vegetables on the shelf, and each row contains three baskets of vegetables. We can label each basket according to the type of vegetable it contains, so the top row contains (from left to right) lettuce, lettuce, and peppers.'}
 
 To store the contents of the shelf in a nested list, you write it this way:
 
@@ -179,11 +165,11 @@ veg = [['lettuce', 'lettuce', 'peppers', 'zucchini'],
      ['lettuce', 'cilantro', 'peppers', 'zucchini']]
 ```
 
-Here are some visual examples of how indexing a list of lists `veg` works. First,
-you can reference each row on the shelf as a separate list. For example, `veg[2]`
-represents the bottom row, which is a list of the baskets in that row.
+Here are some visual examples of how indexing a list of lists `veg` works.
+First, you can reference each row on the shelf as a separate list.
+For example, `veg[2]` represents the bottom row, which is a list of the baskets in that row.
 
-![](fig/04_groceries_veg0.png){alt='veg is now shown as a list of three rows, with veg\[0\] representing the top row ofthree baskets, veg\[1\] representing the second row, and veg\[2\] representing the bottom row.'}
+![](fig/04_groceries_veg0.png){alt='veg is now shown as a list of three rows, with veg\[0\] representing the top row of three baskets, veg\[1\] representing the second row, and veg\[2\] representing the bottom row.'}
 
 Index operations using the image would work like this:
 
@@ -203,10 +189,9 @@ print(veg[0])
 ['lettuce', 'lettuce', 'peppers', 'zucchini']
 ```
 
-To reference a specific basket on a specific shelf, you use two indexes. The first
-index represents the row (from top to bottom) and the second index represents
-the specific basket (from left to right).
-![](fig/04_groceries_veg00.png){alt='veg is now shown as a two-dimensional grid, with each basket labeled according toits index in the nested list. The first index is the row number and the secondindex is the basket number, so veg\[1\]\[3\] represents the basket on the far rightside of the second row (basket 4 on row 2): zucchini'}
+To reference a specific basket on a specific shelf, you use two indexes. The first index represents the row (from top to bottom) and the second index represents the specific basket (from left to right).
+
+![](fig/04_groceries_veg00.png){alt='veg is now shown as a two-dimensional grid, with each basket labelled according to its index in the nested list. The first index is the row number and the second index is the basket number, so veg\[1\]\[3\] represents the basket on the far right side of the second row (basket 4 on row 2): zucchini'}
 
 ```python
 print(veg[0][0])
@@ -230,7 +215,8 @@ print(veg[1][2])
 
 ## Heterogeneous Lists
 
-Lists in Python can contain elements of different types. Example:
+Lists in Python can contain elements of different types.
+For example:
 
 ```python
 sample_ages = [10, 12.5, 'Unknown']
@@ -238,8 +224,7 @@ sample_ages = [10, 12.5, 'Unknown']
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-There are many ways to change the contents of lists besides assigning new values to
-individual elements:
+There are many ways to change the contents of lists besides assigning new values to individual elements:
 
 ```python
 odds.append(11)
@@ -270,12 +255,10 @@ print('odds after reversing:', odds)
 odds after reversing: [11, 7, 5, 3]
 ```
 
-While modifying in place, it is useful to remember that Python treats lists in a slightly
-counter-intuitive way.
+While modifying in place, it is useful to remember that Python treats lists in a slightly counter-intuitive way.
 
-As we saw earlier, when we modified the `mild_salsa` list item in-place, if we make a list, (attempt to)
-copy it and then modify this list, we can cause all sorts of trouble. This also applies to modifying
-the list using the above functions:
+As we saw earlier, when we modified the `mild_salsa` list item in-place, if we make a list, (attempt to) copy it and then modify this list, we can cause all sorts of trouble.
+This also applies to modifying the list using the above functions:
 
 ```python
 odds = [3, 5, 7]
@@ -290,9 +273,8 @@ primes: [3, 5, 7, 2]
 odds: [3, 5, 7, 2]
 ```
 
-This is because Python stores a list in memory, and then can use multiple names to refer to the
-same list. If all we want to do is copy a (simple) list, we can again use the `list` function, so we
-do not modify a list we did not mean to:
+This is because Python stores a list in memory, and then can use multiple names to refer to the same list.
+If all we want to do is copy a (simple) list, we can again use the `list` function, so we do not modify a list we did not mean to:
 
 ```python
 odds = [3, 5, 7]
@@ -307,8 +289,7 @@ primes: [3, 5, 7, 2]
 odds: [3, 5, 7]
 ```
 
-Subsets of lists and strings can be accessed by specifying ranges of values in brackets,
-similar to how we accessed ranges of positions in a NumPy array.
+Subsets of lists and strings can be accessed by specifying ranges of values in brackets, similar to how we accessed ranges of entries in a dataframe via the `.iloc` function.
 This is commonly referred to as "slicing" the list/string.
 
 ```python
@@ -355,8 +336,7 @@ list_for_slicing = [['fluorine', 'F'],
 ```
 
 Would your solution work regardless of whether you knew beforehand
-the length of the string or list
-(e.g. if you wanted to apply the solution to a set of lists of different lengths)?
+the length of the string or list (e.g. if you wanted to apply the solution to a set of lists of different lengths)?
 If not, try to change your approach to make it more robust.
 
 Hint: Remember that indices can be negative as well as positive
@@ -382,11 +362,9 @@ list_for_slicing[-4:]
 
 So far we've seen how to use slicing to take single blocks
 of successive entries from a sequence.
-But what if we want to take a subset of entries
-that aren't next to each other in the sequence?
+But what if we want to take a subset of entries that aren't next to each other in the sequence?
 
-You can achieve this by providing a third argument
-to the range within the brackets, called the *step size*.
+You can achieve this by providing a third argument to the range within the brackets, called the *step size*.
 The example below shows how you can take every third entry in a list:
 
 ```python
@@ -401,8 +379,7 @@ subset [2, 7, 17, 29]
 
 Notice that the slice taken begins with the first entry in the range,
 followed by entries taken at equally-spaced intervals (the steps) thereafter.
-If you wanted to begin the subset with the third entry,
-you would need to specify that as the starting point of the sliced range:
+If you wanted to begin the subset with the third entry, you would need to specify that as the starting point of the sliced range:
 
 ```python
 primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
@@ -414,19 +391,14 @@ print('subset', subset)
 subset [5, 13, 23, 37]
 ```
 
-Use the step size argument to create a new string
-that contains only every other character in the string
-"In an octopus's garden in the shade". Start with
-creating a variable to hold the string:
+Use the step size argument to create a new string that contains only every other character in the string "In an octopus's garden in the shade".
+Start with creating a variable to hold the string:
 
 ```python
 beatles = "In an octopus's garden in the shade"
 ```
 
-What slice of `beatles` will produce the
-following output (i.e., the first character, third
-character, and every other character through the end
-of the string)?
+What slice of `beatles` will produce the following output (i.e., the first character, third character, and every other character through the end of the string)?
 
 ```output
 I notpssgre ntesae
@@ -443,8 +415,7 @@ size of 2:
 beatles[0:35:2]
 ```
 
-You can also leave out the beginning and end of the slice to take the whole string
-and provide only the step argument to go every second
+You can also leave out the beginning and end of the slice to take the whole string and provide only the step argument to go every second
 element:
 
 ```python
@@ -455,8 +426,7 @@ beatles[::2]
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-If you want to take a slice from the beginning of a sequence, you can omit the first index in the
-range:
+If you want to take a slice from the beginning of a sequence, you can omit the first index in the range:
 
 ```python
 date = 'Monday 4 January 2016'
@@ -471,8 +441,7 @@ Using 0 to begin range: Monday
 Omitting beginning index: Monday
 ```
 
-And similarly, you can omit the ending index in the range to take a slice to the very end of the
-sequence:
+And similarly, you can omit the ending index in the range to take a slice to the very end of the sequence:
 
 ```python
 months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
@@ -509,16 +478,13 @@ print(repeats)
 3. `[[2, 4, 6, 8, 10],[2, 4, 6, 8, 10]]`
 4. `[2, 4, 6, 8, 10, 4, 8, 12, 16, 20]`
 
-The technical term for this is *operator overloading*:
-a single operator, like `+` or `*`,
-can do different things depending on what it's applied to.
+The technical term for this is *operator overloading*: a single operator, like `+` or `*`, can do different things depending on what it's applied to.
 
 :::::::::::::::  solution
 
 ## Solution
 
-The multiplication operator `*` used on a list replicates elements of the list and concatenates
-them together:
+The multiplication operator `*` used on a list replicates elements of the list and concatenates them together:
 
 ```output
 [2, 4, 6, 8, 10, 2, 4, 6, 8, 10]
@@ -545,5 +511,3 @@ counts + counts
 - Strings are immutable (i.e., the characters in them cannot be changed).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
