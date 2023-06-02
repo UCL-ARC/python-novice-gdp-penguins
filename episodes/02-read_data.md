@@ -6,9 +6,12 @@ exercises: 20
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Import the Pandas library.
-- Use Pandas to load a CSV data set.
-- Retrieve some basic information about a Pandas dataframe.
+- Explain what a library is and what libraries are used for.
+- Import a Python library (`pandas`) and use the functions it contains.
+- Read tabular data from a file into a program.
+- Select individual values and subsections from data.
+- Get some basic information about a Pandas DataFrame.
+- Perform operations on arrays of data.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -27,18 +30,92 @@ that can be called upon when needed.
 
 ## Loading data into Python using the Pandas library.
 
-[Pandas](https://pandas.pydata.org) is a widely-used Python library for statistics, particularly when processing tabular data.
-We will use Pandas to read in our data files;
-- First, we must tell Python that we want to use the Pandas library. We can do this using the [`import`](../learners/reference.md#library) command.
-- Then, we can use the `read_csv` function from Pandas to read one of our data files into a dataframe. This function takes the name of a file as an argument, and returns a dataframe that we can assign to a variable.
+To begin processing the different GDP data, we need to load it into Python.
+We can do that using a library called
+[pandas](https://pandas.pydata.org/ "Pandas Documentation"), which is a widely-used Python library for statistics, particularly on tabular data.
+In general, you should use this library when you want to do fancy things with data in tables.
+To tell Python that we'd like to start using pandas,
+we need to [import](../learners/reference.md#import) it:
 
 ```python
-import pandas as pd # Tells Python we want to use the Pandas library
+import pandas
+```
 
-# Load the data using Pandas' read_csv method
+Importing a library is like getting a piece of lab equipment out of a storage locker and setting it
+up on the bench. Libraries provide additional functionality to the basic Python package, much like
+a new piece of equipment adds functionality to a lab space. Just like in the lab, importing too
+many libraries can sometimes complicate and slow down your programs - so we only import what we
+need for each program.
+
+Additionally, it's common to use an alias when importing a library to safe some typing. In the case of pandas, the alias used is `pd`. Therefore, the importing command would become:
+
+```python
+import pandas as pd
+```
+
+Once we've imported the library, we can ask the library to read our data file for us:
+
+```python
+pd.read_csv('data/gapminder_gdp_oceania.csv')
+```
+
+```output
+       country  gdpPercap_1952  gdpPercap_1957  gdpPercap_1962  \
+0    Australia     10039.59564     10949.64959     12217.22686
+1  New Zealand     10556.57566     12247.39532     13175.67800
+
+   gdpPercap_1967  gdpPercap_1972  gdpPercap_1977  gdpPercap_1982  \
+0     14526.12465     16788.62948     18334.19751     19477.00928
+1     14463.91893     16046.03728     16233.71770     17632.41040
+
+   gdpPercap_1987  gdpPercap_1992  gdpPercap_1997  gdpPercap_2002  \
+0     21888.88903     23424.76683     26997.93657     30687.75473
+1     19007.19129     18363.32494     21050.41377     23189.80135
+
+   gdpPercap_2007
+0     34435.36744
+1     25185.00911
+```
+
+The expression `pd.read_csv(...)` is a
+[function call](../learners/reference.md#function-call)
+that asks Python to run the [function](../learners/reference.md#function) `read_csv` which
+belongs to the `pandas` library.
+The dot notation in Python is used most of all as an object attribute/property specifier or for invoking its method. `object.property` will give you the object.property value,
+`object_name.method()` will invoke on object\_name method.
+
+As an example, John Smith is the John that belongs to the Smith family.
+We could use the dot notation to write his name `smith.john`,
+just as `read_csv` is a function that belongs to the `pandas` library.
+
+`pandas.read_csv` accepts various [parameters](../learners/reference.md#parameter). So far we've used one (we will see later about other parameters), the name of the file
+we want to read. Note, that the file needs to be character strings
+(or [strings](../learners/reference.md#string) for short), so we put them in quotes.
+
+Since we haven't told it to do anything else with the function's output,
+the [notebook](../learners/reference.md#notebook) displays it.
+In this case,
+that output is the data we just loaded.
+By default,
+only a few rows and columns are shown
+(with `...` to omit elements when displaying big tables). Additionally, pandas uses backslash `\` to show wrapped lines when output is too wide to fit the screen.
+
+Our call to `pandas.read_csv` read our file
+but didn't save the data in memory.
+To do that,
+we need to assign the output to a variable. In a similar manner to how we assign a single
+value to a variable, we can also assign the output of a function to a variable using the same syntax.
+Let's re-run `pandas.read_csv` and save the returned data:
+
+```python
 data_oceania = pd.read_csv('data/gapminder_gdp_oceania.csv')
+```
 
-# Display the data
+This statement doesn't produce any output because we've assigned the output to the variable `data_oceania`.
+If we want to check that the data have been loaded,
+we can print the variable's value:
+
+```python
 print(data_oceania)
 ```
 
@@ -59,62 +136,13 @@ print(data_oceania)
 0     34435.36744
 1     25185.00911
 ```
-- The columns in a dataframe are the observed variables, and the rows are the observations.
-- Pandas uses backslash `\` to show wrapped lines when output is too wide to fit the screen.
-- Using descriptive dataframe names helps us distinguish between multiple DataFrames so we won't accidentally overwrite a dataframe or read from the wrong one.
 
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-## File Not Found
-
-Our lessons store their data files in a `data` sub-directory,
-which is why the path to the file is `data/gapminder_gdp_oceania.csv`.
-If you forget to include `data/`,
-or if you include it but your copy of the file is somewhere else,
-you will get a [runtime error](04-built-in.md)
-that ends with a line like this:
-
-```error
-FileNotFoundError: [Errno 2] No such file or directory: 'data/gapminder_gdp_oceania.csv'
-```
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-## Aliases and dot notation
-There are a couple of extra things going on in the commands we just ran, so let's take a closer look at them.
+Now that the data are in memory, we can manipulate them.
+However, notice that the row headings are numbers (0 and 1 in this case). It would be ideal if we could refer to the rows by the country rather than an arbitrary number (arbitrary in sense that in which that we don't really know how the file was compiled, either alphabetically orderd, GDP of the first year in the list, ...). To *index* by country, we need to reload the dataframe passing a new argument to the `read_csv` function.
 
 ```python
-import pandas as pd # Tells Python we want to use the Pandas library
-```
-
-We `import`ed Pandas `as pd`:
-- This means that we can refer to the Pandas library (and functions inside it) by typing `pd` as opposed to `pandas`.
-- This will be the case so long as we stay working in the same JupyterLab notebook or script. If you make a new Python notebook or script, you'll need to import Pandas again.
-
-```python
-data_oceania = pd.read_csv('data/gapminder_gdp_oceania.csv')
-```
-
-We had to write `pd.read_csv` as opposed to just `read_csv` to load the data.
-- This is because we want to tell Python to specifically look in the Pandas library for a function called `read_csv`.
-- The `pd.` tells Python to look in the Pandas library (remember, we gave Pandas the name `pd` when we imported it).
-- The `read_csv` is the name of the function to run.
-- The `data/gapminder_gdp_oceania.csv` is the argument that we pass to the `read_csv` function. In this case, it's the name of the data file we want to read.
-- `data_oceania` is the variable we want to save the output of `read_csv` to.
-The dot notation in Python is used most of all as an object attribute/property specifier or for invoking its method. `object.property` will give you the `object.property` value, `object_name.method()` will invoke on `object_name` method or function.
-
-## Specifying row headings
-
-You might notice that our `data_oceania` dataframe is displaying the row headings as numbers - in this case `0` and `1`.
-Additionally, the first column of each row contains the name of the country whose data is stored in that row.
-We would like to be able to index our rows by the country rather than numbers.
-- We can pass the name of the column which contains the row headers to `read_csv` as its `index_col` parameter to fix this.
-
-```python
-# Read the data file, specifying that the column "country" contains the names (indices) to be used for the rows
-data_oceania = pd.read_csv('data/gapminder_gdp_oceania.csv', index_col='country')
-
-print(data_oceania)
+data_oceania_country = pd.read_csv('data/gapminder_gdp_oceania.csv', index_col='country')
+print(data_oceania_country)
 ```
 
 ```output
@@ -134,18 +162,67 @@ Australia       23424.76683     26997.93657     30687.75473     34435.36744
 New Zealand     18363.32494     21050.41377     23189.80135     25185.00911
 ```
 
-Now when we print out our dataframe we can see that the rows are identified by country, rather than by a number.
+Note, that `index_col` also gets a string, in this case the name of the column we want to use to define our index. Now, we can refer to rows with names, similarly as we would do with the columns.
 
-## Working with DataFrames
+We've named the new variable as `data_oceania_country`. This helps us to remember how we've loaded the data with which region the data includes (`oceania`) and how it is indexed (`country`).
 
-We know that the `data_oceania` variable contains a dataframe, but how do we actually know *what's in* this dataframe?
-Or how many rows it has?
-Or the *type of* data stored in the columns?
-
-To obtain an overview of our dataframe, we can use the `info()` method.
+Let's ask what [type](../learners/reference.md#type) of thing `data_oceania_country` refers to:
 
 ```python
-data_oceania.info()
+print(type(data_oceania_country))
+```
+
+```output
+<class 'pandas.core.frame.DataFrame'>
+```
+
+The output tells us that `data_oceania_country` currently refers to
+a DataFrame, the functionality for which is provided by the pandas library.
+Dataframe is how it's normally referred tabular data loaded with pandas, similar to one of the data structures provided by R by default.
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Data Type
+
+A Dataframe may contain one or more elements
+of different types. The `type` function will only tell you that
+a variable is a pandas dataframe but won't tell you the type of
+thing inside the dataframe.
+We can find out the type of the data contained in the pandas dataframe.
+
+```python
+print(data_oceania_country.dtypes)
+```
+
+```output
+gdpPercap_1952    float64
+gdpPercap_1957    float64
+gdpPercap_1962    float64
+gdpPercap_1967    float64
+gdpPercap_1972    float64
+gdpPercap_1977    float64
+gdpPercap_1982    float64
+gdpPercap_1987    float64
+gdpPercap_1992    float64
+gdpPercap_1997    float64
+gdpPercap_2002    float64
+gdpPercap_2007    float64
+dtype: object
+```
+
+This tells us that the pandas dataframe's elements are
+[floating-point numbers](../learners/reference.md#floating-point-number).
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+With the following command, we can see some properties of our dataframe:
+
+
+
+```python
+data_oceania_country.info()
 ```
 
 ```output
@@ -170,19 +247,15 @@ dtypes: float64(12)
 memory usage: 208.0+ bytes
 ```
 
-This output is telling us that the `data_oceania` dataframe:
-- Has two rows (entries), the first being `'Australia'` and the last being `'New Zealand'`.
-- Has twelve columns per row.
-  - Each row has 2 non-null values. Null values are used to represent missing data or observations.
-  - All of the columns have data whose type is `float64` - that is, a floating point number like we saw in the previous lesson.
-- The only variable (or datatype, `dtype`) used is `float64`, and it is used in 12 columns (that is, all of them).
-- Is using 208 bytes of memory.
+We see that there are two rows named `'Australia'` and `'New Zealand'`; that
+there are twelve columns, each of which has two actual 64-bit floating point values (non-null values - null values are used to represent missing data or observations);
+and that it's using 208 bytes of memory.
 
 Whilst the `info()` method tells us how many columns our dataframe has, it doesn't tell us what the headers *are*.
 Fortunately, DataFrames also have a `columns` variable, which stores the column headers:
 
 ```python
-print(data_oceania.columns)
+print(data_oceania_country.columns)
 ```
 
 ```output
@@ -192,15 +265,13 @@ Index(['gdpPercap_1952', 'gdpPercap_1957', 'gdpPercap_1962', 'gdpPercap_1967',
       dtype='object')
 ```
 
-- Notice that we *didn't* use parentheses when writing `data_oceania.columns`. This is because `columns` contains *data*, whereas `info()` is a *method* (which displays some information).
-- `columns` is called a *member variable*, or just a *member* of the `data_oceania` variable.
+As with `dtype`, we *didn't* use parentheses when writing `data_oceania_country.columns`. This is because `columns` contains *data*, whereas `info()` is a *method* (which displays some information). This is normally called a [*member variable*](../learners/reference.md#member), or just a *member* of the `data_oceania_country` variable.
 
-Finally, we might want to treat our columns as rows and vice versa.
-To do so, we can *transpose* our dataframe:
-  - Transposing doesn't actually copy the data, but just changes how the program *views* it.
+Sometimes, we might want to treat our columns as rows and vice versa.
+To do so, we can *transpose* our dataframe. Transposing doesn't actually copy the data, but just changes how the program *views* it.
 
 ```python
-print(data_oceania.T) # .T is short for Transpose
+print(data_oceania_country.T)
 ```
 
 ```output
@@ -219,68 +290,123 @@ gdpPercap_2002  30687.75473  23189.80135
 gdpPercap_2007  34435.36744  25185.00911
 ```
 
+`.T` is short for Transpose.
+
 ## Accessing data in a dataframe
 
 The next question on our minds should be; "now that we've loaded our data into Python, how do we select or access its values"?
-DataFrames provide each row and column in our table of data with a *label*.
- - We saw that we can use the `index_col` parameter in `read_csv` to specify the row labels.
- - We also saw that, if we didn't provide `index_col` as a parameter, Pandas automatically assigned our rows labels that started at `0` and increased by `1`.
+DataFrames provide each row and column in our table of data with a *label*. We saw that we can use the `index_col` parameter in `read_csv` to specify the row labels, otherwise, pandas will automatically assign our rows labels that started at `0` and increased by `1`.
 
-Specifying a row and column uniquely identifies an *entry* in the dataframe.
-To retrieve value of the entry at a location, we can use the `DataFrame.loc` method:
 
 ```python
-# Load the data for Europe so that we have a larger dataset to work with
-data = pd.read_csv('data/gapminder_gdp_europe.csv', index_col='country')
+data_europe_country = pd.read_csv('data/gapminder_gdp_europe.csv', index_col='country')
+```
 
-print(data.loc['Albania', 'gdpPercap_1952'])
+We've load the data for Europe so that we have a larger dataset to work with.
+
+We can now specify a row and column uniquely using the identifier of an *entry* in the dataframe,
+together with the `DataFrame.loc` method. If we want to extract the GDP per capita value on the year 1952  for `'Albania'` we can use the row and column labels as:
+
+```python
+print(data_europe_country.loc['Albania', 'gdpPercap_1952'])
 ```
 
 ```output
 1601.056136
 ```
 
-However, underneath the labels for the rows and columns, each entry also has an *index* `[i, j]`.
-- Indices are listed by `[row_number, column_number]`.
-- Indices start at `0` and increase by `1` as we move along the rows and columns.
-- Indices start at `0` because it represents an offset from the "first" entry in the dataframe, which is the entry at the intersection of the first row and first column.
-- We saw that if we don't provide `index_col` to `read_csv`, Pandas sets the row labels to match the row indices.
+Alternatively, we can think that underneath the labels for the rows and columns, each entry also has an *index* `[i, j]` (listed by `[row_number, column_number]`).
+The following command, we can see the underneath array's [shape](../learners/reference.md#shape):
 
-Our `data` dataframe is effectively storing our entries as a grid, and keeps track of which labels correspond to which index.
+```python
+print(data_europe_country.shape)
+```
+
+```output
+(30, 12)
+```
+
+The output tells us that the `data_europe_country` dataframe variable contains 30 rows and 12
+columns. This `shape` is a [members](../learners/reference.md#member) or attribute as the `dtypes`
+and `info`. They provide extra information describing `data_europe_country` in the same way an adjective describes a
+noun. `data_europe_country.shape` is an attribute of `data_europe_country` which describes the dimensions of `data_europe_country`. We use the
+same dotted notation for the attributes of variables that we use for the functions in libraries
+because they have the same part-and-whole relationship.
+
+If we want to get a single number from the dataframe, we must provide an
+[index](../learners/reference.md#index) in square brackets after the variable name, just as we
+do in math when referring to an element of a matrix.  In the case of pandas, we need to use either the `loc` if using labels or `iloc` if using indices.
+
+Our dataframe has two dimensions, so we will need to use two indices to refer to one specific value:
+
+```python
+print('first value in the dataframe:', data_europe_country.iloc[0, 0])
+```
+
+```output
+first value in the dataframe: 1601.056136
+```
+
+```python
+print('middle value in the dataframe:', data[14, 5])
+```
+
+```output
+middle value in data: 11150.98113
+```
+
+The expression `data_europe_country.iloc[14, 5]` accesses the element at row 15, column 6. While this expression may
+not surprise you,
+`data_europe_country.iloc[0, 0]` might.
+Programming languages like Fortran, MATLAB and R start counting at 1
+because that's what human beings have done for thousands of years.
+Languages in the C family (including C++, Java, Perl, and Python) count from 0
+because it represents an offset from the first value in the array (the second
+value is offset by one index from the first value). This is closer to the way
+that computers represent arrays (if you are interested in the historical
+reasons behind counting indices from zero, you can read
+[Mike Hoye's blog post](https://exple.tive.org/blarg/2013/10/22/citation-needed/)).
+As a result,
+if we have an M×N array in Python,
+its indices go from 0 to M-1 on the first axis
+and 0 to N-1 on the second.
+It takes a bit of getting used to,
+but one way to remember the rule is that
+the index is how many steps we have to take from the start to get the item we want.
+
+![](fig/python-zero-index.svg){alt="'data' is a 3 by 3 numpy array containing row 0: \['A', 'B', 'C'\], row 1: \['D', 'E', 'F'\], androw 2: \['G', 'H', 'I'\]. Starting in the upper left hand corner, data\[0, 0\] = 'A', data\[0, 1\] = 'B',data\[0, 2\] = 'C', data\[1, 0\] = 'D', data\[1, 1\] = 'E', data\[1, 2\] = 'F', data\[2, 0\] = 'G',data\[2, 1\] = 'H', and data\[2, 2\] = 'I',in the bottom right hand corner."}
+
+Our `data_europe_country` dataframe is effectively storing our entries as a grid, and keeps track of which labels correspond to which index.
 This lets us interact with our data in a friendly and human-readable way, as it is much easier to work with labels than indices when handling tabular data!
-![](fig/python-zero-index.svg){alt="."}
+For instance, by indices we don't know to which country or year the value belongs to, we would need to count the labels for the row and indices to find that
+the 15th row refers to `'Ireland'` and the 6th column to the `'gdpPercap_1977'` label.
 
-We can also access entries by providing their index to the `DataFrame.iloc[]` method, rather than their row and column labels.
-- Since `'Albania'` is our first row, and `'gdpPercap_1952'` our first column, we can also get the `['Albania', 'gdpPercap_1952']` entry by using `iloc[0,0]`.
-- Since `'Italy'` is the 16th row, and `'gdpPercap_1977'` is the 6th column, we can get the `['Italy', 'gdpPercap_1977']` entry by using `iloc[15,5]`.
+:::::::::::::::::::::::::::::::::::::::::  callout
 
-```python
-# Albania is 0 rows away from the first row (Albania)
-# gdpPercap_1952 is 0 columns away from the first column (gdpPercap_1952)
-print(data.iloc[0,0])
-# Italy is 15 rows away from the first row (Albania)
-# gdpPercap_1977 is 5 columns away from the first column (gdpPercap_1952)
-print(data.iloc[15,5])
-```
+## In the Corner
 
-```output
-1601.056136
-14255.98475
-```
+What may also surprise you is that when Python displays an array,
+it shows the element with index `[0, 0]` in the upper left corner
+rather than the lower left.
+This is consistent with the way mathematicians draw matrices
+but different from the Cartesian coordinates.
+The indices are (row, column) instead of (column, row) for the same reason,
+which can be confusing when plotting data.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Selection using slices
 
 We have seen that `loc` and `iloc` allow us to select individual entries in our dataframe.
 However, they can also be used to select a range of rows and columns whose entries we want to retrieve.
-- A range of indices (or labels) that we want to select is called a *slice*.
-- Slices are writing using a semicolon `:`.
 
 For example, let's say we wanted all the entries from `1957` through to `1987` for all the countries beginning with "B" (`'Belgium'` through to `'Bulgaria'`).
 We could access these entries via a slice:
 
 ```python
 # Slice using labels. Notice that, because a slice doesn't include the end value, we have to provide the label of the first column we don't want to include as the end value of our slice.
-print(data.loc['Belgium':'Bulgaria', 'gdpPercap_1957':'gdpPercap_1987'])
+print(data_europe_country.loc['Belgium':'Bulgaria', 'gdpPercap_1957':'gdpPercap_1987'])
 ```
 
 ```output
@@ -289,36 +415,78 @@ country
 Belgium                    9714.960623    10991.206760    13149.041190   
 Bosnia and Herzegovina     1353.989176     1709.683679     2172.352423   
 Bulgaria                   3008.670727     4254.337839     5577.002800   
-Croatia                    4338.231617     5477.890018     6960.297861   
 
                         gdpPercap_1972  gdpPercap_1977  gdpPercap_1982  \
 country                                                                  
 Belgium                   16672.143560    19117.974480    20979.845890   
 Bosnia and Herzegovina     2860.169750     3528.481305     4126.613157   
 Bulgaria                   6597.494398     7612.240438     8224.191647   
-Croatia                    9164.090127    11305.385170    13221.821840   
 
-                        gdpPercap_1987  gdpPercap_1992  
-country                                                 
-Belgium                   22525.563080    25575.570690  
-Bosnia and Herzegovina     4314.114757     2546.781445  
-Bulgaria                   8239.854824     6302.623438  
-Croatia                   13822.583940     8447.794873  
+                        gdpPercap_1987  
+country                                 
+Belgium                   22525.563080  
+Bosnia and Herzegovina     4314.114757  
+Bulgaria                   8239.854824  
 ```
 
-- Leaving out the `start` label will be taken to mean "start from the beginning".
-- Leaving out the `end` label will be taken to mean "go until the end of the dataframe".
-- Putting only a semicolon can be used to mean "all the entries".
+We also don't have to include the upper and lower bound on the slice.  If we don't include the lower
+bound, Python uses its first value by default; if we don't include the upper, the slice runs to the end of the
+axis, and if we don't include either (i.e., if we use ':' on its own), the slice includes
+everything:
 
 ```python
-# Fetch the entries in rows up to and including Belgium
-print(data.loc[:'Belgium', :])
-# Fetch the entries in columns from 1987 onwards
-print(data.loc[:, 'gdpPercap_1987':])
-# Fetch all the entries for 'Albania'
-data.loc['Albania', :]
-# Fetch the data from 1987 for all countries
-data.loc[:, 'gdpPercap_1987']
+print('All countries before (and included) Belgium for years 1957 - 1967')
+print(data_europe_country.loc[:'Belgium', 'gdpPercap_1957':'gdpPercap_1967'])
+
+print('All countries for the year 2002 till now')
+print(data_europe_country.loc[:, 'gdpPercap_2002':])
+
+print('All the years for Italy')
+print(data_europe_country.loc['Italy', :])
+
+print('All the countries for 1987')
+print(data_europe_countryoc[:, 'gdpPercap_1987'])
+```
+
+```output
+All countries before (and included) Belgium for years 1957 - 1967'
+         gdpPercap_1957  gdpPercap_1962  gdpPercap_1967
+country                                                
+Albania     1942.284244     2312.888958     2760.196931
+Austria     8842.598030    10750.721110    12834.602400
+Belgium     9714.960623    10991.206760    13149.041190
+
+All countries for the year 2002 till now
+                        gdpPercap_2002  gdpPercap_2007
+country                                               
+Albania                    4604.211737     5937.029526
+Austria                   32417.607690    36126.492700
+Belgium                   30485.883750    33692.605080
+...                                ...             ...
+Switzerland               34480.957710    37506.419070
+Turkey                     6508.085718     8458.276384
+United Kingdom            29478.999190    33203.261280
+
+All the years for Italy
+gdpPercap_1952     4931.404155
+gdpPercap_1957     6248.656232
+gdpPercap_1962     8243.582340
+...                        ...
+gdpPercap_1997    24675.024460
+gdpPercap_2002    27968.098170
+gdpPercap_2007    28569.719700
+Name: Italy, dtype: float64
+
+All the countries for 1987
+country
+Albania                    3738.932735
+Austria                   23687.826070
+Belgium                   22525.563080
+...                                ...
+Switzerland               30281.704590
+Turkey                     5089.043686
+United Kingdom            21664.787670
+Name: gdpPercap_1987, dtype: float64
 ```
 
 :::::::::::::::::::::::::::::::::::::::::: callout
@@ -326,11 +494,48 @@ data.loc[:, 'gdpPercap_1987']
 If you want to fetch all of the columns, you don't have to include the second slice when using `loc`.
 For example, the following two calls will give back the same entries:
 ```python
-data.loc['Albania']
-data.loc['Albania', :]
+data_europe_country.loc['Albania']
+data_europe_country.loc['Albania', :]
 ```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+When using indices to slice (i.e., with `.iloc`), you need to be aware that 
+the [slice](../learners/reference.md#slice) `0:4` means, "Start at index 0 and go up to,
+but not including, index 4". Again, the up-to-but-not-including takes a bit of getting used to,
+but the rule is that the difference between the upper and lower bounds is the number of values in
+the slice.
+
+```python
+print('First four countries and first three years')
+print(data_europe_country.iloc[0:4, 0:3])
+```
+```output
+First four countries and first three years
+                        gdpPercap_1952  gdpPercap_1957  gdpPercap_1962
+country                                                               
+Albania                    1601.056136     1942.284244     2312.888958
+Austria                    6137.076492     8842.598030    10750.721110
+Belgium                    8343.105127     9714.960623    10991.206760
+Bosnia and Herzegovina      973.533195     1353.989176     1709.683679
+```
+
+As when using labels, you can omit the lower, upper or both boundaries of the slice.
+
+```python
+print('First the last three countries for the first three years')
+print(data_europe_country.iloc[27:, :3])
+```
+
+```output
+First the last three countries for the first three years
+                gdpPercap_1952  gdpPercap_1957  gdpPercap_1962
+country                                                       
+Switzerland       14734.232750    17909.489730    20431.092700
+Turkey             1969.100980     2218.754257     2322.869908
+United Kingdom     9979.508487    11283.177950    12477.177070
+```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -379,7 +584,7 @@ We see that a numerical slice (slicing indices), `0:2`, *omits* the final index 
 
 ## Reading Other Data
 
-Read the data in `gapminder_gdp_americas.csv` (which should be in the same directory as `gapminder_gdp_oceania.csv`) into a variable called `data_americas`.
+Read the data in `gapminder_gdp_americas.csv` (which should be in the same directory as `gapminder_gdp_oceania.csv`) into a variable called `data_americas_country`.
 
 Determine how many rows and columns this data has.
 Hint: try printing out the value of the `.shape` member variable once you load your dataframe!
@@ -393,8 +598,8 @@ We also once again pass the column name `'country'` to the parameter `index_col`
 
 To determine how many rows and columns this dataframe has, we could use `info` like we did before:
 ```python
-data_americas = pd.read_csv('data/gapminder_gdp_americas.csv', index_col='country')
-data_americas.info()
+data_americas_country = pd.read_csv('data/gapminder_gdp_americas.csv', index_col='country')
+data_americas_country.info()
 ```
 
 ```output
@@ -424,7 +629,7 @@ We can see that we have 25 entries (rows), and 13 columns.
 We could also get the same information about the number of rows and columns using `shape`:
 
 ```python
-print(data_americas.shape)
+print(data_americas_country.shape)
 ```
 
 ```output
@@ -435,12 +640,34 @@ print(data_americas.shape)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Mystery Functions in IPython
+
+How did we know what functions NumPy has and how to use them?
+If you are working in IPython or in a Jupyter Notebook, there is an easy way to find out.
+If you type the name of something followed by a dot, then you can use
+[tab completion](../learners/reference.md#tab-completion)
+(e.g. type `data_europe_country.` and then press <kbd>Tab</kbd>)
+to see a list of all functions and attributes that you can use. After selecting one, you
+can also add a question mark (e.g. `data_europe_country.cumsum?`), and IPython will return an
+explanation of the method! This is the same as doing `help(data_europe_country.cumsum)`.
+Similarly, if you are using the "plain vanilla" Python interpreter, you can type `data_europe_country.`
+and press the <kbd>Tab</kbd> key twice for a listing of what is available. You can then use the
+`help()` function to see an explanation of the function you're interested in,
+for example: `help(data_europe_country.cumsum)`.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Inspecting Data
 
 After reading the data for the Americas,
-use `help(data_americas.head)` and `help(data_americas.tail)`
+use `help(data_americas_country.head)` and `help(data_americas_country.tail)`
 to find out what `DataFrame.head` and `DataFrame.tail` do.
 
 1. What method call will display the first three rows of this data?
@@ -451,13 +678,13 @@ to find out what `DataFrame.head` and `DataFrame.tail` do.
 
 ## Solution
 
-1. We can check out the first five rows of `data_americas` by executing `data_americas.head()`
+1. We can check out the first five rows of `data_americas_country` by executing `data_americas_country.head()`
   which lets us view the beginning of the dataframe. We can specify the number of rows we wish
-  to see by specifying the parameter `n` in our call to `data_americas.head()`.
+  to see by specifying the parameter `n` in our call to `data_americas_country.head()`.
   To view the first three rows, execute:
   
   ```python
-  data_americas.head(n=3)
+  data_americas_country.head(n=3)
   ```
   
   ```output
@@ -486,16 +713,16 @@ to find out what `DataFrame.head` and `DataFrame.tail` do.
   Brazil        9065.800825
   ```
 
-2. To check out the last three rows of `data_americas`, we would use the command,
-  `americas.tail(n=3)`, analogous to `head()` used above. However, here we want to look at
+2. To check out the last three rows of `data_americas_country`, we would use the command,
+  `data_americas_country.tail(n=3)`, analogous to `head()` used above. However, here we want to look at
   the last three columns so we need to change our view and then use `tail()`. To do so, we
   create a new dataframe in which rows and columns are switched:
   
   ```python
-  americas_flipped = data_americas.T
+  americas_flipped = data_americas_country.T
   ```
   
-  We can then view the last three columns of `americas` by viewing the last three rows
+  We can then view the last three columns of `data_americas_country` by viewing the last three rows
   of `americas_flipped`:
   
   ```python
@@ -534,19 +761,172 @@ to find out what `DataFrame.head` and `DataFrame.tail` do.
   **Note:** we could have done the above in a single line of code by 'chaining' the commands:
   
   ```python
-  data_americas.T.tail(n=3).T
+  data_americas_country.T.tail(n=3).T
   ```
 
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Not All Functions Have Input
+
+Generally, a function uses inputs to produce outputs.
+However, some functions produce outputs without
+needing any input. For example, checking the current time
+doesn't require any input.
+
+```python
+import time
+print(time.ctime())
+```
+
+```output
+Sat Mar 26 13:07:33 2016
+```
+
+For functions that don't take in any arguments,
+we still need parentheses (`()`)
+to tell Python to go and do something for us.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Slicing Strings
+
+A section of an array is called a [slice](../learners/reference.md#slice).
+We can take slices of character strings as well:
+
+```python
+element = 'oxygen'
+print('first three characters:', element[0:3])
+print('last three characters:', element[3:6])
+```
+
+```output
+first three characters: oxy
+last three characters: gen
+```
+
+What is the value of `element[:4]`?
+What about `element[4:]`?
+Or `element[:]`?
+
+:::::::::::::::  solution
+
+## Solution
+
+```output
+oxyg
+en
+oxygen
+```
+
+:::::::::::::::::::::::::
+
+What is `element[-1]`?
+What is `element[-2]`?
+
+:::::::::::::::  solution
+
+## Solution
+
+```output
+n
+e
+```
+
+:::::::::::::::::::::::::
+
+Given those answers,
+explain what `element[1:-1]` does.
+
+:::::::::::::::  solution
+
+## Solution
+
+Creates a substring from index 1 up to (not including) the final index,
+effectively removing the first and last letters from 'oxygen'
+
+
+:::::::::::::::::::::::::
+
+How can we rewrite the slice for getting the last three characters of `element`,
+so that it works even if we assign a different string to `element`?
+Test your solution with the following strings: `carpentry`, `clone`, `hi`.
+
+:::::::::::::::  solution
+
+## Solution
+
+```python
+element = 'oxygen'
+print('last three characters:', element[-3:])
+element = 'carpentry'
+print('last three characters:', element[-3:])
+element = 'clone'
+print('last three characters:', element[-3:])
+element = 'hi'
+print('last three characters:', element[-3:])
+```
+
+```output
+last three characters: gen
+last three characters: try
+last three characters: one
+last three characters: hi
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Thin Slices
+
+The expression `element[3:3]` produces an
+[empty string](../learners/reference.md#empty-string),
+i.e., a string that contains no characters.
+If `data_europe_country` holds our array of europe data,
+what does `data_europe_country.iloc[5:5, 4:4]` produce?
+What about `data_europe_country.iloc[3:3, :]`?
+
+:::::::::::::::  solution
+
+## Solution
+
+```output
+Empty DataFrame
+Columns: []
+Index: []
+Empty DataFrame
+Columns: [gdpPercap_1952, gdpPercap_1957, gdpPercap_1962, gdpPercap_1967, gdpPercap_1972, gdpPercap_1977, gdpPercap_1982, gdpPercap_1987, gdpPercap_1992, gdpPercap_1997, gdpPercap_2002, gdpPercap_2007]
+Index: []
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
+- Import a library into a program using `import libraryname`.
 - Use the `pandas` library to work with tabular data in Python.
 - Use the `read_csv` function to load data into a dataframe variable.
 - Use `index_col` to specify that a column's values should be used as row headings.
 - Use `info` to find out basic information about a dataframe.
 - Use slices and `loc` to extract entries from a dataframe.
+- The expression `dataframe.shape` gives the shape of the underlying array.
+- Use `label_a:label_c` to specify a `slice` that includes the rows or columns from `label_a` to, and including, `label_c`.
+- Array indices start at 0, not 1.
+- Use `low:high` to specify a `slice` that includes the indices from `low` to `high-1`.
+- Use `# some kind of explanation` to add comments to programs.
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
