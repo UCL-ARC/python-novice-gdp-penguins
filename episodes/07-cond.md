@@ -18,7 +18,7 @@ exercises: 0
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 In our last lesson, we discovered something suspicious was going on
-in our inflammation data by drawing some plots.
+in our GDP data by drawing some plots.
 How can we use Python to automatically recognize the different features we saw,
 and take a different action for each? In this lesson, we'll learn how to write code that
 runs only when certain conditions are true.
@@ -147,37 +147,36 @@ the value `False`, while `-1 < 0` returns the value `True`.
 
 Now that we've seen how conditionals work,
 we can use them to check for the suspicious features we saw in our inflammation data.
-We are about to use functions provided by the `numpy` module again.
+We are about to use functions provided by the `pandas` module again.
 Therefore, if you're working in a new Python session, make sure to load the
 module with:
 
 ```python
-import numpy
+import pandas as pd
 ```
 
-From the first couple of plots, we saw that maximum daily inflammation exhibits
-a strange behavior and raises one unit a day.
+From the first set of plots, we saw that the minimum and average exhibit
+a strange behavior for some of our dataset.
 Wouldn't it be a good idea to detect such behavior and report it as suspicious?
 Let's do that!
-However, instead of checking every single day of the study, let's merely check
-if maximum inflammation in the beginning (day 0) and in the middle (day 20) of
-the study are equal to the corresponding day numbers.
+However, instead of checking every entry manually, let's check if the minimum and the maximum for the minimum across years is the same.
 
 ```python
-max_inflammation_0 = numpy.amax(data, axis=0)[0]
-max_inflammation_20 = numpy.amax(data, axis=0)[20]
+min_data = data.min(axis='rows')
+min_min_data = min_data.min()
+max_min_data = min_data.max()
 
-if max_inflammation_0 == 0 and max_inflammation_20 == 20:
-    print('Suspicious looking maxima!')
+if min_min_data == 0 and max_min_data == 0:
+    print('Suspicious looking minima!')
 ```
 
-We also saw a different problem in the third dataset;
-the minima per day were all zero (looks like a healthy person snuck into our study).
+We also saw a different problem with America dataset;
+the average across the years was constant (looks like someone had manipulated the data).
 We can also check for this with an `elif` condition:
 
 ```python
-elif numpy.sum(numpy.amin(data, axis=0)) == 0:
-    print('Minima add up to zero!')
+elif round(data.mean(axis='rows').min()) == round(data.mean(axis='rows').max()):
+    print('Average is flat!')
 ```
 
 And if neither of these conditions are true, we can use `else` to give the all-clear:
@@ -190,45 +189,45 @@ else:
 Let's test that out:
 
 ```python
-data = numpy.loadtxt(fname='inflammation-01.csv', delimiter=',')
+data = pd.read_csv('data/gapminder_gdp_asia.csv', index_col='country')
 
-max_inflammation_0 = numpy.amax(data, axis=0)[0]
-max_inflammation_20 = numpy.amax(data, axis=0)[20]
+min_data = data.min(axis='rows')
+min_min_data = min_data.min()
+max_min_data = min_data.max()
 
-if max_inflammation_0 == 0 and max_inflammation_20 == 20:
-    print('Suspicious looking maxima!')
-elif numpy.sum(numpy.amin(data, axis=0)) == 0:
-    print('Minima add up to zero!')
+if min_min_data == 0 and max_min_data == 0:
+    print('Suspicious looking minima!')
+elif round(data.mean(axis='rows').min()) == round(data.mean(axis='rows').max()):
+    print('Average is flat!')
 else:
     print('Seems OK!')
 ```
 
 ```output
-Suspicious looking maxima!
+Suspicious looking minima!
 ```
 
 ```python
-data = numpy.loadtxt(fname='inflammation-03.csv', delimiter=',')
+data = pd.read_csv('data/gapminder_gdp_americas.csv', index_col='country')
 
-max_inflammation_0 = numpy.amax(data, axis=0)[0]
-max_inflammation_20 = numpy.amax(data, axis=0)[20]
+min_data = data.min(axis='rows')
+min_min_data = min_data.min()
+max_min_data = min_data.max()
 
-if max_inflammation_0 == 0 and max_inflammation_20 == 20:
-    print('Suspicious looking maxima!')
-elif numpy.sum(numpy.amin(data, axis=0)) == 0:
-    print('Minima add up to zero!')
+if min_min_data == 0 and max_min_data == 0:
+    print('Suspicious looking minima!')
+elif round(data.mean(axis='rows').min()) == round(data.mean(axis='rows').max()):
+    print('Average is flat!')
 else:
     print('Seems OK!')
 ```
 
 ```output
-Minima add up to zero!
+Average is flat!
 ```
 
-In this way,
-we have asked Python to do something different depending on the condition of our data.
-Here we printed messages in all cases,
-but we could also imagine not using the `else` catch-all
+In this way, we have asked Python to do something different depending on the condition of our data.
+Here we printed messages in all cases, but we could also imagine not using the `else` catch-all
 so that messages are only printed when something is wrong,
 freeing us from having to manually examine every plot for features we've seen before.
 
@@ -436,88 +435,6 @@ sum needs to change, but it illustrates the use of `elif` and `pass`.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## Sorting a List Into Buckets
-
-In our `data` folder, large data sets are stored in files whose names start with
-"inflammation-" and small data sets -- in files whose names start with "small-". We
-also have some other files that we do not care about at this point. We'd like to break all
-these files into three lists called `large_files`, `small_files`, and `other_files`,
-respectively.
-
-Add code to the template below to do this. Note that the string method
-[`startswith`](https://docs.python.org/3/library/stdtypes.html#str.startswith)
-returns `True` if and only if the string it is called on starts with the string
-passed as an argument, that is:
-
-```python
-'String'.startswith('Str')
-```
-
-```output
-True
-```
-
-But
-
-```python
-'String'.startswith('str')
-```
-
-```output
-False
-```
-
-Use the following Python code as your starting point:
-
-```python
-filenames = ['inflammation-01.csv',
-         'myscript.py',
-         'inflammation-02.csv',
-         'small-01.csv',
-         'small-02.csv']
-large_files = []
-small_files = []
-other_files = []
-```
-
-Your solution should:
-
-1. loop over the names of the files
-2. figure out which group each filename belongs in
-3. append the filename to that list
-
-In the end the three lists should be:
-
-```python
-large_files = ['inflammation-01.csv', 'inflammation-02.csv']
-small_files = ['small-01.csv', 'small-02.csv']
-other_files = ['myscript.py']
-```
-
-:::::::::::::::  solution
-
-## Solution
-
-```python
-for filename in filenames:
-    if filename.startswith('inflammation-'):
-        large_files.append(filename)
-    elif filename.startswith('small-'):
-        small_files.append(filename)
-    else:
-        other_files.append(filename)
-
-print('large_files:', large_files)
-print('small_files:', small_files)
-print('other_files:', other_files)
-```
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::::::  challenge
-
 ## Counting Vowels
 
 1. Write a loop that counts the number of vowels in a character string.
@@ -546,8 +463,151 @@ print('The number of vowels in this string is ' + str(count))
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
+:::::::::::::::::::::::::::::::::::::::  challenge
 
-[abs-function]: https://docs.python.org/3/library/functions.html#abs
+## Trimming Values
+
+Fill in the blanks so that this program creates a new list
+containing zeroes where the original list's values were negative
+and ones where the original list's values were positive.
+
+```python
+original = [-1.5, 0.2, 0.4, 0.0, -1.3, 0.4]
+result = ____
+for value in original:
+    if ____:
+        result.append(0)
+    else:
+        ____
+print(result)
+```
+
+```output
+[0, 1, 1, 1, 0, 1]
+```
+
+:::::::::::::::  solution
+
+## Solution
+
+```python
+original = [-1.5, 0.2, 0.4, 0.0, -1.3, 0.4]
+result = []
+for value in original:
+    if value < 0.0:
+        result.append(0)
+    else:
+        result.append(1)
+print(result)
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Processing Small Files
+
+Modify this program so that it only processes files with fewer than 50 records.
+
+```python
+import glob
+import pandas as pd
+for filename in glob.glob('data/*.csv'):
+    contents = pd.read_csv(filename)
+    ____:
+        print(filename, len(contents))
+```
+
+:::::::::::::::  solution
+
+## Solution
+
+```python
+import glob
+import pandas as pd
+for filename in glob.glob('data/*.csv'):
+    contents = pd.read_csv(filename)
+    if len(contents) < 50:
+        print(filename, len(contents))
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Initializing
+
+Modify this program so that it finds the largest and smallest values in the list
+no matter what the range of values originally is.
+
+```python
+values = [...some test data...]
+smallest, largest = None, None
+for v in values:
+    if ____:
+        smallest, largest = v, v
+    ____:
+        smallest = min(____, v)
+        largest = max(____, v)
+print(smallest, largest)
+```
+
+What are the advantages and disadvantages of using this method
+to find the range of the data?
+
+:::::::::::::::  solution
+
+## Solution
+
+```python
+values = [-2,1,65,78,-54,-24,100]
+smallest, largest = None, None
+for v in values:
+    if smallest is None and largest is None:
+        smallest, largest = v, v
+    else:
+        smallest = min(smallest, v)
+        largest = max(largest, v)
+print(smallest, largest)
+```
+
+If you wrote `== None` instead of `is None`, that works too, but Python programmers always
+write `is None` because of the special way `None` works in the language.
+
+It can be argued that an advantage of using this method would be to make the code more readable.
+However, a disadvantage is that this code is not efficient because within each iteration of the
+`for` loop statement, there are two more loops that run over two numbers each (the `min` and
+`max` functions). It would be more efficient to iterate over each number just once:
+
+```python
+values = [-2,1,65,78,-54,-24,100]
+smallest, largest = None, None
+for v in values:
+    if smallest is None or v < smallest:
+        smallest = v
+    if largest is None or v > largest:
+        largest = v
+print(smallest, largest)
+```
+
+Now we have one loop, but four comparison tests. There are two ways we could improve it further:
+either use fewer comparisons in each iteration, or use two loops that each contain only one
+comparison test. The simplest solution is often the best:
+
+```python
+values = [-2,1,65,78,-54,-24,100]
+smallest = min(values)
+largest = max(values)
+print(smallest, largest)
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
@@ -563,3 +623,4 @@ print('The number of vowels in this string is ' + str(count))
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
+[abs-function]: https://docs.python.org/3/library/functions.html#abs
