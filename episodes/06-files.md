@@ -17,232 +17,209 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-As a final piece to processing our inflammation data, we need a way to get a list of all the files
-in our `data` directory whose names start with `inflammation-` and end with `.csv`.
+As a final piece to processing our GDP data, we need a way to get a list of all the files
+in our `data` directory whose names start with `gapminder_` and end with `.csv`.
 The following library will help us to achieve this:
 
 ```python
 import glob
 ```
 
-The `glob` library contains a function, also called `glob`,
-that finds files and directories whose names match a pattern.
-We provide those patterns as strings:
-the character `*` matches zero or more characters,
-while `?` matches any one character.
+The `glob` library contains a function, also called `glob`, that finds files and directories whose names match a pattern.
+We provide those patterns as strings: the character `*` matches zero or more characters, while `?` matches any one character.
 We can use this to get the names of all the CSV files in the current directory:
 
 ```python
-print(glob.glob('inflammation*.csv'))
+print(glob.glob('data/gapminder_*.csv'))
 ```
 
 ```output
-['inflammation-05.csv', 'inflammation-11.csv', 'inflammation-12.csv', 'inflammation-08.csv',
-'inflammation-03.csv', 'inflammation-06.csv', 'inflammation-09.csv', 'inflammation-07.csv',
-'inflammation-10.csv', 'inflammation-02.csv', 'inflammation-04.csv', 'inflammation-01.csv']
+['gapminder_gdp_americas.csv', 'gapminder_gdp_africa.csv', 'gapminder_gdp_europe.csv', 
+'gapminder_gdp_asia.csv', 'gapminder_gdp_oceania.csv']
 ```
 
-As these examples show,
-`glob.glob`'s result is a list of file and directory paths in arbitrary order.
-This means we can loop over it
-to do something with each filename in turn.
-In our case,
-the "something" we want to do is generate a set of plots for each file in our inflammation dataset.
+As these examples show, `glob.glob`'s result is a list of file and directory paths in arbitrary order.
+This means we can loop over it to do something with each filename in turn.
+In our case, the "something" we want to do is generate a set of plots for each file in our GDP dataset.
+
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Determining Matches
+
+Which of these files is *not* matched by the expression `glob.glob('data/*as*.csv')`?
+
+1. `data/gapminder_gdp_africa.csv`
+2. `data/gapminder_gdp_americas.csv`
+3. `data/gapminder_gdp_asia.csv`
+
+:::::::::::::::  solution
+
+## Solution
+
+1 is not matched by the glob.
+
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Minimum File Size
+
+Modify this program so that it prints the number of records in
+the file that has the fewest records.
+
+```python
+import glob
+import pandas as pd
+fewest = ____
+for filename in glob.glob('data/*.csv'):
+    dataframe = pd.____(filename)
+    fewest = min(____, dataframe.shape[0])
+print('smallest file has', fewest, 'records')
+```
+
+Note that the [`DataFrame.shape()` method][shape-method]
+returns a tuple with the number of rows and columns of the data frame.
+
+:::::::::::::::  solution
+
+## Solution
+
+```python
+import glob
+import pandas as pd
+fewest = float('Inf')
+for filename in glob.glob('data/*.csv'):
+    dataframe = pd.read_csv(filename)
+    fewest = min(fewest, dataframe.shape[0])
+print('smallest file has', fewest, 'records')
+```
+
+You might have chosen to initialize the `fewest` variable with a number greater than the numbers
+you're dealing with, but that could lead to trouble if you reuse the code with bigger numbers.
+Python lets you use positive infinity, which will work no matter how big your numbers are.
+What other special strings does the [`float` function][float-function] recognize?
+
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 
 If we want to start by analyzing just the first three files in alphabetical order, we can use the
 `sorted` built-in function to generate a new sorted list from the `glob.glob` output:
 
 ```python
 import glob
-import numpy
-import matplotlib.pyplot
 
-filenames = sorted(glob.glob('inflammation*.csv'))
+import pandas as pd
+import matplotlib.pyplot as plt
+
+filenames = sorted(glob.glob('data/gapminder_*.csv'))
 filenames = filenames[0:3]
 for filename in filenames:
     print(filename)
 
-    data = numpy.loadtxt(fname=filename, delimiter=',')
+    continent = filename[14:-4].capitalize()
 
-    fig = matplotlib.pyplot.figure(figsize=(10.0, 3.0))
+    data_gdp = pd.read_csv(filename, index_col='country')
 
-    axes1 = fig.add_subplot(1, 3, 1)
-    axes2 = fig.add_subplot(1, 3, 2)
-    axes3 = fig.add_subplot(1, 3, 3)
+    fig = plt.figure(figsize=(18.0, 3.0))
 
-    axes1.set_ylabel('average')
-    axes1.plot(numpy.mean(data, axis=0))
+    axes_1 = fig.add_subplot(1, 3, 1)
+    axes_2 = fig.add_subplot(1, 3, 2)
+    axes_3 = fig.add_subplot(1, 3, 3)
 
-    axes2.set_ylabel('max')
-    axes2.plot(numpy.amax(data, axis=0))
+    axes_1.set_title('Min')
+    axes_1.set_ylabel('GDP/capita')
+    axes_1.plot(data_gdp.min(axis='rows'))
 
-    axes3.set_ylabel('min')
-    axes3.plot(numpy.amin(data, axis=0))
+    axes_2.set_title('Max')
+    axes_2.plot(data_gdp.max(axis='rows'))
 
+    axes_3.set_title('Average')
+    axes_3.plot(data_gdp.mean(axis='rows'))
+
+    fig.suptitle('GDP/capita statistics for countries in ' + continent)
     fig.tight_layout()
-    matplotlib.pyplot.show()
+    plt.show()
 ```
 
 ```output
-inflammation-01.csv
+data/gapminder_gdp_africa.csv
 ```
 
-![](fig/03-loop_49_1.png){alt='Output from the first iteration of the for loop. Three line graphs showing the daily average,maximum and minimum inflammation over a 40-day period for all patients in the first dataset.'}
+![](fig/06-files_00.png){alt='Output from the first iteration of the for loop. Three line graphs showing the yearly minimum, maximum and average GDP over the years for the countries in the first dataset.'}
 
 ```output
-inflammation-02.csv
+data/gapminder_gdp_americas.csv
 ```
 
-![](fig/03-loop_49_3.png){alt='Output from the second iteration of the for loop. Three line graphs showing the daily average,maximum and minimum inflammation over a 40-day period for all patients in the seconddataset.'}
+![](fig/06-files_01.png){alt='Output from the first iteration of the for loop. Three line graphs showing the yearly minimum, maximum and average GDP over the years for the countries in the second dataset.'}
 
 ```output
-inflammation-03.csv
+data/gapminder_gdp_asia.csv
 ```
 
-![](fig/03-loop_49_5.png){alt='Output from the third iteration of the for loop. Three line graphs showing the daily average,maximum and minimum inflammation over a 40-day period for all patients in the thirddataset.'}
+![](fig/06-files_02.png){alt='Output from the first iteration of the for loop. Three line graphs showing the yearly minimum, maximum and average GDP over the years for the countries in the third dataset.'}
 
-The plots generated for the second clinical trial file look very similar to the plots for
-the first file: their average plots show similar "noisy" rises and falls; their maxima plots
-show exactly the same linear rise and fall; and their minima plots show similar staircase
-structures.
+The average plot generated for the Americas dataset looks a bit strange. How is it possible
+that the average value across the years is flat?
+Also, we find a similar behaviour for the minimum graph for the Asia dataset, where in this case it's always 0.
 
-The third dataset shows much noisier average and maxima plots that are far less suspicious than
-the first two datasets, however the minima plot shows that the third dataset minima is
-consistently zero across every day of the trial. If we produce a heat map for the third data file
-we see the following:
-
-![](fig/inflammation-03-imshow.svg){alt='Heat map of the third inflammation dataset. Note that there are sporadic zero values throughoutthe entire dataset, and the last patient only has zero values over the 40 day study.'}
-
-We can see that there are zero values sporadically distributed across all patients and days of the
-clinical trial, suggesting that there were potential issues with data collection throughout the
-trial. In addition, we can see that the last patient in the study didn't have any inflammation
-flare-ups at all throughout the trial, suggesting that they may not even suffer from arthritis!
+From inspecting the data we can see that some entries for the Asia dataset has a 0 value.
+This may suggest that there were potential issues with data collection.
+The Americas dataset, however, doesn't show any clear indication by visually inspecting the data, nevertheless, it seems very improbable that the average remained constant for the whole time.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## Plotting Differences
+## Comparing Data
 
-Plot the difference between the average inflammations reported in the first and second datasets
-(stored in `inflammation-01.csv` and `inflammation-02.csv`, correspondingly),
-i.e., the difference between the leftmost plots of the first two figures.
+Write a program that reads in the regional data sets
+and plots the average GDP per capita for each region over time
+in a single chart.
 
 :::::::::::::::  solution
 
 ## Solution
 
+This solution builds a useful legend by using the [string `split` method][split-method] to
+extract the `region` from the path 'data/gapminder\_gdp\_a\_specific\_region.csv'.
+
 ```python
 import glob
-import numpy
-import matplotlib.pyplot
-
-filenames = sorted(glob.glob('inflammation*.csv'))
-
-data0 = numpy.loadtxt(fname=filenames[0], delimiter=',')
-data1 = numpy.loadtxt(fname=filenames[1], delimiter=',')
-
-fig = matplotlib.pyplot.figure(figsize=(10.0, 3.0))
-
-matplotlib.pyplot.ylabel('Difference in average')
-matplotlib.pyplot.plot(numpy.mean(data0, axis=0) - numpy.mean(data1, axis=0))
-
-fig.tight_layout()
-matplotlib.pyplot.show()
+import pandas as pd
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots(1,1)
+for filename in glob.glob('data/gapminder_gdp*.csv'):
+    dataframe = pd.read_csv(filename)
+    # extract <region> from the filename, expected to be in the format 'data/gapminder_gdp_<region>.csv'.
+    # we will split the string using the split method and `_` as our separator,
+    # retrieve the last string in the list that split returns (`<region>.csv`),
+    # and then remove the `.csv` extension from that string.
+    region = filename.split('_')[-1][:-4]
+    dataframe.mean().plot(ax=ax, label=region)
+plt.legend()
+plt.show()
 ```
 
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::  challenge
 
-## Generate Composite Statistics
-
-Use each of the files once to generate a dataset containing values averaged over all patients by completing the code inside the loop given below:
-
-```python
-filenames = glob.glob('inflammation*.csv')
-composite_data = numpy.zeros((60,40))
-for filename in filenames:
-    # sum each new file's data into composite_data as it's read
-    #
-# and then divide the composite_data by number of samples
-composite_data = composite_data / len(filenames)
-```
-
-Then use pyplot to generate average, max, and min for all patients.
-
-:::::::::::::::  solution
-
-## Solution
-
-```python
-import glob
-import numpy
-import matplotlib.pyplot
-
-filenames = glob.glob('inflammation*.csv')
-composite_data = numpy.zeros((60,40))
-
-for filename in filenames:
-    data = numpy.loadtxt(fname = filename, delimiter=',')
-    composite_data = composite_data + data
-
-composite_data = composite_data / len(filenames)
-
-fig = matplotlib.pyplot.figure(figsize=(10.0, 3.0))
-
-axes1 = fig.add_subplot(1, 3, 1)
-axes2 = fig.add_subplot(1, 3, 2)
-axes3 = fig.add_subplot(1, 3, 3)
-
-axes1.set_ylabel('average')
-axes1.plot(numpy.mean(composite_data, axis=0))
-
-axes2.set_ylabel('max')
-axes2.plot(numpy.amax(composite_data, axis=0))
-
-axes3.set_ylabel('min')
-axes3.plot(numpy.amin(composite_data, axis=0))
-
-fig.tight_layout()
-
-matplotlib.pyplot.show()
-```
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-After spending some time investigating the heat map and statistical plots, as well as
-doing the above exercises to plot differences between datasets and to generate composite
-patient statistics, we gain some insight into the twelve clinical trial datasets.
+After spending some time investigating the different statistical plots, we gain some insight into the various datasets.
 
 The datasets appear to fall into two categories:
 
-- seemingly "ideal" datasets that agree excellently with Dr. Maverick's claims,
-  but display suspicious maxima and minima (such as `inflammation-01.csv` and `inflammation-02.csv`)
-- "noisy" datasets that somewhat agree with Dr. Maverick's claims, but show concerning
-  data collection issues such as sporadic missing values and even an unsuitable candidate
-  making it into the clinical trial.
-
-In fact, it appears that all three of the "noisy" datasets (`inflammation-03.csv`,
-`inflammation-08.csv`, and `inflammation-11.csv`) are identical down to the last value.
-Armed with this information, we confront Dr. Maverick about the suspicious data and
-duplicated files.
-
-Dr. Maverick confesses that they fabricated the clinical data after they found out
-that the initial trial suffered from a number of issues, including unreliable data-recording and
-poor participant selection. They created fake data to prove their drug worked, and when we asked
-for more data they tried to generate more fake datasets, as well as throwing in the original
-poor-quality dataset a few times to try and make all the trials seem a bit more "realistic".
-
-Congratulations! We've investigated the inflammation data and proven that the datasets have been
-synthetically generated.
-
-But it would be a shame to throw away the synthetic datasets that have taught us so much
-already, so we'll forgive the imaginary Dr. Maverick and continue to use the data to learn
-how to program.
-
+- seemingly "normal" datasets but display suspicious average values (such as Americas)
+- "bad" datasets that shows 0 for the minima across the years (maybe due to missing data?) for different countries each year.
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
@@ -253,3 +230,4 @@ how to program.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
+[split-method]: https://docs.python.org/3/library/stdtypes.html#str.split
