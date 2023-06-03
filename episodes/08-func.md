@@ -428,6 +428,28 @@ global `k` value.
 
 :::::::::::::::::::::::::
 
+Do you recognise what is this function doing?
+
+:::::::::::::::  solution
+
+## Solution
+
+It converts temperature between Fahrenheit and Kelvin degrees.
+Probably, it would have been easier to understand if written in this way:
+
+```python
+def fahr_to_kelvin(temp_f):
+    temp_celsius = (temp_f - 32) * (5/9)
+    temp_kelvin = temp_celsius + 273.15
+    return temp_kelvin
+```
+
+Naming functions and variables in a readable helps the next person who comes to read your code.
+That next person could be your future-self!
+
+:::::::::::::::::::::::::
+
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::: challenge
@@ -466,6 +488,395 @@ def plot_bill_size_vs_flipper(penguin_data, species_name):
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Tidying up
+
+Now that we know how to wrap bits of code up in functions,
+we can make our GDP analysis easier to read and easier to reuse.
+First, let's make a `visualize` function that generates our plots:
+
+```python
+def visualize(filename):
+
+    continent = filename.split('_')[-1][:-4].capitalize()
+
+    data_gdp = pd.read_csv(filename, index_col='country')
+
+    fig = plt.figure(figsize=(18.0, 3.0))
+
+    axes_1 = fig.add_subplot(1, 3, 1)
+    axes_2 = fig.add_subplot(1, 3, 2)
+    axes_3 = fig.add_subplot(1, 3, 3)
+
+    axes_1.set_title('Min')
+    axes_1.set_ylabel('GDP/capita')
+    axes_1.plot(data_gdp.min(axis='rows'))
+
+    axes_2.set_title('Max')
+    axes_2.plot(data_gdp.max(axis='rows'))
+
+    axes_3.set_title('Average')
+    axes_3.plot(data_gdp.mean(axis='rows'))
+
+    fig.suptitle('GDP/capita statistics for countries in ' + continent)
+    fig.tight_layout()
+    plt.show()
+```
+
+and another function called `detect_problems` that checks for those systematics
+we noticed:
+
+```python
+def detect_problems(filename):
+
+    data_gdp = pd.read_csv(filename, index_col='country')
+
+    min_data = data_gdp.min(axis='rows')
+    min_min_data = min_data.min()
+    max_min_data = min_data.max()
+
+    if min_min_data == 0 and max_min_data == 0:
+        print('Suspicious looking minima!')
+    elif round(data.mean(axis='rows').min()) == round(data.mean(axis='rows').max()):
+        print('Average is flat!')
+    else:
+        print('Seems OK!')
+```
+
+
+Notice that rather than jumbling this code together in one giant `for` loop,
+we can now read and reuse both ideas separately.
+We can reproduce the previous analysis with a much simpler `for` loop:
+
+```python
+filenames = sorted(glob.glob('data/gapminder_*.csv'))
+
+for filename in filenames[:3]:
+    print(filename)
+    visualize(filename)
+    detect_problems(filename)
+```
+
+By giving our functions human-readable names,
+we can more easily read and understand what is happening in the `for` loop.
+Even better, if at some later date we want to use either of those pieces of code again,
+we can do so in a single line.
+
+
+## Testing and Documenting
+
+Once we start putting things in functions so that we can re-use them, we need to start testing that those functions are working correctly.
+To see how to do this, let's write a function to convert values between USD to GBP:
+
+```python
+def usd_to_gbp(data, usd_gbp_rate):
+    return (data * usd_gbp_rate)
+```
+
+We could test this on our actual data, but since we don't know what the values ought to be,
+it will be hard to tell if the result was correct.
+Instead, let's input a value manually, 1 USD, and 0.8 USD-GBP rate:
+
+```python
+print(usd_to_gbp(1, 0.8))
+```
+
+```output
+0.8
+```
+
+That looks right,
+so let's try `usd_to_gbp` on our real data:
+
+```python
+data_gdp = pd.read_csv('data/gapminder_gdp_oceania.csv', index_col='country')
+print('in USD')
+print(data_gdp.loc[:, 1952:1962])
+print('in GBP')
+print(usd_to_gbp(data_gdp.loc[:, 1952:1962], 0.8))
+```
+
+```output
+in USD
+                       1952            1957            1962
+country
+Australia       10039.59564     10949.64959     12217.22686
+New Zealand     10556.57566     12247.39532     13175.67800
+
+in GBP
+                       1952            1957            1962
+country
+Australia       8031.676512     8759.719672     9773.781488
+New Zealand     8445.260528     9797.916256    10540.542400
+```
+
+We have one more task to do first, though:
+we should write some [documentation](../learners/reference.md#documentation) for our function
+to remind ourselves later what it's for and how to use it.
+
+The usual way to put documentation in software is
+to add [comments](../learners/reference.md#comment) like this:
+
+```python
+# usd_to_gbp(data, usd_gbp_rate):
+# return the input data converted to GBP
+def usd_to_gbp(data, usd_gbp_rate):
+    return (data * usd_gbp_rate)
+```
+
+There's a better way, though.
+If the first thing in a function is a string that isn't assigned to a variable,
+that string is attached to the function as its documentation:
+
+```python
+def usd_to_gbp(data, usd_gbp_rate):
+    """Return the input data converted to GBP.
+    """
+    return (data * usd_gbp_rate)
+```
+
+This is better because we can now ask Python's built-in help system to show us
+the documentation for the function:
+
+```python
+help(usd_to_gbp)
+```
+
+```output
+Help on function usd_to_gbp in module __main__:
+
+usd_to_gbp(data, usd_gbp_rate):
+    Return the input data converted to GBP.
+```
+
+A string like this is called a [docstring](../learners/reference.md#docstring).
+We don't need to use triple quotes when we write one,
+but if we do, we can break the string across multiple lines:
+
+```python
+def usd_to_gbp(data, usd_gbp_rate):
+    """Return the input data converted to GBP.
+
+    Examples
+    --------
+    >>> usd_to_gbp(10, 0.80)
+    8.
+    """
+    return (data * usd_gbp_rate)
+
+help(usd_to_gbp)
+```
+
+```output
+Help on function usd_to_gbp in module __main__:
+
+usd_to_gbp(data, usd_gbp_rate):
+    Return the input data converted to GBP.
+
+    Examples
+    --------
+    >>> usd_to_gbp(10, 0.80)
+    8.
+```
+
+## Defining Defaults
+
+We have passed parameters to functions in two ways:
+directly, as in `type(data)`,
+and by name, as in `pd.read_csv(filename, index_col='country')`.
+but we still need to say `index_col=`:
+
+```python
+pd.read_csv('data/gapminder_gdp_oceania.csv', 'country')
+```
+
+```error
+Traceback (most recent call last):
+ParserWarning: Falling back to the 'python' engine because the 'c' engine does not support regex separators (separators > 1 char and different from '\s+' are interpreted as regex); you can avoid this warning by specifying engine='python'.
+  oceania =  pd.read_csv('data/gapminder_gdp_oceania.csv', 'country')
+```
+
+To understand what's going on, and make our own functions easier to use,
+let's re-define our `usd_to_gbp` function like this:
+
+```python
+def usd_to_gbp(data, usd_gbp_rate=0.8):
+    """Return the input data converted to GBP (usd to gbp rate as 0.8 by default).
+
+    Examples
+    --------
+    >>> usd_to_gbp(10)
+    8.
+    """
+    return (data * usd_gbp_rate)
+```
+
+The key change is that the second parameter is now written `usd_gbp_rate=0.8`
+instead of just `usd_gbp_rate`.
+If we call the function with two arguments, it works as it did before:
+
+```python
+print(usd_to_gbp(1, 0.3))
+```
+
+```output
+0.3
+```
+
+But we can also now call it with just one parameter,
+in which case `usd_gbp_rate` is automatically assigned
+the [default value](../learners/reference.md#default-value) of 0.8.
+
+This is handy:
+if we usually want a function to work one way,
+but occasionally need it to do something else,
+we can allow people to pass a parameter when they need to
+but provide a default to make the normal case easier.
+The example below shows how Python matches values to parameters:
+
+```python
+def display(a=1, b=2, c=3):
+    print('a:', a, 'b:', b, 'c:', c)
+
+print('no parameters:')
+display()
+print('one parameter:')
+display(55)
+print('two parameters:')
+display(55, 66)
+```
+
+```output
+no parameters:
+a: 1 b: 2 c: 3
+one parameter:
+a: 55 b: 2 c: 3
+two parameters:
+a: 55 b: 66 c: 3
+```
+
+As this example shows,
+parameters are matched up from left to right,
+and any that haven't been given a value explicitly get their default value.
+We can override this behavior by naming the value as we pass it in:
+
+```python
+print('only setting the value of c')
+display(c=77)
+```
+
+```output
+only setting the value of c
+a: 1 b: 2 c: 77
+```
+
+With that in hand,
+let's look at the help for `pd.read_csv`:
+
+```python
+help(pd.read_csv)
+```
+
+```output
+Help on function read_csv in module pandas.io.parsers.readers:
+
+read_csv(filepath_or_buffer: 'FilePath | ReadCsvBuffer[bytes] | ReadCsvBuffer[str]', *, sep: 'str | None | lib.NoDefault' = <no_default>, ...
+    Read a comma-separated values (csv) file into DataFrame.
+
+    Also supports optionally iterating or breaking of the file
+    into chunks.
+
+    Additional help can be found in the online docs for
+    `IO Tools <https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html>`_.
+
+    Parameters
+    ----------
+...
+```
+
+There's a lot of information here,
+but the most important part is the first couple of lines:
+
+```output
+read_csv(filepath_or_buffer: 'FilePath | ReadCsvBuffer[bytes] | ReadCsvBuffer[str]', *, sep: 'str | None | lib.NoDefault' = <no_default>, ...
+```
+
+This tells us that `read_csv` has one parameter called `filepath_or_buffer` that doesn't have a default value,
+and many others that do.
+If we call the function like this:
+
+```python
+pd.read_csv('data/gapminder_gdp_oceania', 'country')
+```
+
+then the filename is assigned to `filepath_or_buffer` (which is what we want),
+but the index column string `'country'` is assigned to `sep` rather than `index_col`,
+because `sep` is the second parameter in the list. However `'country'` isn't a known delimiter so
+our code produced an error message when we tried to run it.
+When we call `pd.read_csv` we don't have to provide `filepath_or_buffer=` for the filename because it's the
+first item in the list, but if we want the `'country'` to be assigned to the variable `index_col`,
+we *do* have to provide `index_col=` for the second parameter since `ndex_col` is not
+the second parameter in the list.
+
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Mixing Default and Non-Default Parameters
+
+Given the following code:
+
+```python
+def numbers(one, two=2, three, four=4):
+    n = str(one) + str(two) + str(three) + str(four)
+    return n
+
+print(numbers(1, three=3))
+```
+
+what do you expect will be printed?  What is actually printed?
+What rule do you think Python is following?
+
+1. `1234`
+2. `one2three4`
+3. `1239`
+4. `SyntaxError`
+
+Given that, what does the following piece of code display when run?
+
+```python
+def func(a, b=3, c=6):
+    print('a: ', a, 'b: ', b, 'c:', c)
+
+func(-1, 2)
+```
+
+1. `a: b: 3 c: 6`
+2. `a: -1 b: 3 c: 6`
+3. `a: -1 b: 2 c: 6`
+4. `a: b: -1 c: 2`
+
+:::::::::::::::  solution
+
+## Solution
+
+Attempting to define the `numbers` function results in `4. SyntaxError`.
+The defined parameters `two` and `four` are given default values. Because
+`one` and `three` are not given default values, they are required to be
+included as arguments when the function is called and must be placed
+before any parameters that have default values in the function definition.
+
+The given call to `func` displays `a: -1 b: 2 c: 6`. -1 is assigned to
+the first parameter `a`, 2 is assigned to the next parameter `b`, and `c` is
+not passed a value, so it uses its default value 6.
+
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Define a function using `def function_name(parameter)`.
@@ -475,7 +886,10 @@ def plot_bill_size_vs_flipper(penguin_data, species_name):
 - Variables created outside of any function are called global variables.
 - Within a function, we can access global variables.
 - If we want to do the same calculation on all entries in our columns, we can pass the dataframe columns as the inputs to a function.
+- Use `help(thing)` to view help for something.
+- Put docstrings in functions to provide help for that function.
+- Specify default values for parameters when defining a function using `name=value` in the parameter list.
+- Parameters can be passed by matching based on name, by position, or by omitting them (in which case the default value is used).
+- Put code whose parameters change frequently in a function, then call it with different parameter values to customize its behavior.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
