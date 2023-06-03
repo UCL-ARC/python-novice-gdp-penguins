@@ -33,22 +33,17 @@ If you are starting a new notebook, you'll need to `import` Pandas and load this
 We have assigned each penguin a name, which we will use as the row labels (and pass to the `index_col` parameter).
 
 We will also be making plots, so we'll need to import `matplotlib.pyplot` like we did in lesson 3.
-And finally, we also need the mathematical constant $\pi$ (`pi`), which we can `import` from the `math` library that comes with Python.
+And finally, we also need the mathematical constant $\pi$ (`pi`), which we can `import` from the `math` library that comes with Python. For this we will be using `from` to only import a single "thing" (pi in this case).
 
 ```python
-# Import Pandas like we did before
-import pandas as pd
-# Import matplotlib.pyplot so we can make plots
-import matplotlib.pyplot as plt
-# Import pi from the math library
-# Using "from math import pi" means that we don't load in the entire math library - we only need pi!
 from math import pi
+
+import pandas as pd
+import matplotlib.pyplot as plt
 
 penguins = pd.read_csv('data/penguin_data.csv', index_col='name')
 
-# Display the value of pi
 print("Pi is:", pi)
-# Display the first 5 rows in the dataset
 print("Our dataset looks like:")
 print(penguins.head(5))
 ```
@@ -57,20 +52,20 @@ print(penguins.head(5))
 Pi is: 3.141592653589793
 Our dataset looks like:
                 id    species  culmen depth (mm)  culmen length (mm)  \
-name                                                                   
-lyndale      N34A2     Gentoo               16.3                51.5   
-drexel       N32A1     Adelie               16.6                35.9   
-delaware     N56A2     Gentoo               16.0                48.6   
-phillips     N20A2     Gentoo               16.8                49.8   
-south shore  N65A2  Chinstrap               18.8                51.0   
+name
+lyndale      N34A2     Gentoo               16.3                51.5
+drexel       N32A1     Adelie               16.6                35.9
+delaware     N56A2     Gentoo               16.0                48.6
+phillips     N20A2     Gentoo               16.8                49.8
+south shore  N65A2  Chinstrap               18.8                51.0
 
-             flipper length (mm)  mass (kg)  
-name                                         
-lyndale                    230.0       5.50  
-drexel                     190.0       3.05  
-delaware                   230.0       5.80  
-phillips                   230.0       5.70  
-south shore                203.0       4.10  
+             flipper length (mm)  mass (kg)
+name
+lyndale                    230.0       5.50
+drexel                     190.0       3.05
+delaware                   230.0       5.80
+phillips                   230.0       5.70
+south shore                203.0       4.10
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -88,9 +83,9 @@ This is where functions come in: given some *inputs*, they define a sequence of 
 
 Python views functions in the same ways as humans might view recipes when cooking.
 Given some ingredients (the inputs), you follow the recipe (the instructions/steps), to produce a meal (the output).
-- You might decide to switch out the vegetables you're using, or switch chips for something like sweet potato fried, and so you get a different meal even if the *steps you take* to make the meal are the same.
+You might decide to switch out the vegetables you're using, or switch chips for something like sweet potato fried, and so you get a different meal even if the *steps you take* to make the meal are the same.
 
-You only have to look in one place for the recipe to know what you're doing. 
+You only have to look in one place for the recipe to know what you're doing.
 Similarly, functions let us write one set of instructions that can be run multiple times in our code.
 This also helps if we find a bug in our instructions - we only have to change the instructions in one place (the function) rather than all over our notebook!
 
@@ -100,34 +95,30 @@ The researcher informs us that we can treat the bill of a penguin as a cylinder,
 The volume of a cylinder is given by
 $$ \text{cylinder volume} = \text{cylinder height} \times \pi \left(\text{cylinder radius} \right)^2. $$
 This is not a simple calculation to write out every time we need to do it, and we will most likely want to do this calculation a lot in our analysis!
-So we can define a _function_ that can perform this calculation for us:
+So we can define a _function_ that can perform this calculation for us.
 
 ```python
-# Functions always start with "def", followed by the name of the function.
-# After the name, we put in brackets the arguments that the function takes.
 def cylinder_volume(height, radius):
-    # The ** operator can be used to raise a number to an integer power
-    volume = height * pi * radius** 2
-    # The "return" keyword tells Python the value that this function should provide as the output
+    volume = height * pi * radius ** 2
     return volume
 ```
 
 ![](fig/python-labelled-function.svg){alt='Labeled parts of a Python function definition'}
 
-- The function definition opens with the keyword `def` followed by the
-name of the function (`cylinder_volume`) and a parenthesized list of parameter (or argument) names (`height, radius`). 
-- The [body](../learners/reference.md#body) of the function is indented below the definition line. These are the statements (instructions) that are executed when it runs.
-- The body concludes with a `return` keyword followed by the return value, which will be the function's output.
+A function always start with "def", followed by the name of the function (`cylinder_volume`).
+After the name, we put in brackets the parameters (or arguments) that the function takes (`height, radius`).
+The body concludes with a `return` keyword that tells Python the value that this function should provide as the output.
+In this function we're also using `**`, that's the operator can be used to raise a number to a power.
 
 When we call the function, the values we pass to it are assigned to those variables so that we can use them inside the function.
 Inside the function, we use a [return statement](../learners/reference.md#return-statement) to send a result back to whoever asked for it.
 Let's try running our function:
 
 ```python
-# The volume of a cylinder with radius 1 and height 1
-# should be 1 * pi * 1 ** 2 = pi
 cylinder_volume(1, 1)
 ```
+
+The volume of a cylinder with radius 1 and height 1, should be `1 * pi * 1 ** 2 = pi`
 
 This command should call our function, using "1" as the input for `height`, and "1" as the input for `radius`, and return the function value.
 In fact, calling our own function is no different from calling any other function:
@@ -153,17 +144,14 @@ since the culmen depth is the cylinder's diameter --- which is double the radius
 
 So how can we write out a function to estimate the bill size from the culmen length and culmen depth?
 We could write out the formula above, but we don't need to.
-Instead, we can [compose](../learners/reference.md#compose) our `cylinder_volume` function with a statement that divides the diameter by 2 to obtain the radius:
+Instead, we can [compose](../learners/reference.md#compose) our `cylinder_volume` function with a statement that divides the diameter by 2 to obtain the radius. We use it then to compute the bill size of the penguin 'phillips'.
 
 ```python
 def penguin_bill_size(culmen_length, culmen_depth):
-    # Divide the culmen depth by two to get the "radius" to use
     culmen_radius = culmen_depth / 2
-    # Now calculate the volume of the bill
     culmen_size = cylinder_volume(culmen_length, culmen_radius)
     return culmen_size
 
-# Compute the bill size of the penguin 'phillips'
 phillips_length = penguins.loc['phillips','culmen length (mm)']
 phillips_depth = penguins.loc['phillips','culmen depth (mm)']
 print('Penguin phillips has bill size', penguin_bill_size(phillips_length, phillips_depth), "mm^3")
@@ -213,14 +201,9 @@ Inside a function, one can read the value of such global variables.
 For example, our `cylinder_volume` function is able to read the value of `pi`, even though we didn't actually assign `pi` within the function!
 
 ```python
-# Functions always start with "def", followed by the name of the function.
-# After the name, we put in brackets the arguments that the function takes.
 def cylinder_volume(height, radius):
-    # Because pi is global, we can use it's value in this function
     print("This function knows the value of pi is", pi)
-    # The ** operator can be used to raise a number to an integer power
     volume = height * pi * radius ** 2
-    # The "return" keyword tells Python the value that this function should provide as the output
     return volume
 
 volume = cylinder_volume(0, 0)
@@ -259,11 +242,9 @@ First, let's make a `visualise_bill_sizes` function that generates a box plot fo
 
 ```python
 def visualise_bill_sizes(penguin_data, species_name):
-    # First, we need to check if we have any records of the penguin species in the dataframe we were given
     if species_name in penguin_data['species'].values:
         # We have some data on that species of penguin!
 
-        # Use loc to filter for the rows that correspond to that penguin species
         this_species = penguins.loc[penguins['species'] == species_name]
 
         # Now let's work out the bill sizes of these penguins
@@ -276,23 +257,23 @@ def visualise_bill_sizes(penguin_data, species_name):
         plt.xlabel("Bill sizes (mm^3)")
         plt.show()
     else:
-        # We don't have any data on that species of penguin!
         print("There is no data on penguin species:", species_name)
 ```
 
-Wait! 
-Didn't we forget to specify what this functions should return? Well, we didn't. 
-In Python, functions are not required to include a `return` statement and can be used for the sole purpose of grouping together pieces of code that conceptually do one thing. 
+This function checks first whether the species name requested exists on the dataframe.
+If the species exists, then it proceeds to generate the plot, otherwise it prints a message informing that the species is not in the dataframe.
+
+Wait!
+Didn't we forget to specify what this functions should return? Well, we didn't.
+In Python, functions are not required to include a `return` statement and can be used for the sole purpose of grouping together pieces of code that conceptually do one thing.
 In such cases, function names usually describe what they do, *e.g.* `visualise_bill_sizes`.
 
 Notice that rather than jumbling this code together in one giant `for` loop, we can now read and reuse both ideas separately.
 We can produce a box plot for each species of penguin using a `for` loop, and by putting our function inside it!
 
 ```python
-# Load our data
 penguins = pd.read_csv('data/penguin_data.csv', index_col='name')
 
-# Get Python to work out what the names of the penguin species are
 unique_species = penguins['species'].unique
 
 for species in unique_species:
@@ -464,17 +445,12 @@ Hint: `plt.scatter(x_data, y_data)` produces a scatter plot.
 
 ```python
 def plot_bill_size_vs_flipper(penguin_data, species_name):
-    # First, we need to check if we have any records of the penguin species in the dataframe we were given
     if species_name in penguin_data['species'].values:
-        # We have some data on that species of penguin!
 
-        # Use loc to filter for the rows that correspond to that penguin species
         this_species = penguins.loc[penguins['species'] == species_name]
 
-        # Now let's work out the bill sizes of these penguins
         bill_sizes = penguin_bill_size(this_species['culmen length (mm)'], this_species['culmen depth (mm)'])
 
-        # Now let's make a plot of these bill sizes
         fig = plt.figure(figsize=(5., 5.))
         plt.scatter(this_species['flipper length (mm)'], bill_sizes)
         plt.title(species_name + " penguins")
@@ -482,7 +458,6 @@ def plot_bill_size_vs_flipper(penguin_data, species_name):
         plt.ylabel("Bill sizes (mm^3)")
         plt.show()
     else:
-        # We don't have any data on that species of penguin!
         print("There is no data on penguin species:", species_name)
 ```
 
