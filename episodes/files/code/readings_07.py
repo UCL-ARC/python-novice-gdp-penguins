@@ -1,5 +1,5 @@
 import sys
-import numpy
+import pandas as pd
 
 def main():
     script = sys.argv[0]
@@ -14,14 +14,14 @@ def main():
             process(filename, action)
 
 def process(filename, action):
-    data = numpy.loadtxt(filename, delimiter=',')
+    data = pd.read_csv(filename, index_col='country')
 
     if action == '-n':
-        values = numpy.amin(data, axis=1)
+        values = data.min(axis='columns')
     elif action == '-m':
-        values = numpy.mean(data, axis=1)
+        values = data.mean(axis='columns')
     elif action == '-x':
-        values = numpy.amax(data, axis=1)
+        values = data.max(axis='columns')
 
     for val in values:
         print(val)

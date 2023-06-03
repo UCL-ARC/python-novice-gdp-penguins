@@ -1,6 +1,5 @@
 import sys
-import numpy
-
+import pandas as pd
 
 def main():
     script = sys.argv[0]
@@ -23,7 +22,7 @@ def main():
 
 def row_col_count(filename):
     try:
-        nrow, ncol = numpy.loadtxt(filename, delimiter=',').shape
+        nrow, ncol = pd.read_csv(filename, index_col='country').shape
     except ValueError:
         # This occurs if the file doesn't have same number of rows and columns,
         # or if it has non-numeric content

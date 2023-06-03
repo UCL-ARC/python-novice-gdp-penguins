@@ -25,7 +25,7 @@ In order to do that in an efficient way,
 we need to make our programs work like other Unix command-line tools.
 For example,
 we may want a program that reads a dataset
-and prints the average inflammation per patient.
+and prints the average GDP per country.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -38,33 +38,33 @@ command that tells you to run that command in the shell rather than the Python i
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-This program does exactly what we want - it prints the average inflammation per patient
+This program does exactly what we want - it prints the average GDP per country
 for a given file.
 
 ```bash
-$ python ../code/readings_04.py --mean inflammation-01.csv
+$ python ../code/readings_04.py --mean gapminder_gdp_europe.csv
 ```
 
 ```output
-5.45
-5.425
-6.1
+5937.029526
+36126.4927
+33692.60508
 ...
-6.4
-7.05
-5.9
+37506.41907
+8458.276384
+33203.26128
 ```
 
 We might also want to look at the minimum of the first four lines
 
 ```bash
-$ head -4 inflammation-01.csv | python ../code/readings_06.py --min
+$ head -4 gapminder_gdp_europe.csv | python ../code/readings_06.py --min
 ```
 
-or the maximum inflammations in several files one after another:
+or the maximum GDP in several files one after another:
 
 ```bash
-$ python ../code/readings_04.py --max inflammation-*.csv
+$ python ../code/readings_04.py --max gapminder_gdp_*.csv
 ```
 
 Our scripts should do the following:
@@ -101,8 +101,7 @@ $ python sys_version.py
 ```
 
 ```output
-version is 3.4.3+ (default, Jul 28 2015, 13:17:50)
-[GCC 4.9.3]
+version is 3.11.3 (main, Apr  5 2023, 15:52:25) [GCC 12.2.1 20230201]
 ```
 
 Create another file called `argv_list.py` and save the following text to it.
@@ -142,7 +141,7 @@ sys.argv is ['argv_list.py', 'first', 'second', 'third']
 then Python adds each of those arguments to that magic list.
 
 With this in hand, let's build a version of `readings.py` that always prints
-the per-patient mean of a single data file.
+the per-country mean of a single data file.
 The first step is to write a function that outlines our implementation,
 and a placeholder for the function that does the actual work.
 By convention this function is usually called `main`,
@@ -154,14 +153,14 @@ $ cat ../code/readings_01.py
 
 ```python
 import sys
-import numpy
+import pandas as pd
 
 
 def main():
     script = sys.argv[0]
     filename = sys.argv[1]
-    data = numpy.loadtxt(filename, delimiter=',')
-    for row_mean in numpy.mean(data, axis=1):
+    data = pd.read_csv(filename, index_col='country')
+    for row_mean in data.mean(axis='columns'):
         print(row_mean)
 ```
 
@@ -171,7 +170,7 @@ and the name of the file to process from `sys.argv[1]`.
 Here's a simple test:
 
 ```bash
-$ python ../code/readings_01.py inflammation-01.csv
+$ python ../code/readings_01.py gapminder_gdp_oceania.csv
 ```
 
 There is no output because we have defined a function,
@@ -184,13 +183,13 @@ $ cat ../code/readings_02.py
 
 ```python
 import sys
-import numpy
+import pandas as pd
 
 def main():
     script = sys.argv[0]
     filename = sys.argv[1]
-    data = numpy.loadtxt(filename, delimiter=',')
-    for row_mean in numpy.mean(data, axis=1):
+    data = pd.read_csv(filename, index_col='country')
+    for row_mean in data.mean(axis='columns'):
         print(row_mean)
 
 if __name__ == '__main__':
@@ -200,70 +199,12 @@ if __name__ == '__main__':
 and run that:
 
 ```bash
-$ python ../code/readings_02.py inflammation-01.csv
+$ python ../code/readings_02.py gapminder_gdp_oceania.csv
 ```
 
 ```output
-5.45
-5.425
-6.1
-5.9
-5.55
-6.225
-5.975
-6.65
-6.625
-6.525
-6.775
-5.8
-6.225
-5.75
-5.225
-6.3
-6.55
-5.7
-5.85
-6.55
-5.775
-5.825
-6.175
-6.1
-5.8
-6.425
-6.05
-6.025
-6.175
-6.55
-6.175
-6.35
-6.725
-6.125
-7.075
-5.725
-5.925
-6.15
-6.075
-5.75
-5.975
-5.725
-6.3
-5.9
-6.75
-5.925
-7.225
-6.15
-5.95
-6.275
-5.7
-6.1
-6.825
-5.975
-6.725
-5.7
-6.25
-6.4
-7.05
-5.9
+9980.595634166664
+17262.6228125
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -319,33 +260,37 @@ that is part of Python's Official Documentation.
 
 The next step is to teach our program how to handle multiple files.
 Since 60 lines of output per file is a lot to page through,
-we'll start by using three smaller files,
-each of which has three days of data for two patients:
+we'll start by using three smaller files:
 
 ```bash
-$ ls small-*.csv
+$ ls small_*.csv
 ```
 
 ```output
-small-01.csv small-02.csv small-03.csv
+small_gdp_discworld.csv  small_gdp_middle-earth.csv
 ```
 
 ```bash
-$ cat small-01.csv
+$ cat small_gdp_middle-earth.csv
 ```
 
 ```output
-0,0,1
-0,1,2
+country,800,1000,1200,1400,1600,1800
+Rivendell, 100, 100, 200, 200, 300, 300
+Mordor, 20, 40, 60, 80, 100, 300
+Hobbiton,10, 10, 10, 10, 10, 10
+Moria, 150, 250, 100, 50, 50, 0
 ```
 
 ```bash
-$ python ../code/readings_02.py small-01.csv
+$ python ../code/readings_02.py small_gdp_middle-earth.csv
 ```
 
 ```output
-0.333333333333
-1.0
+200.0
+100.0
+10.0
+100.0
 ```
 
 Using small data files as input also allows us to check our results more easily:
@@ -381,30 +326,35 @@ $ cat ../code/readings_03.py
 
 ```python
 import sys
-import numpy
+import pandas as pd
+
 
 def main():
     script = sys.argv[0]
     for filename in sys.argv[1:]:
-        data = numpy.loadtxt(filename, delimiter=',')
-        for row_mean in numpy.mean(data, axis=1):
+        data = pd.read_csv(filename, index_col='country')
+        for row_mean in data.mean(axis='columns'):
             print(row_mean)
 
+
 if __name__ == '__main__':
-   main()
+    main()
 ```
 
 and here it is in action:
 
 ```bash
-$ python ../code/readings_03.py small-01.csv small-02.csv
+$ python ../code/readings_03.py small_gdp_discworld.csv  small_gdp_middle-earth.csv
 ```
 
 ```output
-0.333333333333
-1.0
-13.6666666667
-11.0
+0.0
+35.0
+15.0
+200.0
+100.0
+10.0
+100.0
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -437,7 +387,8 @@ $ cat ../code/readings_04.py
 
 ```python
 import sys
-import numpy
+import pandas as pd
+
 
 def main():
     script = sys.argv[0]
@@ -445,31 +396,33 @@ def main():
     filenames = sys.argv[2:]
 
     for filename in filenames:
-        data = numpy.loadtxt(filename, delimiter=',')
+        data = pd.read_csv(filename, index_col='country')
 
         if action == '--min':
-            values = numpy.amin(data, axis=1)
+            values = data.min(axis='columns')
         elif action == '--mean':
-            values = numpy.mean(data, axis=1)
+            values = data.mean(axis='columns')
         elif action == '--max':
-            values = numpy.amax(data, axis=1)
+            values = data.max(axis='columns')
 
         for val in values:
             print(val)
 
+
 if __name__ == '__main__':
-   main()
+    main()
 ```
 
 This works:
 
 ```bash
-$ python ../code/readings_04.py --max small-01.csv
+$ python ../code/readings_04.py --max small_gdp_discworld.csv
 ```
 
 ```output
-1.0
-2.0
+0
+60
+20
 ```
 
 but there are several things wrong with it:
@@ -496,7 +449,7 @@ $ cat ../code/readings_05.py
 
 ```python
 import sys
-import numpy
+import pandas as pd
 
 def main():
     script = sys.argv[0]
@@ -508,14 +461,14 @@ def main():
         process(filename, action)
 
 def process(filename, action):
-    data = numpy.loadtxt(filename, delimiter=',')
+    data = pd.read_csv(filename, index_col='country')
 
     if action == '--min':
-        values = numpy.amin(data, axis=1)
+        values = data.min(axis='columns')
     elif action == '--mean':
-        values = numpy.mean(data, axis=1)
+        values = data.mean(axis='columns')
     elif action == '--max':
-        values = numpy.amax(data, axis=1)
+        values = data.max(axis='columns')
 
     for val in values:
         print(val)
@@ -557,17 +510,17 @@ but we can do almost anything with it that we could do to a regular file.
 Let's try running it as if it were a regular command-line program:
 
 ```bash
-$ python ../code/count_stdin.py < small-01.csv
+$ python ../code/count_stdin.py < small_gdp_middle-earth.csv
 ```
 
 ```output
-2 lines in standard input
+5 lines in standard input
 ```
 
 A common mistake is to try to run something that reads from standard input like this:
 
 ```bash
-$ python ../code/count_stdin.py small-01.csv
+$ python ../code/count_stdin.py small_gdp_middle-earth.csv
 ```
 
 i.e., to forget the `<` character that redirects the file to standard input.
@@ -581,7 +534,7 @@ and we have to halt it using the `Interrupt` option from the `Kernel` menu in th
 We now need to rewrite the program so that it loads data from `sys.stdin`
 if no filenames are provided.
 Luckily,
-`numpy.loadtxt` can handle either a filename or an open file as its first parameter,
+`pandas.read_csv` can handle either a filename or an open file as its first parameter,
 so we don't actually need to change `process`.
 Only `main` changes:
 
@@ -591,14 +544,14 @@ $ cat ../code/readings_06.py
 
 ```python
 import sys
-import numpy
+import pandas as pd
 
 def main():
     script = sys.argv[0]
     action = sys.argv[1]
     filenames = sys.argv[2:]
-    assert action in ['--min', '--mean', '--max'], \
-           'Action is not one of --min, --mean, or --max: ' + action
+    assert action in ['--min', '--mean', '--max'], (
+        'Action is not one of --min, --mean, or --max: ' + action)
     if len(filenames) == 0:
         process(sys.stdin, action)
     else:
@@ -606,31 +559,32 @@ def main():
             process(filename, action)
 
 def process(filename, action):
-    data = numpy.loadtxt(filename, delimiter=',')
+    data = pd.read_csv(filename, index_col='country')
 
     if action == '--min':
-        values = numpy.amin(data, axis=1)
+        values = data.min(axis='columns')
     elif action == '--mean':
-        values = numpy.mean(data, axis=1)
+        values = data.mean(axis='columns')
     elif action == '--max':
-        values = numpy.amax(data, axis=1)
+        values = data.max(axis='columns')
 
     for val in values:
         print(val)
 
 if __name__ == '__main__':
-   main()
+    main()
 ```
 
 Let's try it out:
 
 ```bash
-$ python ../code/readings_06.py --mean < small-01.csv
+$ python ../code/readings_06.py --max < small_gdp_discworld.csv
 ```
 
 ```output
-0.333333333333
-1.0
+0
+60
+20
 ```
 
 That's better.
@@ -760,14 +714,14 @@ Is the program easier to understand?
 ```python
 # this is code/readings_07.py
 import sys
-import numpy
+import pandas as pd
 
 def main():
     script = sys.argv[0]
     action = sys.argv[1]
     filenames = sys.argv[2:]
-    assert action in ['-n', '-m', '-x'], \
-           'Action is not one of -n, -m, or -x: ' + action
+    assert action in ['-n', '-m', '-x'], (
+        'Action is not one of -n, -m, or -x: ' + action)
     if len(filenames) == 0:
         process(sys.stdin, action)
     else:
@@ -775,19 +729,20 @@ def main():
             process(filename, action)
 
 def process(filename, action):
-    data = numpy.loadtxt(filename, delimiter=',')
+    data = pd.read_csv(filename, index_col='country')
 
     if action == '-n':
-        values = numpy.amin(data, axis=1)
+        values = data.min(axis='columns')
     elif action == '-m':
-        values = numpy.mean(data, axis=1)
+        values = data.mean(axis='columns')
     elif action == '-x':
-        values = numpy.amax(data, axis=1)
+        values = data.max(axis='columns')
 
     for val in values:
         print(val)
 
-main()
+if __name__ == '__main__':
+    main()
 ```
 
 :::::::::::::::::::::::::
@@ -810,7 +765,7 @@ it prints a message explaining how it should be used.
 ```python
 # this is code/readings_08.py
 import sys
-import numpy
+import pandas as pd
 
 def main():
     script = sys.argv[0]
@@ -834,21 +789,20 @@ def main():
             process(filename, action)
 
 def process(filename, action):
-    data = numpy.loadtxt(filename, delimiter=',')
+    data = pd.read_csv(filename, index_col='country')
 
     if action == '--min':
-        values = numpy.amin(data, axis=1)
+        values = data.min(axis='columns')
     elif action == '--mean':
-        values = numpy.mean(data, axis=1)
+        values = data.mean(axis='columns')
     elif action == '--max':
-        values = numpy.amax(data, axis=1)
+        values = data.max(axis='columns')
 
     for val in values:
         print(val)
 
 if __name__ == '__main__':
     main()
-
 ```
 
 :::::::::::::::::::::::::
@@ -870,14 +824,15 @@ it displays the means of the data.
 ```python
 # this is code/readings_09.py
 import sys
-import numpy
+import pandas as pd
 
 def main():
     script = sys.argv[0]
     action = sys.argv[1]
-    if action not in ['--min', '--mean', '--max']: # if no action given
-        action = '--mean'    # set a default action, that being mean
-        filenames = sys.argv[1:] # start the filenames one place earlier in the argv list
+    if action not in ['--min', '--mean', '--max']:  # if no action given
+        action = '--mean'  # set a default action, that being mean
+        # start the filenames one place earlier in the argv list
+        filenames = sys.argv[1:]
     else:
         filenames = sys.argv[2:]
 
@@ -888,19 +843,20 @@ def main():
             process(filename, action)
 
 def process(filename, action):
-    data = numpy.loadtxt(filename, delimiter=',')
+    data = pd.read_csv(filename, index_col='country')
 
     if action == '--min':
-        values = numpy.amin(data, axis=1)
+        values = data.min(axis='columns')
     elif action == '--mean':
-        values = numpy.mean(data, axis=1)
+        values = data.mean(axis='columns')
     elif action == '--max':
-        values = numpy.amax(data, axis=1)
+        values = data.max(axis='columns')
 
     for val in values:
         print(val)
 
-main()
+if __name__ == '__main__':
+    main()
 ```
 
 :::::::::::::::::::::::::
@@ -912,7 +868,7 @@ main()
 ## A File-Checker
 
 Write a program called `check.py` that takes the names of one or more
-inflammation data files as arguments
+GDP-like CSV data files as arguments
 and checks that all the files have the same number of rows and columns.
 What is the best way to test your program?
 
@@ -922,35 +878,39 @@ What is the best way to test your program?
 
 ```python
 import sys
-import numpy
+import pandas as pd
 
 def main():
     script = sys.argv[0]
     filenames = sys.argv[1:]
-    if len(filenames) <=1: #nothing to check
+    if len(filenames) <= 1:  # nothing to check
         print('Only 1 file specified on input')
     else:
         nrow0, ncol0 = row_col_count(filenames[0])
-        print('First file %s: %d rows and %d columns' % (filenames[0], nrow0, ncol0))
+        print('First file %s: %d rows and %d columns' % (
+            filenames[0], nrow0, ncol0))
         for filename in filenames[1:]:
             nrow, ncol = row_col_count(filename)
             if nrow != nrow0 or ncol != ncol0:
-                print('File %s does not check: %d rows and %d columns' % (filename, nrow, ncol))
+                print('File %s does not check: %d rows and %d columns'
+                      % (filename, nrow, ncol))
             else:
                 print('File %s checks' % filename)
         return
 
+
 def row_col_count(filename):
     try:
-        nrow, ncol = numpy.loadtxt(filename, delimiter=',').shape
+        nrow, ncol = pd.read_csv(filename, index_col='country').shape
     except ValueError:
-        # 'ValueError' error is raised when numpy encounters lines that
-        # have different number of data elements in them than the rest of the lines,
-        # or when lines have non-numeric elements
+        # This occurs if the file doesn't have same number of rows and columns,
+        # or if it has non-numeric content
         nrow, ncol = (0, 0)
     return nrow, ncol
 
-main()
+
+if __name__ == '__main__':
+    main()
 ```
 
 :::::::::::::::::::::::::
@@ -1036,6 +996,28 @@ $ python check_arguments.py filename.txt
 Thanks for specifying arguments!
 ```
 
+:::::::::::::::  solution
+
+## Solution
+
+```python
+import sys
+
+def main():
+    script = sys.argv[0]
+    arguments = sys.argv[1:]
+    if len(arguments) >= 1:
+        print('Thanks for specifying argument')
+    else:
+        print('usage: python check_argument.py filename.txt')
+        sys.exit()
+
+if __name__ == '__main__':
+    main()
+```
+
+:::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -1048,5 +1030,3 @@ Thanks for specifying arguments!
 - The pseudo-file `sys.stdin` connects to a program's standard input.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

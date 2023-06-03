@@ -1,5 +1,5 @@
 # Settings
-ARCHIVE = 'python-novice-gapminder-code'
+ARCHIVE = 'python-novice-gapminder-data'
 PYFILES = $(wildcard *.py)
 
 # Controls
@@ -19,4 +19,4 @@ test : zip
 zip : ${ARCHIVE}
 
 ${ARCHIVE} : ${PYFILES}
-	@cd .. && zip -9 -FS ./code/$@ -r ./code -i "*.py"
+	@cd .. && zip -9 -FS ./data/$@ -r ./data -i "*.csv"

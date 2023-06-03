@@ -20,8 +20,8 @@ and in [Anaconda documentation][anaconda-install].
 
 ## Obtain lesson materials
 
-1. Download [python-novice-inflammation-data.zip][zipfile1]
-  and [python-novice-inflammation-code.zip][zipfile2].
+1. Download [python-novice-gapminder-data.zip][zipfile1]
+  and [python-novice-gapminder-code.zip][zipfile2].
 2. Create a folder called `swc-python` on your Desktop.
 3. Move downloaded files to `swc-python`.
 4. Unzip the files.
@@ -55,8 +55,9 @@ If you installed Anaconda, you can launch a notebook in two ways:
   It might ask you if you'd like to send anonymized usage information to Anaconda developers:
   ![](fig/anaconda-navigator-first-launch.png){alt='Anaconda Navigator first launch'}
   Make your choice and click "Ok, and don't show again" button.
-2. Find the "Notebook" tab and click on the "Launch" button:
+2. Find the "JupyterLab" tab and click on the "Launch" button:
   ![](fig/anaconda-navigator-notebook-launch.png){alt='Anaconda Navigator Notebook launch'}
+  <!-- TODO Recreate image with Lab instead this and next two images -->
   Anaconda will open a new browser window or tab with a Notebook Dashboard showing you the
   contents of your Home (or User) folder.
 3. Navigate to the `data` directory by clicking on the directory names leading to it:
@@ -132,7 +133,7 @@ cd /D %userprofile%\Desktop\swc-python\data
 ## Unix shell
 
 ```bash
-jupyter notebook
+jupyter lab
 ```
 
 :::::::::::::::::::::::::
@@ -193,8 +194,8 @@ winpty python
 [anaconda-website]: https://www.anaconda.com/
 [anaconda-instructions]: https://carpentries.github.io/workshop-template/#python
 [anaconda-install]: https://docs.anaconda.com/anaconda/install
-[zipfile1]: data/python-novice-inflammation-data.zip
-[zipfile2]: ../episodes/files/code/python-novice-inflammation-code.zip
+[zipfile1]: data/python-novice-gapminder-data.zip
+[zipfile2]: ../episodes/files/code/python-novice-gapminder-code.zip
 [gitbash]: https://gitforwindows.org
 
 
