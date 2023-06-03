@@ -1,0 +1,22 @@
+# Settings
+ARCHIVE = 'python-novice-gapminder-data'
+PYFILES = $(wildcard *.py)
+
+# Controls
+.PHONY : all commands test zip
+
+all : commands
+
+## commands         : show all commands (the default)
+commands :
+	@grep -h -E '^##' Makefile | sed -e 's/## //g'
+
+## test             : test archive
+test : zip
+	@zip -T ${ARCHIVE}
+
+## zip              : create python-novice-inflammation-code.zip
+zip : ${ARCHIVE}
+
+${ARCHIVE} : ${PYFILES}
+	@cd .. && zip -9 -FS ./data/$@ -r ./data -i "*.csv"
