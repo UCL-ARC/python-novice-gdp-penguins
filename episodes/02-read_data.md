@@ -60,21 +60,11 @@ pd.read_csv('data/gapminder_gdp_oceania.csv')
 ```
 
 ```output
-       country  gdpPercap_1952  gdpPercap_1957  gdpPercap_1962  \
-0    Australia     10039.59564     10949.64959     12217.22686
-1  New Zealand     10556.57566     12247.39532     13175.67800
+       country         1952         1957  ...         1997         2002         2007
+0    Australia  10039.59564  10949.64959  ...  26997.93657  30687.75473  34435.36744
+1  New Zealand  10556.57566  12247.39532  ...  21050.41377  23189.80135  25185.00911
 
-   gdpPercap_1967  gdpPercap_1972  gdpPercap_1977  gdpPercap_1982  \
-0     14526.12465     16788.62948     18334.19751     19477.00928
-1     14463.91893     16046.03728     16233.71770     17632.41040
-
-   gdpPercap_1987  gdpPercap_1992  gdpPercap_1997  gdpPercap_2002  \
-0     21888.88903     23424.76683     26997.93657     30687.75473
-1     19007.19129     18363.32494     21050.41377     23189.80135
-
-   gdpPercap_2007
-0     34435.36744
-1     25185.00911
+[2 rows x 13 columns]
 ```
 
 The expression `pd.read_csv(...)` is a
@@ -120,21 +110,11 @@ print(data_oceania)
 ```
 
 ```output
-       country  gdpPercap_1952  gdpPercap_1957  gdpPercap_1962  \
-0    Australia     10039.59564     10949.64959     12217.22686
-1  New Zealand     10556.57566     12247.39532     13175.67800
+       country         1952         1957  ...         1997         2002         2007
+0    Australia  10039.59564  10949.64959  ...  26997.93657  30687.75473  34435.36744
+1  New Zealand  10556.57566  12247.39532  ...  21050.41377  23189.80135  25185.00911
 
-   gdpPercap_1967  gdpPercap_1972  gdpPercap_1977  gdpPercap_1982  \
-0     14526.12465     16788.62948     18334.19751     19477.00928
-1     14463.91893     16046.03728     16233.71770     17632.41040
-
-   gdpPercap_1987  gdpPercap_1992  gdpPercap_1997  gdpPercap_2002  \
-0     21888.88903     23424.76683     26997.93657     30687.75473
-1     19007.19129     18363.32494     21050.41377     23189.80135
-
-   gdpPercap_2007
-0     34435.36744
-1     25185.00911
+[2 rows x 13 columns]
 ```
 
 Now that the data are in memory, we can manipulate them.
@@ -146,20 +126,12 @@ print(data_oceania_country)
 ```
 
 ```output
-             gdpPercap_1952  gdpPercap_1957  gdpPercap_1962  gdpPercap_1967  \
-country
-Australia       10039.59564     10949.64959     12217.22686     14526.12465
-New Zealand     10556.57566     12247.39532     13175.67800     14463.91893
+                    1952         1957  ...         2002         2007
+country                                ...
+Australia    10039.59564  10949.64959  ...  30687.75473  34435.36744
+New Zealand  10556.57566  12247.39532  ...  23189.80135  25185.00911
 
-             gdpPercap_1972  gdpPercap_1977  gdpPercap_1982  gdpPercap_1987  \
-country
-Australia       16788.62948     18334.19751     19477.00928     21888.88903
-New Zealand     16046.03728     16233.71770     17632.41040     19007.19129
-
-             gdpPercap_1992  gdpPercap_1997  gdpPercap_2002  gdpPercap_2007
-country
-Australia       23424.76683     26997.93657     30687.75473     34435.36744
-New Zealand     18363.32494     21050.41377     23189.80135     25185.00911
+[2 rows x 12 columns]
 ```
 
 Note, that `index_col` also gets a string, in this case the name of the column we want to use to define our index. Now, we can refer to rows with names, similarly as we would do with the columns.
@@ -195,18 +167,18 @@ print(data_oceania_country.dtypes)
 ```
 
 ```output
-gdpPercap_1952    float64
-gdpPercap_1957    float64
-gdpPercap_1962    float64
-gdpPercap_1967    float64
-gdpPercap_1972    float64
-gdpPercap_1977    float64
-gdpPercap_1982    float64
-gdpPercap_1987    float64
-gdpPercap_1992    float64
-gdpPercap_1997    float64
-gdpPercap_2002    float64
-gdpPercap_2007    float64
+1952    float64
+1957    float64
+1962    float64
+1967    float64
+1972    float64
+1977    float64
+1982    float64
+1987    float64
+1992    float64
+1997    float64
+2002    float64
+2007    float64
 dtype: object
 ```
 
@@ -229,20 +201,20 @@ data_oceania_country.info()
 <class 'pandas.core.frame.DataFrame'>
 Index: 2 entries, Australia to New Zealand
 Data columns (total 12 columns):
- #   Column          Non-Null Count  Dtype  
----  ------          --------------  -----  
- 0   gdpPercap_1952  2 non-null      float64
- 1   gdpPercap_1957  2 non-null      float64
- 2   gdpPercap_1962  2 non-null      float64
- 3   gdpPercap_1967  2 non-null      float64
- 4   gdpPercap_1972  2 non-null      float64
- 5   gdpPercap_1977  2 non-null      float64
- 6   gdpPercap_1982  2 non-null      float64
- 7   gdpPercap_1987  2 non-null      float64
- 8   gdpPercap_1992  2 non-null      float64
- 9   gdpPercap_1997  2 non-null      float64
- 10  gdpPercap_2002  2 non-null      float64
- 11  gdpPercap_2007  2 non-null      float64
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   1952    2 non-null      float64
+ 1   1957    2 non-null      float64
+ 2   1962    2 non-null      float64
+ 3   1967    2 non-null      float64
+ 4   1972    2 non-null      float64
+ 5   1977    2 non-null      float64
+ 6   1982    2 non-null      float64
+ 7   1987    2 non-null      float64
+ 8   1992    2 non-null      float64
+ 9   1997    2 non-null      float64
+ 10  2002    2 non-null      float64
+ 11  2007    2 non-null      float64
 dtypes: float64(12)
 memory usage: 208.0+ bytes
 ```
@@ -259,9 +231,8 @@ print(data_oceania_country.columns)
 ```
 
 ```output
-Index(['gdpPercap_1952', 'gdpPercap_1957', 'gdpPercap_1962', 'gdpPercap_1967',
-       'gdpPercap_1972', 'gdpPercap_1977', 'gdpPercap_1982', 'gdpPercap_1987',
-       'gdpPercap_1992', 'gdpPercap_1997', 'gdpPercap_2002', 'gdpPercap_2007'],
+Index(['1952', '1957', '1962', '1967', '1972', '1977', '1982', '1987', '1992',
+       '1997', '2002', '2007'],
       dtype='object')
 ```
 
@@ -275,19 +246,19 @@ print(data_oceania_country.T)
 ```
 
 ```output
-country           Australia  New Zealand
-gdpPercap_1952  10039.59564  10556.57566
-gdpPercap_1957  10949.64959  12247.39532
-gdpPercap_1962  12217.22686  13175.67800
-gdpPercap_1967  14526.12465  14463.91893
-gdpPercap_1972  16788.62948  16046.03728
-gdpPercap_1977  18334.19751  16233.71770
-gdpPercap_1982  19477.00928  17632.41040
-gdpPercap_1987  21888.88903  19007.19129
-gdpPercap_1992  23424.76683  18363.32494
-gdpPercap_1997  26997.93657  21050.41377
-gdpPercap_2002  30687.75473  23189.80135
-gdpPercap_2007  34435.36744  25185.00911
+country    Australia  New Zealand
+1952     10039.59564  10556.57566
+1957     10949.64959  12247.39532
+1962     12217.22686  13175.67800
+1967     14526.12465  14463.91893
+1972     16788.62948  16046.03728
+1977     18334.19751  16233.71770
+1982     19477.00928  17632.41040
+1987     21888.88903  19007.19129
+1992     23424.76683  18363.32494
+1997     26997.93657  21050.41377
+2002     30687.75473  23189.80135
+2007     34435.36744  25185.00911
 ```
 
 `.T` is short for Transpose.
@@ -308,7 +279,7 @@ We can now specify a row and column uniquely using the identifier of an *entry* 
 together with the `DataFrame.loc` method. If we want to extract the GDP per capita value on the year 1952  for `'Albania'` we can use the row and column labels as:
 
 ```python
-print(data_europe_country.loc['Albania', 'gdpPercap_1952'])
+print(data_europe_country.loc['Albania', '1952'])
 ```
 
 ```output
@@ -379,7 +350,7 @@ the index is how many steps we have to take from the start to get the item we wa
 Our `data_europe_country` dataframe is effectively storing our entries as a grid, and keeps track of which labels correspond to which index.
 This lets us interact with our data in a friendly and human-readable way, as it is much easier to work with labels than indices when handling tabular data!
 For instance, by indices we don't know to which country or year the value belongs to, we would need to count the labels for the row and indices to find that
-the 15th row refers to `'Ireland'` and the 6th column to the `'gdpPercap_1977'` label.
+the 15th row refers to `'Ireland'` and the 6th column to the `1977'` label.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -406,27 +377,15 @@ We could access these entries via a slice:
 
 ```python
 # Slice using labels. Notice that, because a slice doesn't include the end value, we have to provide the label of the first column we don't want to include as the end value of our slice.
-print(data_europe_country.loc['Belgium':'Bulgaria', 'gdpPercap_1957':'gdpPercap_1987'])
+print(data_europe_country.loc['Belgium':'Bulgaria', '1957':'1987'])
 ```
 
 ```output
-                        gdpPercap_1957  gdpPercap_1962  gdpPercap_1967  \
-country                                                                  
-Belgium                    9714.960623    10991.206760    13149.041190   
-Bosnia and Herzegovina     1353.989176     1709.683679     2172.352423   
-Bulgaria                   3008.670727     4254.337839     5577.002800   
-
-                        gdpPercap_1972  gdpPercap_1977  gdpPercap_1982  \
-country                                                                  
-Belgium                   16672.143560    19117.974480    20979.845890   
-Bosnia and Herzegovina     2860.169750     3528.481305     4126.613157   
-Bulgaria                   6597.494398     7612.240438     8224.191647   
-
-                        gdpPercap_1987  
-country                                 
-Belgium                   22525.563080  
-Bosnia and Herzegovina     4314.114757  
-Bulgaria                   8239.854824  
+                               1957          1962  ...          1982          1987
+country                                            ...
+Belgium                 9714.960623  10991.206760  ...  20979.845890  22525.563080
+Bosnia and Herzegovina  1353.989176   1709.683679  ...   4126.613157   4314.114757
+Bulgaria                3008.670727   4254.337839  ...   8224.191647   8239.854824
 ```
 
 We also don't have to include the upper and lower bound on the slice.  If we don't include the lower
@@ -436,45 +395,45 @@ everything:
 
 ```python
 print('All countries before (and included) Belgium for years 1957 - 1967')
-print(data_europe_country.loc[:'Belgium', 'gdpPercap_1957':'gdpPercap_1967'])
+print(data_europe_country.loc[:'Belgium', '1957':'1967'])
 
 print('All countries for the year 2002 till now')
-print(data_europe_country.loc[:, 'gdpPercap_2002':])
+print(data_europe_country.loc[:, '2002':])
 
 print('All the years for Italy')
 print(data_europe_country.loc['Italy', :])
 
 print('All the countries for 1987')
-print(data_europe_countryoc[:, 'gdpPercap_1987'])
+print(data_europe_country.loc[:, '1987'])
 ```
 
 ```output
-All countries before (and included) Belgium for years 1957 - 1967'
-         gdpPercap_1957  gdpPercap_1962  gdpPercap_1967
-country                                                
-Albania     1942.284244     2312.888958     2760.196931
-Austria     8842.598030    10750.721110    12834.602400
-Belgium     9714.960623    10991.206760    13149.041190
+ll countries before (and included) Belgium for years 1957 - 1967
+                1957          1962          1967
+country
+Albania  1942.284244   2312.888958   2760.196931
+Austria  8842.598030  10750.721110  12834.602400
+Belgium  9714.960623  10991.206760  13149.041190
 
 All countries for the year 2002 till now
-                        gdpPercap_2002  gdpPercap_2007
-country                                               
-Albania                    4604.211737     5937.029526
-Austria                   32417.607690    36126.492700
-Belgium                   30485.883750    33692.605080
-...                                ...             ...
-Switzerland               34480.957710    37506.419070
-Turkey                     6508.085718     8458.276384
-United Kingdom            29478.999190    33203.261280
+                                2002          2007
+country
+Albania                  4604.211737   5937.029526
+Austria                 32417.607690  36126.492700
+Belgium                 30485.883750  33692.605080
+...                              ...           ...
+Switzerland             34480.957710  37506.419070
+Turkey                   6508.085718   8458.276384
+United Kingdom          29478.999190  33203.261280
 
 All the years for Italy
-gdpPercap_1952     4931.404155
-gdpPercap_1957     6248.656232
-gdpPercap_1962     8243.582340
-...                        ...
-gdpPercap_1997    24675.024460
-gdpPercap_2002    27968.098170
-gdpPercap_2007    28569.719700
+1952     4931.404155
+1957     6248.656232
+1962     8243.582340
+...              ...
+1997    24675.024460
+2002    27968.098170
+2007    28569.719700
 Name: Italy, dtype: float64
 
 All the countries for 1987
@@ -486,7 +445,7 @@ Belgium                   22525.563080
 Switzerland               30281.704590
 Turkey                     5089.043686
 United Kingdom            21664.787670
-Name: gdpPercap_1987, dtype: float64
+Name: 1987, dtype: float64
 ```
 
 :::::::::::::::::::::::::::::::::::::::::: callout
@@ -501,7 +460,7 @@ data_europe_country.loc['Albania', :]
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-When using indices to slice (i.e., with `.iloc`), you need to be aware that 
+When using indices to slice (i.e., with `.iloc`), you need to be aware that
 the [slice](../learners/reference.md#slice) `0:4` means, "Start at index 0 and go up to,
 but not including, index 4". Again, the up-to-but-not-including takes a bit of getting used to,
 but the rule is that the difference between the upper and lower bounds is the number of values in
@@ -513,12 +472,12 @@ print(data_europe_country.iloc[0:4, 0:3])
 ```
 ```output
 First four countries and first three years
-                        gdpPercap_1952  gdpPercap_1957  gdpPercap_1962
-country                                                               
-Albania                    1601.056136     1942.284244     2312.888958
-Austria                    6137.076492     8842.598030    10750.721110
-Belgium                    8343.105127     9714.960623    10991.206760
-Bosnia and Herzegovina      973.533195     1353.989176     1709.683679
+                               1952         1957          1962
+country
+Albania                 1601.056136  1942.284244   2312.888958
+Austria                 6137.076492  8842.598030  10750.721110
+Belgium                 8343.105127  9714.960623  10991.206760
+Bosnia and Herzegovina   973.533195  1353.989176   1709.683679
 ```
 
 As when using labels, you can omit the lower, upper or both boundaries of the slice.
@@ -530,11 +489,11 @@ print(data_europe_country.iloc[27:, :3])
 
 ```output
 First the last three countries for the first three years
-                gdpPercap_1952  gdpPercap_1957  gdpPercap_1962
-country                                                       
-Switzerland       14734.232750    17909.489730    20431.092700
-Turkey             1969.100980     2218.754257     2322.869908
-United Kingdom     9979.508487    11283.177950    12477.177070
+                       1952          1957          1962
+country
+Switzerland     14734.232750  17909.489730  20431.092700
+Turkey           1969.100980   2218.754257   2322.869908
+United Kingdom   9979.508487  11283.177950  12477.177070
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
@@ -545,8 +504,8 @@ United Kingdom     9979.508487    11283.177950    12477.177070
 2. Based on this, what rule governs what is included (or not) in numerical slices (using `iloc`) and named slices (using `loc`) in Pandas?
 
 ```python
-print(data.iloc[0:2, 0:2])
-print(data.loc['Albania':'Belgium', 'gdpPercap_1952':'gdpPercap_1962'])
+print(data_europe_country.iloc[0:2, 0:2])
+print(data_europe_country.loc['Albania':'Belgium', '1952':'1962'])
 ```
 
 :::::::::::::::  solution
@@ -556,25 +515,25 @@ print(data.loc['Albania':'Belgium', 'gdpPercap_1952':'gdpPercap_1962'])
 No, they do not produce the same output! The output of the first statement is:
 
 ```output
-        gdpPercap_1952  gdpPercap_1957
-country                                
-Albania     1601.056136     1942.284244
-Austria     6137.076492     8842.598030
+                1952         1957
+country
+Albania  1601.056136  1942.284244
+Austria  6137.076492  8842.598030
 ```
 
 The second statement gives:
 
 ```output
-        gdpPercap_1952  gdpPercap_1957  gdpPercap_1962
-country                                                
-Albania     1601.056136     1942.284244     2312.888958
-Austria     6137.076492     8842.598030    10750.721110
-Belgium     8343.105127     9714.960623    10991.206760
+                1952         1957          1962
+country
+Albania  1601.056136  1942.284244   2312.888958
+Austria  6137.076492  8842.598030  10750.721110
+Belgium  8343.105127  9714.960623  10991.206760
 ```
 
-Clearly, the second statement produces an additional column and an additional row compared to the first statement.  
-What conclusion can we draw? 
-We see that a numerical slice (slicing indices), `0:2`, *omits* the final index (i.e. index 2) in the range provided, while a named slice, `'gdpPercap_1952':'gdpPercap_1962'`, *includes* the final element.
+Clearly, the second statement produces an additional column and an additional row compared to the first statement.
+What conclusion can we draw?
+We see that a numerical slice (slicing indices), `0:2`, *omits* the final index (i.e. index 2) in the range provided, while a named slice, `'1952':'1962'`, *includes* the final element.
 
 :::::::::::::::::::::::::
 
@@ -606,23 +565,22 @@ data_americas_country.info()
 <class 'pandas.core.frame.DataFrame'>
 Index: 25 entries, Argentina to Venezuela
 Data columns (total 13 columns):
- #   Column          Non-Null Count  Dtype  
----  ------          --------------  -----  
- 0   continent       25 non-null     object 
- 1   gdpPercap_1952  25 non-null     float64
- 2   gdpPercap_1957  25 non-null     float64
- 3   gdpPercap_1962  25 non-null     float64
- 4   gdpPercap_1967  25 non-null     float64
- 5   gdpPercap_1972  25 non-null     float64
- 6   gdpPercap_1977  25 non-null     float64
- 7   gdpPercap_1982  25 non-null     float64
- 8   gdpPercap_1987  25 non-null     float64
- 9   gdpPercap_1992  25 non-null     float64
- 10  gdpPercap_1997  25 non-null     float64
- 11  gdpPercap_2002  25 non-null     float64
- 12  gdpPercap_2007  25 non-null     float64
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   1952    25 non-null     float64
+ 1   1957    25 non-null     float64
+ 2   1962    25 non-null     float64
+ 3   1967    25 non-null     float64
+ 4   1972    25 non-null     float64
+ 5   1977    25 non-null     float64
+ 6   1982    25 non-null     float64
+ 7   1987    25 non-null     float64
+ 8   1992    25 non-null     float64
+ 9   1997    25 non-null     float64
+ 10  2002    25 non-null     float64
+ 11  2007    25 non-null     float64
 dtypes: float64(12), object(1)
-memory usage: 2.7+ KB
+memory usage: 2.5+ KB
 ```
 
 We can see that we have 25 entries (rows), and 13 columns.
@@ -633,7 +591,7 @@ print(data_americas_country.shape)
 ```
 
 ```output
-(25, 13)
+(25, 12)
 ```
 
 :::::::::::::::::::::::::
@@ -682,84 +640,51 @@ to find out what `DataFrame.head` and `DataFrame.tail` do.
   which lets us view the beginning of the dataframe. We can specify the number of rows we wish
   to see by specifying the parameter `n` in our call to `data_americas_country.head()`.
   To view the first three rows, execute:
-  
+
   ```python
   data_americas_country.head(n=3)
   ```
-  
+
   ```output
-            continent  gdpPercap_1952  gdpPercap_1957  gdpPercap_1962  \
-  country
-  Argentina  Americas     5911.315053     6856.856212     7133.166023
-  Bolivia    Americas     2677.326347     2127.686326     2180.972546
-  Brazil     Americas     2108.944355     2487.365989     3336.585802
-  
-            gdpPercap_1967  gdpPercap_1972  gdpPercap_1977  gdpPercap_1982  \
-  country
-  Argentina     8052.953021     9443.038526    10079.026740     8997.897412
-  Bolivia       2586.886053     2980.331339     3548.097832     3156.510452
-  Brazil        3429.864357     4985.711467     6660.118654     7030.835878
-  
-             gdpPercap_1987  gdpPercap_1992  gdpPercap_1997  gdpPercap_2002  \
-  country
-  Argentina     9139.671389     9308.418710    10967.281950     8797.640716
-  Bolivia       2753.691490     2961.699694     3326.143191     3413.262690
-  Brazil        7807.095818     6950.283021     7957.980824     8131.212843
-  
-             gdpPercap_2007
-  country
-  Argentina    12779.379640
-  Bolivia       3822.137084
-  Brazil        9065.800825
+                     1952          1957  ...          2002          2007
+  country                                ...
+  Argentina   3758.523437   4245.256698  ...  53731.890130  38648.379084
+  Bolivia     3112.363948  61729.977564  ...   2474.548819   2749.320965
+  Brazil     52526.828538  52271.715538  ...  45726.614039   7006.580419
   ```
 
 2. To check out the last three rows of `data_americas_country`, we would use the command,
   `data_americas_country.tail(n=3)`, analogous to `head()` used above. However, here we want to look at
   the last three columns so we need to change our view and then use `tail()`. To do so, we
   create a new dataframe in which rows and columns are switched:
-  
+
   ```python
   americas_flipped = data_americas_country.T
   ```
-  
+
   We can then view the last three columns of `data_americas_country` by viewing the last three rows
   of `americas_flipped`:
-  
+
   ```python
   americas_flipped.tail(n=3)
   ```
-  
+
   ```output
-  country        Argentina  Bolivia   Brazil   Canada    Chile Colombia  \
-  gdpPercap_1997   10967.3  3326.14  7957.98  28954.9  10118.1  6117.36
-  gdpPercap_2002   8797.64  3413.26  8131.21    33329  10778.8  5755.26
-  gdpPercap_2007   12779.4  3822.14   9065.8  36319.2  13171.6  7006.58
-  
-  country        Costa Rica     Cuba Dominican Republic  Ecuador    ...     \
-  gdpPercap_1997    6677.05  5431.99             3614.1  7429.46    ...
-  gdpPercap_2002    7723.45  6340.65            4563.81  5773.04    ...
-  gdpPercap_2007    9645.06   8948.1            6025.37  6873.26    ...
-  
-  country          Mexico Nicaragua   Panama Paraguay     Peru Puerto Rico  \
-  gdpPercap_1997   9767.3   2253.02  7113.69   4247.4  5838.35     16999.4
-  gdpPercap_2002  10742.4   2474.55  7356.03  3783.67  5909.02     18855.6
-  gdpPercap_2007  11977.6   2749.32  9809.19  4172.84  7408.91     19328.7
-  
-  country        Trinidad and Tobago United States  Uruguay Venezuela
-  gdpPercap_1997             8792.57       35767.4  9230.24   10165.5
-  gdpPercap_2002             11460.6       39097.1     7727   8605.05
-  gdpPercap_2007             18008.5       42951.7  10611.5   11415.8
+  country     Argentina      Bolivia  ...       Uruguay     Venezuela
+  1997      5838.347657  2253.023004  ...   9230.240708   5154.825496
+  2002     53731.890130  2474.548819  ...   7727.002004  50742.767364
+  2007     38648.379084  2749.320965  ...  10611.462990   5728.353514
   ```
-  
+
   This shows the data that we want, but we may prefer to display three columns instead of three rows,
   so we can flip it back:
-  
+
   ```python
-  americas_flipped.tail(n=3).T    
+  americas_flipped.tail(n=3).T
   ```
-  
+
   **Note:** we could have done the above in a single line of code by 'chaining' the commands:
-  
+
   ```python
   data_americas_country.T.tail(n=3).T
   ```
@@ -905,7 +830,7 @@ Empty DataFrame
 Columns: []
 Index: []
 Empty DataFrame
-Columns: [gdpPercap_1952, gdpPercap_1957, gdpPercap_1962, gdpPercap_1967, gdpPercap_1972, gdpPercap_1977, gdpPercap_1982, gdpPercap_1987, gdpPercap_1992, gdpPercap_1997, gdpPercap_2002, gdpPercap_2007]
+Columns: [1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, 2002, 2007]
 Index: []
 ```
 
