@@ -1,12 +1,12 @@
 import sys
-import numpy
+import pandas as pd
 
 
 def main():
     script = sys.argv[0]
     for filename in sys.argv[1:]:
-        data = numpy.loadtxt(filename, delimiter=',')
-        for row_mean in numpy.mean(data, axis=1):
+        data = pd.read_csv(filename, index_col='country')
+        for row_mean in data.mean(axis='columns'):
             print(row_mean)
 
 
