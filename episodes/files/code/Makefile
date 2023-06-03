@@ -1,5 +1,5 @@
 # Settings
-ARCHIVE = 'python-novice-inflammation-code'
+ARCHIVE = 'python-novice-gapminder-code'
 PYFILES = $(wildcard *.py)
 
 # Controls
