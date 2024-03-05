@@ -350,7 +350,7 @@ following library will help us to achieve this:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> glob</span></code></pre>
 </div>
 <p>The <code>glob</code> library contains a function, also called
 <code>glob</code>, that finds files and directories whose names match a
@@ -361,7 +361,7 @@ CSV files in the current directory:</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(glob.glob(<span class="st">'data/gapminder_*.csv'</span>))</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="bu">print</span>(glob.glob(<span class="st">'data/gapminder_*.csv'</span>))</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -415,13 +415,13 @@ file that has the fewest records.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fewest <span class="op">=</span> ____</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> glob.glob(<span class="st">'data/*.csv'</span>):</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    dataframe <span class="op">=</span> pd.____(filename)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    fewest <span class="op">=</span> <span class="bu">min</span>(____, dataframe.shape[<span class="dv">0</span>])</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'smallest file has'</span>, fewest, <span class="st">'records'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>fewest <span class="op">=</span> ____</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> glob.glob(<span class="st">'data/*.csv'</span>):</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    dataframe <span class="op">=</span> pd.____(filename)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>    fewest <span class="op">=</span> <span class="bu">min</span>(____, dataframe.shape[<span class="dv">0</span>])</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'smallest file has'</span>, fewest, <span class="st">'records'</span>)</span></code></pre>
 </div>
 <p>Note that the [<code>DataFrame.shape()</code> method][shape-method]
 returns a tuple with the number of rows and columns of the data
@@ -439,13 +439,13 @@ frame.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fewest <span class="op">=</span> <span class="bu">float</span>(<span class="st">'Inf'</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> glob.glob(<span class="st">'data/*.csv'</span>):</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    dataframe <span class="op">=</span> pd.read_csv(filename)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    fewest <span class="op">=</span> <span class="bu">min</span>(fewest, dataframe.shape[<span class="dv">0</span>])</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'smallest file has'</span>, fewest, <span class="st">'records'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>fewest <span class="op">=</span> <span class="bu">float</span>(<span class="st">'Inf'</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> glob.glob(<span class="st">'data/*.csv'</span>):</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>    dataframe <span class="op">=</span> pd.read_csv(filename)</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    fewest <span class="op">=</span> <span class="bu">min</span>(fewest, dataframe.shape[<span class="dv">0</span>])</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'smallest file has'</span>, fewest, <span class="st">'records'</span>)</span></code></pre>
 </div>
 <p>You might have chosen to initialize the <code>fewest</code> variable
 with a number greater than the numbers you’re dealing with, but that
@@ -464,39 +464,39 @@ output:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>filenames <span class="op">=</span> <span class="bu">sorted</span>(glob.glob(<span class="st">'data/gapminder_*.csv'</span>))</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>filenames <span class="op">=</span> filenames[<span class="dv">0</span>:<span class="dv">3</span>]</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> filenames:</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(filename)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    continent <span class="op">=</span> filename[<span class="dv">14</span>:<span class="op">-</span><span class="dv">4</span>].capitalize()</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    data_gdp <span class="op">=</span> pd.read_csv(filename, index_col<span class="op">=</span><span class="st">'country'</span>)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">18.0</span>, <span class="fl">3.0</span>))</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    axes_1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    axes_2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    axes_3 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    axes_1.set_title(<span class="st">'Min'</span>)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    axes_1.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    axes_1.plot(data_gdp.<span class="bu">min</span>(axis<span class="op">=</span><span class="st">'rows'</span>))</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    axes_2.set_title(<span class="st">'Max'</span>)</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    axes_2.plot(data_gdp.<span class="bu">max</span>(axis<span class="op">=</span><span class="st">'rows'</span>))</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    axes_3.set_title(<span class="st">'Average'</span>)</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    axes_3.plot(data_gdp.mean(axis<span class="op">=</span><span class="st">'rows'</span>))</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    fig.suptitle(<span class="st">'GDP/capita statistics for countries in '</span> <span class="op">+</span> continent)</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    fig.tight_layout()</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>filenames <span class="op">=</span> <span class="bu">sorted</span>(glob.glob(<span class="st">'data/gapminder_*.csv'</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>filenames <span class="op">=</span> filenames[<span class="dv">0</span>:<span class="dv">3</span>]</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> filenames:</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>    <span class="bu">print</span>(filename)</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>    continent <span class="op">=</span> filename[<span class="dv">14</span>:<span class="op">-</span><span class="dv">4</span>].capitalize()</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>    data_gdp <span class="op">=</span> pd.read_csv(filename, index_col<span class="op">=</span><span class="st">'country'</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">18.0</span>, <span class="fl">3.0</span>))</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>    axes_1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>    axes_2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>    axes_3 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a>    axes_1.set_title(<span class="st">'Min'</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>    axes_1.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>    axes_1.plot(data_gdp.<span class="bu">min</span>(axis<span class="op">=</span><span class="st">'rows'</span>))</span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>    axes_2.set_title(<span class="st">'Max'</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>    axes_2.plot(data_gdp.<span class="bu">max</span>(axis<span class="op">=</span><span class="st">'rows'</span>))</span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>    axes_3.set_title(<span class="st">'Average'</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>    axes_3.plot(data_gdp.mean(axis<span class="op">=</span><span class="st">'rows'</span>))</span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>    fig.suptitle(<span class="st">'GDP/capita statistics for countries in '</span> <span class="op">+</span> continent)</span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a>    fig.tight_layout()</span>
+<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a>    plt.show()</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -549,20 +549,20 @@ the path ‘data/gapminder_gdp_a_specific_region.csv’.</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">1</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> glob.glob(<span class="st">'data/gapminder_gdp*.csv'</span>):</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    dataframe <span class="op">=</span> pd.read_csv(filename)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># extract &lt;region&gt; from the filename, expected to be in the format 'data/gapminder_gdp_&lt;region&gt;.csv'.</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we will split the string using the split method and `_` as our separator,</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># retrieve the last string in the list that split returns (`&lt;region&gt;.csv`),</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and then remove the `.csv` extension from that string.</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    region <span class="op">=</span> filename.split(<span class="st">'_'</span>)[<span class="op">-</span><span class="dv">1</span>][:<span class="op">-</span><span class="dv">4</span>]</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    dataframe.mean().plot(ax<span class="op">=</span>ax, label<span class="op">=</span>region)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> glob.glob(<span class="st">'data/gapminder_gdp*.csv'</span>):</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>    dataframe <span class="op">=</span> pd.read_csv(filename)</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>    <span class="co"># extract &lt;region&gt; from the filename, expected to be in the format 'data/gapminder_gdp_&lt;region&gt;.csv'.</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>    <span class="co"># we will split the string using the split method and `_` as our separator,</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>    <span class="co"># retrieve the last string in the list that split returns (`&lt;region&gt;.csv`),</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>    <span class="co"># and then remove the `.csv` extension from that string.</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>    region <span class="op">=</span> filename.split(<span class="st">'_'</span>)[<span class="op">-</span><span class="dv">1</span>][:<span class="op">-</span><span class="dv">4</span>]</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>    dataframe.mean().plot(ax<span class="op">=</span>ax, label<span class="op">=</span>region)</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>plt.legend()</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 </div>
 </div>
@@ -652,7 +652,7 @@ and <code>?</code> to match any single character.</li>
   "identifier": "https://swcarpentry.github.io/python-novice-inflammation/instructor/06-files.html",
   "dateCreated": "2014-11-25",
   "dateModified": "2024-02-23",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

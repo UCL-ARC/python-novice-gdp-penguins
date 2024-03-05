@@ -375,9 +375,9 @@ data for Europe into a dataframe called <code>data_eu</code>.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data_eu <span class="op">=</span> pd.read_csv(<span class="st">'data/gapminder_gdp_europe.csv'</span>, index_col<span class="op">=</span><span class="st">'country'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>data_eu <span class="op">=</span> pd.read_csv(<span class="st">'data/gapminder_gdp_europe.csv'</span>, index_col<span class="op">=</span><span class="st">'country'</span>)</span></code></pre>
 </div>
 </div>
 </div>
@@ -390,7 +390,7 @@ produce a line-plot of the data contained within the frame.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_eu.plot()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>data_eu.plot()</span></code></pre>
 </div>
 <figure><img src="fig/03-data_eu_plot.svg" alt="A line graph showing the GDP of each country in Europe between 1952 and 2007. Unhelpfully, the dependant variable has been assumed to be the column headers, rather than the rows." class="figure mx-auto d-block"></figure><p>This has placed all of our data into a single plot that Python has
 then displayed to us - clearly, there is far too much here for us to
@@ -406,8 +406,8 @@ variable and the rows as the line labels.</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>first_five_countries <span class="op">=</span> data_eu.iloc[<span class="dv">0</span>:<span class="dv">5</span>, :]</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>first_five_countries.T.plot()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>first_five_countries <span class="op">=</span> data_eu.iloc[<span class="dv">0</span>:<span class="dv">5</span>, :]</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>first_five_countries.T.plot()</span></code></pre>
 </div>
 <figure><img src="fig/03-data_eu_T_plot.svg" alt="A line graph showing the GDP per capita of 5 European countries, from 1952 through to 2007." class="figure mx-auto d-block"></figure></section><section id="computing-statistics-across-dataframe-axes"><h2 class="section-heading">Computing statistics across dataframe axes<a class="anchor" aria-label="anchor" href="#computing-statistics-across-dataframe-axes"></a>
 </h2>
@@ -417,7 +417,7 @@ function, <code>mean()</code> that we can use to help us here:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_eu.mean())</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="bu">print</span>(data_eu.mean())</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -453,7 +453,7 @@ for each country by taking the average value <em>across the columns</em>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_eu.mean(axis<span class="op">=</span><span class="st">'columns'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>data_eu.mean(axis<span class="op">=</span><span class="st">'columns'</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -482,17 +482,17 @@ tell Python to import it:</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre>
 </div>
 <p>We can now create a plot of the average GDP of European countries in
 the following way:</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mean_gdp_each_year <span class="op">=</span> data_eu.mean(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.plot(mean_gdp_each_year)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>mean_gdp_each_year <span class="op">=</span> data_eu.mean(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>plt.plot(mean_gdp_each_year)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 <p><img src="fig/03-eu_mean_gdp_no_labels.svg" alt="A line graph showing the change in the average GDP of European countries." class="figure">)</p>
 <p>Let’s break down what each line is doing.</p>
@@ -503,7 +503,7 @@ canvas.</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span></code></pre>
 </div>
 <p>Then, we create a new variable <code>mean_gdp_each_year</code>, with
 the average value of our <code>data_eu</code> dataframe across the rows
@@ -511,7 +511,7 @@ the average value of our <code>data_eu</code> dataframe across the rows
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mean_gdp_each_year <span class="op">=</span> data_eu.mean(axis<span class="op">=</span><span class="st">'rows'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>mean_gdp_each_year <span class="op">=</span> data_eu.mean(axis<span class="op">=</span><span class="st">'rows'</span>)</span></code></pre>
 </div>
 <p>Next, using the <code>plot</code> function from the
 <code>matplotlib.pyplot</code> library, we request to visualise the data
@@ -523,8 +523,8 @@ function displays the final result on the screen.</p>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.plot(mean_gdp_each_year)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>plt.plot(mean_gdp_each_year)</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 </section><section id="grouping-plots"><h2 class="section-heading">Grouping Plots<a class="anchor" aria-label="anchor" href="#grouping-plots"></a>
 </h2>
@@ -544,22 +544,22 @@ to plot the data; and 1. Display the data in the screen.</p>
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>eu_min_data <span class="op">=</span> data_eu.<span class="bu">min</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>eu_max_data <span class="op">=</span> data_eu.<span class="bu">max</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>eu_avg_data <span class="op">=</span> data_eu.mean(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">10.</span>, <span class="fl">3.</span>))</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>axes_1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>axes_1.plot(eu_min_data)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>axes_2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>axes_2.plot(eu_max_data)</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>axes_3 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>axes_3.plot(eu_avg_data)</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>eu_min_data <span class="op">=</span> data_eu.<span class="bu">min</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>eu_max_data <span class="op">=</span> data_eu.<span class="bu">max</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>eu_avg_data <span class="op">=</span> data_eu.mean(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">10.</span>, <span class="fl">3.</span>))</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>axes_1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>axes_1.plot(eu_min_data)</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>axes_2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>axes_2.plot(eu_max_data)</span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a>axes_3 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>axes_3.plot(eu_avg_data)</span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="fig/03-min_max_avg_no_labels.svg" alt="A figure which contains three subplots, side-by-side" class="figure mx-auto d-block"></figure><p>Note how we’ve set the right axis arguments when computing the
 different statistical properties (<code>axis='rows'</code>). The
@@ -575,14 +575,14 @@ top-to-bottom). Each subplot is stored in a different variable
 (<code>axes_1</code>, <code>axes_2</code>, <code>axes_3</code>). Once a
 subplot is created, the axes can be used to place the desired plot for
 each.</p>
-<div id="min-and-max-methods" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="min-and-max-methods" class="callout-inner">
-<h3 class="callout-title">
-<code>min</code>and<code>max</code>methods<a class="anchor" aria-label="anchor" href="#min-and-max-methods"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="min-and-max-methods">
+<code>min</code> and <code>max</code>
+methods<a class="anchor" aria-label="anchor" href="#min-and-max-methods"></a></h3>
 <div class="callout-content">
 <p>The <code>min</code> and <code>max</code> functions can be used on a
 dataframe in the same way as the <code>mean</code> function, and take
@@ -591,7 +591,7 @@ GDP of countries in Europe for each year:</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data_eu.<span class="bu">min</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>data_eu.<span class="bu">min</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -631,31 +631,31 @@ as much whitespace as possible from our figure.</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>eu_min_data <span class="op">=</span> data_eu.<span class="bu">min</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>eu_max_data <span class="op">=</span> data_eu.<span class="bu">max</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>eu_avg_data <span class="op">=</span> data_eu.mean(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">10.</span>, <span class="fl">3.</span>))</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>axes_1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>axes_1.plot(eu_min_data)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>axes_1.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>axes_1.set_title(<span class="st">'Min'</span>)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>axes_2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>axes_2.plot(eu_max_data)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>axes_2.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>axes_1.set_title(<span class="st">'Max'</span>)</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>axes_3 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>axes_3.plot(eu_avg_data)</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>axes_3.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>axes_1.set_title(<span class="st">'Average'</span>)</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">'GDP/capita statistics for European countries'</span>)</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>eu_min_data <span class="op">=</span> data_eu.<span class="bu">min</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>eu_max_data <span class="op">=</span> data_eu.<span class="bu">max</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>eu_avg_data <span class="op">=</span> data_eu.mean(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">10.</span>, <span class="fl">3.</span>))</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>axes_1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>axes_1.plot(eu_min_data)</span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>axes_1.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>axes_1.set_title(<span class="st">'Min'</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a>axes_2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>axes_2.plot(eu_max_data)</span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a>axes_2.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a>axes_1.set_title(<span class="st">'Max'</span>)</span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a>axes_3 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a>axes_3.plot(eu_avg_data)</span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a>axes_3.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a>axes_1.set_title(<span class="st">'Average'</span>)</span>
+<span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a>fig.suptitle(<span class="st">'GDP/capita statistics for European countries'</span>)</span>
+<span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb16-24"><a href="#cb16-24" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="fig/03-min_max_avg_with_labels.svg" alt="A figure with 3 subplots, each labelled with the statistic that they display." class="figure mx-auto d-block"></figure><div id="setting-limits-for-the-axes" class="callout challenge">
 <div class="callout-square">
@@ -690,21 +690,21 @@ the overall minimum and maximum values of the dataframe.</p>
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>axes_1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>axes_1.plot(eu_min_data)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>axes_1.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>axes_1.set_title(<span class="st">'Min'</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sets the y-limits to the min/max overall values to ease comparisson across the plots</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>y_axes_min_value <span class="op">=</span> eu_min_data.<span class="bu">min</span>()</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>y_axes_max_value <span class="op">=</span> eu_max_data.<span class="bu">max</span>()</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>axes_1.set_ylim(y_axes_min_value, y_axes_max_value)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>axes_1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>axes_1.plot(eu_min_data)</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>axes_1.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>axes_1.set_title(<span class="st">'Min'</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="co"># Sets the y-limits to the min/max overall values to ease comparisson across the plots</span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>y_axes_min_value <span class="op">=</span> eu_min_data.<span class="bu">min</span>()</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>y_axes_max_value <span class="op">=</span> eu_max_data.<span class="bu">max</span>()</span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>axes_1.set_ylim(y_axes_min_value, y_axes_max_value)</span></code></pre>
 </div>
 <p>Or without creating intermediate variables, you could use</p>
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>axes_1.set_ylim(eu_min_data.<span class="bu">min</span>(), eu_min_data.<span class="bu">max</span>())</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>axes_1.set_ylim(eu_min_data.<span class="bu">min</span>(), eu_min_data.<span class="bu">max</span>())</span></code></pre>
 </div>
 <p>instead of the last three lines!</p>
 </div>
@@ -745,7 +745,7 @@ below:</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>axes_1.plot(eu_mean_data, linestyle<span class="op">=</span><span class="st">':'</span>, color<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'x'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>axes_1.plot(eu_mean_data, linestyle<span class="op">=</span><span class="st">':'</span>, color<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'x'</span>)</span></code></pre>
 </div>
 </div>
 </div>
@@ -776,12 +776,12 @@ each year.</p>
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>std_plot <span class="op">=</span> plt.figure()</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>std_data <span class="op">=</span> data_eu.std(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.plot(std_data)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>std_plot <span class="op">=</span> plt.figure()</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>std_data <span class="op">=</span> data_eu.std(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>plt.plot(std_data)</span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 </div>
 </div>
@@ -810,31 +810,31 @@ instead of side by side.</p>
 <div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>eu_min_data <span class="op">=</span> data_eu.<span class="bu">min</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>eu_max_data <span class="op">=</span> data_eu.<span class="bu">max</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>eu_avg_data <span class="op">=</span> data_eu.mean(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">10.</span>, <span class="fl">3.</span>))</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>axes_1 <span class="op">=</span> fig.add_subplot(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>axes_1.plot(eu_min_data)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>axes_1.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>axes_1.set_title(<span class="st">'Min'</span>)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>axes_2 <span class="op">=</span> fig.add_subplot(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>axes_2.plot(eu_max_data)</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>axes_2.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>axes_1.set_title(<span class="st">'Max'</span>)</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>axes_3 <span class="op">=</span> fig.add_subplot(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>axes_3.plot(eu_avg_data)</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>axes_3.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>axes_1.set_title(<span class="st">'Average'</span>)</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">'GDP/capita statistics for European countries'</span>)</span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>eu_min_data <span class="op">=</span> data_eu.<span class="bu">min</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>eu_max_data <span class="op">=</span> data_eu.<span class="bu">max</span>(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>eu_avg_data <span class="op">=</span> data_eu.mean(axis<span class="op">=</span><span class="st">'rows'</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">10.</span>, <span class="fl">3.</span>))</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>axes_1 <span class="op">=</span> fig.add_subplot(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>axes_1.plot(eu_min_data)</span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>axes_1.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a>axes_1.set_title(<span class="st">'Min'</span>)</span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>axes_2 <span class="op">=</span> fig.add_subplot(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a>axes_2.plot(eu_max_data)</span>
+<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a>axes_2.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
+<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a>axes_1.set_title(<span class="st">'Max'</span>)</span>
+<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a></span>
+<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a>axes_3 <span class="op">=</span> fig.add_subplot(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb21-18"><a href="#cb21-18" tabindex="-1"></a>axes_3.plot(eu_avg_data)</span>
+<span id="cb21-19"><a href="#cb21-19" tabindex="-1"></a>axes_3.set_ylabel(<span class="st">'GDP/capita'</span>)</span>
+<span id="cb21-20"><a href="#cb21-20" tabindex="-1"></a>axes_1.set_title(<span class="st">'Average'</span>)</span>
+<span id="cb21-21"><a href="#cb21-21" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" tabindex="-1"></a>fig.suptitle(<span class="st">'GDP/capita statistics for European countries'</span>)</span>
+<span id="cb21-23"><a href="#cb21-23" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb21-24"><a href="#cb21-24" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 </div>
 </div>
@@ -864,7 +864,7 @@ than when they were side by side?</p>
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">3.</span>, <span class="fl">10.</span>))</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">3.</span>, <span class="fl">10.</span>))</span></code></pre>
 </div>
 </div>
 </div>
@@ -891,8 +891,8 @@ Portugal.</p>
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>portugal <span class="op">=</span> data_eu.loc[<span class="st">'Portugal'</span>]</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(portugal)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>portugal <span class="op">=</span> data_eu.loc[<span class="st">'Portugal'</span>]</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="bu">print</span>(portugal)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -911,13 +911,13 @@ calculations</p>
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>[ <span class="fl">3068.31</span> <span class="op">-</span> NaN, <span class="fl">3774.57</span> <span class="op">-</span> <span class="fl">3068.31</span>,  <span class="fl">4727.95</span> <span class="op">-</span> <span class="fl">3774.57</span>, ...,  <span class="fl">19970.90</span> <span class="op">-</span> <span class="fl">17641.03</span>, <span class="fl">20509.64</span> <span class="op">-</span> <span class="fl">19970.90</span> ]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>[ <span class="fl">3068.31</span> <span class="op">-</span> NaN, <span class="fl">3774.57</span> <span class="op">-</span> <span class="fl">3068.31</span>,  <span class="fl">4727.95</span> <span class="op">-</span> <span class="fl">3774.57</span>, ...,  <span class="fl">19970.90</span> <span class="op">-</span> <span class="fl">17641.03</span>, <span class="fl">20509.64</span> <span class="op">-</span> <span class="fl">19970.90</span> ]</span></code></pre>
 </div>
 <p>and return the 12 difference values in a new series.</p>
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>portugal.diff()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>portugal.diff()</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -955,7 +955,7 @@ concept.</p>
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data_eu.diff(axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>data_eu.diff(axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
 </div>
 </div>
 </div>
@@ -988,7 +988,7 @@ difference between days.</p>
 <div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>data_eu.diff(axis<span class="op">=</span><span class="dv">1</span>).<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>data_eu.diff(axis<span class="op">=</span><span class="dv">1</span>).<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1012,7 +1012,7 @@ difference between readings.</p>
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data_eu.diff(axis<span class="op">=</span><span class="dv">1</span>).<span class="bu">abs</span>().<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>data_eu.diff(axis<span class="op">=</span><span class="dv">1</span>).<span class="bu">abs</span>().<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1112,7 +1112,7 @@ our plots using <code>matplotlib</code>.</li>
   "identifier": "https://swcarpentry.github.io/python-novice-inflammation/03-matplotlib.html",
   "dateCreated": "2014-11-25",
   "dateModified": "2024-02-23",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

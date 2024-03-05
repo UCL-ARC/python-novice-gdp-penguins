@@ -372,7 +372,7 @@ tables. To tell Python that we’d like to start using pandas, we need to
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pandas</span></code></pre>
 </div>
 <p>Importing a library is like getting a piece of lab equipment out of a
 storage locker and setting it up on the bench. Libraries provide
@@ -386,14 +386,14 @@ safe some typing. In the case of pandas, the alias used is
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre>
 </div>
 <p>Once we’ve imported the library, we can ask the library to read our
 data file for us:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(<span class="st">'data/gapminder_gdp_oceania.csv'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>pd.read_csv(<span class="st">'data/gapminder_gdp_oceania.csv'</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -435,7 +435,7 @@ save the returned data:</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_oceania <span class="op">=</span> pd.read_csv(<span class="st">'data/gapminder_gdp_oceania.csv'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>data_oceania <span class="op">=</span> pd.read_csv(<span class="st">'data/gapminder_gdp_oceania.csv'</span>)</span></code></pre>
 </div>
 <p>This statement doesn’t produce any output because we’ve assigned the
 output to the variable <code>data_oceania</code>. If we want to check
@@ -443,7 +443,7 @@ that the data have been loaded, we can print the variable’s value:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_oceania)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="bu">print</span>(data_oceania)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -465,8 +465,8 @@ to reload the dataframe passing a new argument to the
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_oceania_country <span class="op">=</span> pd.read_csv(<span class="st">'data/gapminder_gdp_oceania.csv'</span>, index_col<span class="op">=</span><span class="st">'country'</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_oceania_country)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>data_oceania_country <span class="op">=</span> pd.read_csv(<span class="st">'data/gapminder_gdp_oceania.csv'</span>, index_col<span class="op">=</span><span class="st">'country'</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="bu">print</span>(data_oceania_country)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -490,7 +490,7 @@ the data includes (<code>oceania</code>) and how it is indexed
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(data_oceania_country))</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(data_oceania_country))</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -502,13 +502,12 @@ refers to a DataFrame, the functionality for which is provided by the
 pandas library. Dataframe is how it’s normally referred tabular data
 loaded with pandas, similar to one of the data structures provided by R
 by default.</p>
-<div id="data-type" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="data-type" class="callout-inner">
-<h3 class="callout-title">Data Type<a class="anchor" aria-label="anchor" href="#data-type"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="data-type">Data Type<a class="anchor" aria-label="anchor" href="#data-type"></a></h3>
 <div class="callout-content">
 <p>A Dataframe may contain one or more elements of different types. The
 <code>type</code> function will only tell you that a variable is a
@@ -518,7 +517,7 @@ dataframe.</p>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_oceania_country.dtypes)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="bu">print</span>(data_oceania_country.dtypes)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -547,7 +546,7 @@ dataframe:</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data_oceania_country.info()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>data_oceania_country.info()</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -584,7 +583,7 @@ stores the column headers:</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_oceania_country.columns)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="bu">print</span>(data_oceania_country.columns)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -607,7 +606,7 @@ it.</p>
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_oceania_country.T)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="bu">print</span>(data_oceania_country.T)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -639,7 +638,7 @@ increased by <code>1</code>.</p>
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>data_europe_country <span class="op">=</span> pd.read_csv(<span class="st">'data/gapminder_gdp_europe.csv'</span>, index_col<span class="op">=</span><span class="st">'country'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>data_europe_country <span class="op">=</span> pd.read_csv(<span class="st">'data/gapminder_gdp_europe.csv'</span>, index_col<span class="op">=</span><span class="st">'country'</span>)</span></code></pre>
 </div>
 <p>We’ve load the data for Europe so that we have a larger dataset to
 work with.</p>
@@ -651,7 +650,7 @@ row and column labels as:</p>
 <div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[<span class="st">'Albania'</span>, <span class="st">'1952'</span>])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[<span class="st">'Albania'</span>, <span class="st">'1952'</span>])</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -665,7 +664,7 @@ command, we can see the underneath array’s <a href="reference.html#shape">shap
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.shape)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.shape)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -694,7 +693,7 @@ to refer to one specific value:</p>
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'first value in the dataframe:'</span>, data_europe_country.iloc[<span class="dv">0</span>, <span class="dv">0</span>])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'first value in the dataframe:'</span>, data_europe_country.iloc[<span class="dv">0</span>, <span class="dv">0</span>])</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -704,7 +703,7 @@ to refer to one specific value:</p>
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'middle value in the dataframe:'</span>, data[<span class="dv">14</span>, <span class="dv">5</span>])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'middle value in the dataframe:'</span>, data[<span class="dv">14</span>, <span class="dv">5</span>])</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -735,13 +734,12 @@ know to which country or year the value belongs to, we would need to
 count the labels for the row and indices to find that the 15th row
 refers to <code>'Ireland'</code> and the 6th column to the
 <code>1977'</code> label.</p>
-<div id="in-the-corner" class="callout callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="in-the-corner" class="callout-inner">
-<h3 class="callout-title">In the Corner<a class="anchor" aria-label="anchor" href="#in-the-corner"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="in-the-corner">In the Corner<a class="anchor" aria-label="anchor" href="#in-the-corner"></a></h3>
 <div class="callout-content">
 <p>What may also surprise you is that when Python displays an array, it
 shows the element with index <code>[0, 0]</code> in the upper left
@@ -765,8 +763,8 @@ beginning with “B” (<code>'Belgium'</code> through to
 <div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Slice using labels. Notice that, because a slice doesn't include the end value, we have to provide the label of the first column we don't want to include as the end value of our slice.</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[<span class="st">'Belgium'</span>:<span class="st">'Bulgaria'</span>, <span class="st">'1957'</span>:<span class="st">'1987'</span>])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># Slice using labels. Notice that, because a slice doesn't include the end value, we have to provide the label of the first column we don't want to include as the end value of our slice.</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[<span class="st">'Belgium'</span>:<span class="st">'Bulgaria'</span>, <span class="st">'1957'</span>:<span class="st">'1987'</span>])</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -785,17 +783,17 @@ the slice includes everything:</p>
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'All countries before (and included) Belgium for years 1957 - 1967'</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[:<span class="st">'Belgium'</span>, <span class="st">'1957'</span>:<span class="st">'1967'</span>])</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'All countries for the year 2002 till now'</span>)</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[:, <span class="st">'2002'</span>:])</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'All the years for Italy'</span>)</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[<span class="st">'Italy'</span>, :])</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'All the countries for 1987'</span>)</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[:, <span class="st">'1987'</span>])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'All countries before (and included) Belgium for years 1957 - 1967'</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[:<span class="st">'Belgium'</span>, <span class="st">'1957'</span>:<span class="st">'1967'</span>])</span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'All countries for the year 2002 till now'</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[:, <span class="st">'2002'</span>:])</span>
+<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'All the years for Italy'</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[<span class="st">'Italy'</span>, :])</span>
+<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'All the countries for 1987'</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[:, <span class="st">'1987'</span>])</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -839,13 +837,12 @@ Turkey                     5089.043686
 United Kingdom            21664.787670
 Name: 1987, dtype: float64</code></pre>
 </div>
-<div id="callout3" class="callout callout">
+<div id="callout3" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout3"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title">Callout</h3>
 <div class="callout-content">
 <p>If you want to fetch all of the columns, you don’t have to include
 the second slice when using <code>loc</code>. For example, the following
@@ -853,8 +850,8 @@ two calls will give back the same entries:</p>
 <div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>data_europe_country.loc[<span class="st">'Albania'</span>]</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>data_europe_country.loc[<span class="st">'Albania'</span>, :]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>data_europe_country.loc[<span class="st">'Albania'</span>]</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>data_europe_country.loc[<span class="st">'Albania'</span>, :]</span></code></pre>
 </div>
 </div>
 </div>
@@ -868,8 +865,8 @@ and lower bounds is the number of values in the slice.</p>
 <div class="codewrapper sourceCode" id="cb34">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'First four countries and first three years'</span>)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.iloc[<span class="dv">0</span>:<span class="dv">4</span>, <span class="dv">0</span>:<span class="dv">3</span>])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'First four countries and first three years'</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.iloc[<span class="dv">0</span>:<span class="dv">4</span>, <span class="dv">0</span>:<span class="dv">3</span>])</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -887,8 +884,8 @@ boundaries of the slice.</p>
 <div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'First the last three countries for the first three years'</span>)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.iloc[<span class="dv">27</span>:, :<span class="dv">3</span>])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'First the last three countries for the first three years'</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.iloc[<span class="dv">27</span>:, :<span class="dv">3</span>])</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -915,8 +912,8 @@ numerical slices (using <code>iloc</code>) and named slices (using
 </ol><div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.iloc[<span class="dv">0</span>:<span class="dv">2</span>, <span class="dv">0</span>:<span class="dv">2</span>])</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[<span class="st">'Albania'</span>:<span class="st">'Belgium'</span>, <span class="st">'1952'</span>:<span class="st">'1962'</span>])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.iloc[<span class="dv">0</span>:<span class="dv">2</span>, <span class="dv">0</span>:<span class="dv">2</span>])</span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a><span class="bu">print</span>(data_europe_country.loc[<span class="st">'Albania'</span>:<span class="st">'Belgium'</span>, <span class="st">'1952'</span>:<span class="st">'1962'</span>])</span></code></pre>
 </div>
 </div>
 </div>
@@ -992,8 +989,8 @@ use <code>info</code> like we did before:</p>
 <div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>data_americas_country <span class="op">=</span> pd.read_csv(<span class="st">'data/gapminder_gdp_americas.csv'</span>, index_col<span class="op">=</span><span class="st">'country'</span>)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>data_americas_country.info()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a>data_americas_country <span class="op">=</span> pd.read_csv(<span class="st">'data/gapminder_gdp_americas.csv'</span>, index_col<span class="op">=</span><span class="st">'country'</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a>data_americas_country.info()</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1024,7 +1021,7 @@ also get the same information about the number of rows and columns using
 <div class="codewrapper sourceCode" id="cb43">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_americas_country.shape)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="bu">print</span>(data_americas_country.shape)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1035,13 +1032,12 @@ also get the same information about the number of rows and columns using
 </div>
 </div>
 </div>
-<div id="mystery-functions-in-ipython" class="callout callout">
+<div id="callout4" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="mystery-functions-in-ipython" class="callout-inner">
-<h3 class="callout-title">Mystery Functions in IPython<a class="anchor" aria-label="anchor" href="#mystery-functions-in-ipython"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="mystery-functions-in-ipython">Mystery Functions in IPython<a class="anchor" aria-label="anchor" href="#mystery-functions-in-ipython"></a></h3>
 <div class="callout-content">
 <p>How did we know what functions NumPy has and how to use them? If you
 are working in IPython or in a Jupyter Notebook, there is an easy way to
@@ -1098,7 +1094,7 @@ execute:</li>
 </ol><div class="codewrapper sourceCode" id="cb45">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>data_americas_country.head(n<span class="op">=</span><span class="dv">3</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>data_americas_country.head(n<span class="op">=</span><span class="dv">3</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1119,7 +1115,7 @@ and columns are switched:</li>
 </ol><div class="codewrapper sourceCode" id="cb47">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>americas_flipped <span class="op">=</span> data_americas_country.T</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a>americas_flipped <span class="op">=</span> data_americas_country.T</span></code></pre>
 </div>
 <p>We can then view the last three columns of
 <code>data_americas_country</code> by viewing the last three rows of
@@ -1127,7 +1123,7 @@ and columns are switched:</li>
 <div class="codewrapper sourceCode" id="cb48">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>americas_flipped.tail(n<span class="op">=</span><span class="dv">3</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a>americas_flipped.tail(n<span class="op">=</span><span class="dv">3</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1142,26 +1138,25 @@ columns instead of three rows, so we can flip it back:</p>
 <div class="codewrapper sourceCode" id="cb50">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>americas_flipped.tail(n<span class="op">=</span><span class="dv">3</span>).T</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a>americas_flipped.tail(n<span class="op">=</span><span class="dv">3</span>).T</span></code></pre>
 </div>
 <p><strong>Note:</strong> we could have done the above in a single line
 of code by ‘chaining’ the commands:</p>
 <div class="codewrapper sourceCode" id="cb51">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>data_americas_country.T.tail(n<span class="op">=</span><span class="dv">3</span>).T</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a>data_americas_country.T.tail(n<span class="op">=</span><span class="dv">3</span>).T</span></code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div id="not-all-functions-have-input" class="callout callout">
+<div id="callout5" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="not-all-functions-have-input" class="callout-inner">
-<h3 class="callout-title">Not All Functions Have Input<a class="anchor" aria-label="anchor" href="#not-all-functions-have-input"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="not-all-functions-have-input">Not All Functions Have Input<a class="anchor" aria-label="anchor" href="#not-all-functions-have-input"></a></h3>
 <div class="callout-content">
 <p>Generally, a function uses inputs to produce outputs. However, some
 functions produce outputs without needing any input. For example,
@@ -1169,8 +1164,8 @@ checking the current time doesn’t require any input.</p>
 <div class="codewrapper sourceCode" id="cb52">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(time.ctime())</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a><span class="bu">print</span>(time.ctime())</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1196,9 +1191,9 @@ strings as well:</p>
 <div class="codewrapper sourceCode" id="cb54">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>element <span class="op">=</span> <span class="st">'oxygen'</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'first three characters:'</span>, element[<span class="dv">0</span>:<span class="dv">3</span>])</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'last three characters:'</span>, element[<span class="dv">3</span>:<span class="dv">6</span>])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a>element <span class="op">=</span> <span class="st">'oxygen'</span></span>
+<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'first three characters:'</span>, element[<span class="dv">0</span>:<span class="dv">3</span>])</span>
+<span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'last three characters:'</span>, element[<span class="dv">3</span>:<span class="dv">6</span>])</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1311,14 +1306,14 @@ strings: <code>carpentry</code>, <code>clone</code>,
 <div class="codewrapper sourceCode" id="cb58">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>element <span class="op">=</span> <span class="st">'oxygen'</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'last three characters:'</span>, element[<span class="op">-</span><span class="dv">3</span>:])</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>element <span class="op">=</span> <span class="st">'carpentry'</span></span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'last three characters:'</span>, element[<span class="op">-</span><span class="dv">3</span>:])</span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>element <span class="op">=</span> <span class="st">'clone'</span></span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'last three characters:'</span>, element[<span class="op">-</span><span class="dv">3</span>:])</span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>element <span class="op">=</span> <span class="st">'hi'</span></span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'last three characters:'</span>, element[<span class="op">-</span><span class="dv">3</span>:])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" tabindex="-1"></a>element <span class="op">=</span> <span class="st">'oxygen'</span></span>
+<span id="cb58-2"><a href="#cb58-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'last three characters:'</span>, element[<span class="op">-</span><span class="dv">3</span>:])</span>
+<span id="cb58-3"><a href="#cb58-3" tabindex="-1"></a>element <span class="op">=</span> <span class="st">'carpentry'</span></span>
+<span id="cb58-4"><a href="#cb58-4" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'last three characters:'</span>, element[<span class="op">-</span><span class="dv">3</span>:])</span>
+<span id="cb58-5"><a href="#cb58-5" tabindex="-1"></a>element <span class="op">=</span> <span class="st">'clone'</span></span>
+<span id="cb58-6"><a href="#cb58-6" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'last three characters:'</span>, element[<span class="op">-</span><span class="dv">3</span>:])</span>
+<span id="cb58-7"><a href="#cb58-7" tabindex="-1"></a>element <span class="op">=</span> <span class="st">'hi'</span></span>
+<span id="cb58-8"><a href="#cb58-8" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'last three characters:'</span>, element[<span class="op">-</span><span class="dv">3</span>:])</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1461,7 +1456,7 @@ programs.</li>
   "identifier": "https://swcarpentry.github.io/python-novice-inflammation/02-read_data.html",
   "dateCreated": "2014-11-25",
   "dateModified": "2024-02-23",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>
