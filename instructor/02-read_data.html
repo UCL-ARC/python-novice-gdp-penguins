@@ -504,12 +504,13 @@ refers to a DataFrame, the functionality for which is provided by the
 pandas library. Dataframe is how it’s normally referred tabular data
 loaded with pandas, similar to one of the data structures provided by R
 by default.</p>
-<div id="callout1" class="callout">
+<div id="data-type" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="data-type">Data Type<a class="anchor" aria-label="anchor" href="#data-type"></a></h3>
+<div id="data-type" class="callout-inner">
+<h3 class="callout-title">Data Type<a class="anchor" aria-label="anchor" href="#data-type"></a>
+</h3>
 <div class="callout-content">
 <p>A Dataframe may contain one or more elements of different types. The
 <code>type</code> function will only tell you that a variable is a
@@ -736,12 +737,13 @@ know to which country or year the value belongs to, we would need to
 count the labels for the row and indices to find that the 15th row
 refers to <code>'Ireland'</code> and the 6th column to the
 <code>1977'</code> label.</p>
-<div id="callout2" class="callout">
+<div id="in-the-corner" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="in-the-corner">In the Corner<a class="anchor" aria-label="anchor" href="#in-the-corner"></a></h3>
+<div id="in-the-corner" class="callout-inner">
+<h3 class="callout-title">In the Corner<a class="anchor" aria-label="anchor" href="#in-the-corner"></a>
+</h3>
 <div class="callout-content">
 <p>What may also surprise you is that when Python displays an array, it
 shows the element with index <code>[0, 0]</code> in the upper left
@@ -843,8 +845,9 @@ Name: 1987, dtype: float64</code></pre>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title">Callout</h3>
+<div class="callout-inner">
+<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout3"></a>
+</h3>
 <div class="callout-content">
 <p>If you want to fetch all of the columns, you don’t have to include
 the second slice when using <code>loc</code>. For example, the following
@@ -925,7 +928,7 @@ numerical slices (using <code>iloc</code>) and named slices (using
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>No, they do not produce the same output! The output of the first
 statement is:</p>
@@ -980,7 +983,7 @@ your dataframe!</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>To read in a CSV, we use <code>pd.read_csv</code> and pass the
 filename <code>'data/gapminder_gdp_americas.csv'</code> to it. We also
@@ -1034,12 +1037,13 @@ also get the same information about the number of rows and columns using
 </div>
 </div>
 </div>
-<div id="callout4" class="callout">
+<div id="mystery-functions-in-ipython" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="mystery-functions-in-ipython">Mystery Functions in IPython<a class="anchor" aria-label="anchor" href="#mystery-functions-in-ipython"></a></h3>
+<div id="mystery-functions-in-ipython" class="callout-inner">
+<h3 class="callout-title">Mystery Functions in IPython<a class="anchor" aria-label="anchor" href="#mystery-functions-in-ipython"></a>
+</h3>
 <div class="callout-content">
 <p>How did we know what functions NumPy has and how to use them? If you
 are working in IPython or in a Jupyter Notebook, there is an easy way to
@@ -1084,7 +1088,7 @@ data?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>We can check out the first five rows of
 <code>data_americas_country</code> by executing
@@ -1153,12 +1157,13 @@ of code by ‘chaining’ the commands:</p>
 </div>
 </div>
 </div>
-<div id="callout5" class="callout">
+<div id="not-all-functions-have-input" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="not-all-functions-have-input">Not All Functions Have Input<a class="anchor" aria-label="anchor" href="#not-all-functions-have-input"></a></h3>
+<div id="not-all-functions-have-input" class="callout-inner">
+<h3 class="callout-title">Not All Functions Have Input<a class="anchor" aria-label="anchor" href="#not-all-functions-have-input"></a>
+</h3>
 <div class="callout-content">
 <p>Generally, a function uses inputs to produce outputs. However, some
 functions produce outputs without needing any input. For example,
@@ -1213,7 +1218,7 @@ last three characters: gen</code></pre>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1244,7 +1249,7 @@ last three characters: gen</code></pre>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5">Show me the solution</h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1274,7 +1279,7 @@ does.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6">Show me the solution</h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>Creates a substring from index 1 up to (not including) the final
 index, effectively removing the first and last letters from ‘oxygen’</p>
@@ -1303,7 +1308,7 @@ strings: <code>carpentry</code>, <code>clone</code>,
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7">Show me the solution</h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb58">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1350,7 +1355,7 @@ array of europe data, what does
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution8" aria-expanded="false" aria-controls="collapseSolution8">
   <h4 class="accordion-header" id="headingSolution8">Show me the solution</h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1435,7 +1440,7 @@ programs.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.2" class="external-link">sandpaper (0.16.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.4" class="external-link">pegboard (0.7.4)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.1" class="external-link">varnish (1.0.1)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.3" class="external-link">sandpaper (0.16.3)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.4" class="external-link">pegboard (0.7.4)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.1" class="external-link">varnish (1.0.1)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -1458,7 +1463,7 @@ programs.</li>
   "identifier": "https://swcarpentry.github.io/python-novice-inflammation/instructor/02-read_data.html",
   "dateCreated": "2014-11-25",
   "dateModified": "2024-02-23",
-  "datePublished": "2024-03-12"
+  "datePublished": "2024-03-19"
 }
 
   </script><script>
