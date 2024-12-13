@@ -113,14 +113,14 @@ jobs:
           path: ${{ env.PR }}
 
       - name: "Upload Diff"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: diff
           path: ${{ env.CHIVE }}
           retention-days: 1
 
       - name: "Upload Build"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built
           path: ${{ env.MD }}
